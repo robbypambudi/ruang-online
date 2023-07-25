@@ -20,7 +20,7 @@ function NextArrow({ onClick }: CustomArrowProps) {
       icon={FiChevronRight}
       variant='ghost'
       size='sm'
-      className='absolute top-1/2 right-0 z-10 flex translate-x-full -translate-y-1/2 items-center rounded-full'
+      className='absolute right-0 top-1/2 z-10 flex -translate-y-1/2 translate-x-full items-center rounded-full'
     />
   );
 }
@@ -32,7 +32,7 @@ function PrevArrow({ onClick }: CustomArrowProps) {
       icon={FiChevronLeft}
       variant='ghost'
       size='sm'
-      className='absolute top-1/2 left-0 z-10 flex -translate-x-full -translate-y-1/2 items-center rounded-full'
+      className='absolute left-0 top-1/2 z-10 flex -translate-x-full -translate-y-1/2 items-center rounded-full'
     />
   );
 }
@@ -64,9 +64,7 @@ export default function Banner({ className, ...rest }: BannerProps) {
         <Slider {...settings}>
           {BANNER_CONTENT.map((content, index) => (
             <div key={index} className='text-center'>
-              <Typography variant='b3' font='averta'>
-                {content()}
-              </Typography>
+              <Typography variant='b3'>{content()}</Typography>
             </div>
           ))}
         </Slider>

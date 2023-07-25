@@ -11,6 +11,8 @@ import '@/styles/nprogress.css';
 import '@/styles/globals.css';
 
 import api from '@/lib/axios';
+import clsxm from '@/lib/clsxm';
+import { montserrat, poppins } from '@/lib/font';
 
 import DismissableToast from '@/components/DismissableToast';
 
@@ -34,7 +36,7 @@ const queryClient = new QueryClient({
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <div>
+      <div className={clsxm(montserrat.variable, poppins.variable)}>
         <DismissableToast />
         <Component {...pageProps} />
       </div>

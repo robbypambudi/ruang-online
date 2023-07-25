@@ -1,10 +1,22 @@
 import * as React from 'react';
 
 import BaseDialog from '@/components/dialog/BaseDialog';
+import Footer from '@/components/layout/Footer';
+import Navbar from '@/components/layout/Navbar';
 
 import useDialogStore from '@/store/useDialogStore';
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+type LayoutOpt = {
+  children: React.ReactNode;
+  withNavbar?: boolean;
+  withFooter?: boolean;
+} & React.ComponentPropsWithRef<'div'>;
+
+export default function Layout({
+  children,
+  withNavbar = true,
+  withFooter = true,
+}: LayoutOpt) {
   //#region  //*=========== Store ===========
   const open = useDialogStore.useOpen();
   const state = useDialogStore.useState();
@@ -14,6 +26,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div>
+      {withNavbar && <Navbar />}
       {children}
       <BaseDialog
         onClose={handleClose}
@@ -21,6 +34,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         open={open}
         options={state}
       />
+      {withFooter && <Footer />}
     </div>
   );
 }

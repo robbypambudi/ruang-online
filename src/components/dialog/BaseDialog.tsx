@@ -76,7 +76,7 @@ export default function BaseDialog({
         initialFocus={containerRef}
       >
         <div
-          className='flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0'
+          className='flex min-h-screen items-end justify-center px-4 pb-20 pt-4 text-center sm:block sm:p-0'
           ref={containerRef}
         >
           <Transition.Child
@@ -110,11 +110,11 @@ export default function BaseDialog({
             <div
               className={clsx(
                 'z-auto inline-block w-full transform overflow-hidden rounded-lg bg-white text-left align-bottom shadow-xl transition-all',
-                'pt-5 pb-4 sm:my-8 sm:pt-6 sm:pb-4',
+                'pb-4 pt-5 sm:my-8 sm:pb-4 sm:pt-6',
                 'sm:max-w-lg sm:align-middle'
               )}
             >
-              <div className='absolute top-0 right-0 hidden pt-4 pr-4 sm:block'>
+              <div className='absolute right-0 top-0 hidden pr-4 pt-4 sm:block'>
                 <IconButton
                   onClick={onClose}
                   variant='ghost'
@@ -141,7 +141,7 @@ export default function BaseDialog({
                     aria-hidden='true'
                   />
                 </div>
-                <div className='mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left'>
+                <div className='mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left'>
                   <Typography as={Dialog.Title} variant='h3'>
                     {title}
                   </Typography>

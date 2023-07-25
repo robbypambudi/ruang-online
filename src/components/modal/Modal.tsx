@@ -43,7 +43,7 @@ export function ModalRoot({
         initialFocus={containerRef}
       >
         <div
-          className='flex min-h-screen items-center justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0'
+          className='flex min-h-screen items-center justify-center px-4 pb-20 pt-4 text-center sm:block sm:p-0'
           ref={containerRef}
         >
           <Transition.Child
@@ -82,7 +82,7 @@ export function ModalRoot({
               )}
             >
               <div className='w-full divide-y divide-typo-divider'>
-                <header className='flex items-center justify-between py-4 px-4 sm:px-6'>
+                <header className='flex items-center justify-between px-4 py-4 sm:px-6'>
                   <Typography
                     as={Dialog.Title}
                     variant='h2'

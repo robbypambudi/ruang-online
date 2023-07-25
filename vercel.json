@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/fonts/AvertaStd/AvertaStd-Regular.woff2",
+      "source": "/fonts/Montserrat/Montserrat-Regular.woff2",
       "headers": [
         {
           "key": "Cache-Control",
@@ -10,7 +10,7 @@
       ]
     },
     {
-      "source": "/fonts/AvertaStd/AvertaStd-RegularItalic.woff2",
+      "source": "/fonts/Montserrat/Montserrat-RegularItalic.woff2",
       "headers": [
         {
           "key": "Cache-Control",
@@ -19,7 +19,7 @@
       ]
     },
     {
-      "source": "/fonts/AvertaStd/AvertaStd-Semibold.woff2",
+      "source": "/fonts/Montserrat/Montserrat-Semibold.woff2",
       "headers": [
         {
           "key": "Cache-Control",
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "source": "/fonts/AvertaStd/AvertaStd-SemiboldItalic.woff2",
+      "source": "/fonts/Montserrat/Montserrat-SemiboldItalic.woff2",
       "headers": [
         {
           "key": "Cache-Control",
@@ -37,7 +37,7 @@
       ]
     },
     {
-      "source": "/fonts/AvertaStd/AvertaStd-Bold.woff2",
+      "source": "/fonts/Montserrat/Montserrat-Bold.woff2",
       "headers": [
         {
           "key": "Cache-Control",
@@ -46,7 +46,7 @@
       ]
     },
     {
-      "source": "/fonts/AvertaStd/AvertaStd-BoldItalic.woff2",
+      "source": "/fonts/Montserrat/Montserrat-BoldItalic.woff2",
       "headers": [
         {
           "key": "Cache-Control",

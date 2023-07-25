@@ -1,13 +1,17 @@
 import { Head, Html, Main, NextScript } from 'next/document';
 
 const fonts = [
-  '/fonts/inter-var-latin.woff2',
-  '/fonts/AvertaStd/AvertaStd-Regular.woff2',
-  '/fonts/AvertaStd/AvertaStd-RegularItalic.woff2',
-  '/fonts/AvertaStd/AvertaStd-Semibold.woff2',
-  '/fonts/AvertaStd/AvertaStd-SemiboldItalic.woff2',
-  '/fonts/AvertaStd/AvertaStd-Bold.woff2',
-  '/fonts/AvertaStd/AvertaStd-BoldItalic.woff2',
+  '/fonts/Poppins-Regular.woff2',
+  '/fonts/Montserrat/Montserrat-Medium.woff2',
+  '/fonts/Montserrat/Montserrat-MediumItalic.woff2',
+  '/fonts/Montserrat/Montserrat-Light.woff2',
+  '/fonts/Montserrat/Montserrat-LightItalic.woff2',
+  '/fonts/Montserrat/Montserrat-Regular.woff2',
+  '/fonts/Montserrat/Montserrat-Italic.woff2',
+  '/fonts/Montserrat/Montserrat-Semibold.woff2',
+  '/fonts/Montserrat/Montserrat-SemiboldItalic.woff2',
+  '/fonts/Montserrat/Montserrat-Bold.woff2',
+  '/fonts/Montserrat/Montserrat-BoldItalic.woff2',
 ];
 
 export default function Document() {

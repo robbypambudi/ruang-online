@@ -87,7 +87,7 @@ export default function PasswordInput({
         <button
           onClick={togglePassword}
           type='button'
-          className='absolute top-1/2 right-0 mr-3 flex -translate-y-1/2 items-center rounded-lg p-1 focus:outline-none focus:ring focus:ring-primary-500'
+          className='absolute right-0 top-1/2 mr-3 flex -translate-y-1/2 items-center rounded-lg p-1 focus:outline-none focus:ring focus:ring-primary-500'
         >
           {showPassword ? (
             <HiEyeOff className='cursor-pointer text-xl text-typo-icons hover:text-typo-secondary' />
