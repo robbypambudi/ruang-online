@@ -81,7 +81,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             ],
             variant === 'secondary' && [
               'bg-secondary-500 text-white',
-              'border border-secondary-600',
+              'border-secondary-600 border',
               'hover:bg-secondary-600 hover:text-white',
               'active:bg-secondary-700',
               'disabled:bg-secondary-700',
@@ -106,7 +106,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             variant === 'outline' && [
               'text-typo',
               'border border-gray-300',
-              'hover:bg-light focus-visible:ring-primary-400 active:bg-typo-divider disabled:bg-typo-divider',
+              'active:bg-typo-divider disabled:bg-typo-divider hover:bg-light focus-visible:ring-primary-400',
             ],
             variant === 'ghost' && [
               'text-primary-500',

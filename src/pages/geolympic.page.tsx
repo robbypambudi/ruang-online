@@ -2,7 +2,13 @@ import { Disclosure } from '@headlessui/react';
 import AOS from 'aos';
 import NextImage from 'next/image';
 import React from 'react';
-import { BsArrowLeft, BsChevronUp, BsLine, BsWhatsapp } from 'react-icons/bs';
+import {
+  BsArrowLeft,
+  BsArrowRight,
+  BsChevronUp,
+  BsLine,
+  BsWhatsapp,
+} from 'react-icons/bs';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -14,18 +20,17 @@ import clsxm from '@/lib/clsxm';
 
 import Layout from '@/components/layout/Layout';
 import ButtonLink from '@/components/links/ButtonLink';
+import Seo from '@/components/Seo';
 import Typography from '@/components/typography/Typography';
 
 export default function Geolympic() {
-  const [domLoaded, setDomLoaded] = React.useState(false);
-
   React.useEffect(() => {
     AOS.init();
-    setDomLoaded(true);
   }, []);
 
   return (
     <Layout>
+      <Seo templateTitle='Geolympic' />
       <div className='bg-geolympic overflow-x-hidden'>
         <section className='flex items-center justify-center pb-16 pt-32 md:min-h-screen md:pb-0 lg:pt-0'>
           <NextImage
@@ -52,7 +57,7 @@ export default function Geolympic() {
           />
           <div className='layout grid grid-cols-2 gap-8 lg:grid-cols-12 xl:gap-16'>
             <div className='order-last col-span-2 flex flex-col justify-center gap-4 lg:order-first lg:col-span-7 lg:gap-6'>
-              <Typography variant='h4' color='white'>
+              <Typography variant='j1' color='white'>
                 Geolympic 2023
               </Typography>
               <Typography color='white'>
@@ -61,8 +66,8 @@ export default function Geolympic() {
                   Geomatics Science and Exploration Olympiad
                 </span>
                 ) is an
-                <br className='1xl:block hidden' />{' '}
-                <span className='text-orange-500'>Olympic activity</span> on{' '}
+                <br className='1xl:block hidden' />
+                <span className='text-orange-500'>Olympic activity</span> on
                 <span className='text-orange-500'>basic sciences</span> related
                 to Geomatics Engineering which is held for high
                 school/equivalent students throughout Indonesia. Target
@@ -71,7 +76,9 @@ export default function Geolympic() {
               </Typography>
               <div className='mt-8'>
                 <ButtonLink className='w-full md:w-fit' href='#timeline'>
-                  Let&apos;s Discover
+                  <Typography variant='s2' color='white'>
+                    Let&apos;s Discover
+                  </Typography>
                 </ButtonLink>
               </div>
             </div>
@@ -115,7 +122,8 @@ export default function Geolympic() {
           <div className='layout pt-48 lg:pt-24'>
             <div className='flex w-full items-center justify-center md:justify-between'>
               <Typography
-                variant='h5'
+                variant='j2'
+                as='h2'
                 color='white'
                 className='text-center font-bold md:text-left'
               >
@@ -124,9 +132,11 @@ export default function Geolympic() {
               <ButtonLink
                 href='/dashboard/geolympic'
                 className='hidden md:flex md:items-center md:justify-center md:gap-2'
+                rightIcon={BsArrowRight}
               >
-                Register Now
-                <BsArrowLeft className='rotate-180 font-bold' />
+                <Typography variant='s2' color='white'>
+                  Register Now
+                </Typography>
               </ButtonLink>
             </div>
             <div className='mx-auto mt-24 flex w-full gap-16 md:w-3/5 lg:mt-52 lg:w-full'>
@@ -515,7 +525,7 @@ export default function Geolympic() {
           />
           <div className='layout'>
             <Typography
-              variant='h5'
+              variant='j2'
               color='white'
               className='text-center font-bold'
             >
@@ -532,17 +542,17 @@ export default function Geolympic() {
                   className='mx-auto mb-4 w-16 md:mb-8 md:w-[88px]'
                 />
                 <div className='flex h-60 w-full flex-col items-center justify-center gap-4 rounded-xl bg-orange-700 text-center md:h-72 md:rounded-none'>
-                  <Typography variant='h3' color='white' className='font-bold'>
+                  <Typography variant='j2' color='white' className='font-bold'>
                     2nd
                   </Typography>
-                  <Typography variant='h6' color='white' className='font-bold'>
+                  <Typography variant='h3' color='white' className='font-bold'>
                     Geolympic 2023
                   </Typography>
                   <Typography
                     color='white'
                     className='w-[70%] font-medium leading-8'
                   >
-                    Rp1.500.000
+                    Rp 1.500.000
                   </Typography>
                 </div>
               </div>
@@ -556,17 +566,17 @@ export default function Geolympic() {
                   className='mx-auto -mb-1 w-52 md:mb-0 md:w-64'
                 />
                 <div className='flex h-72 w-full flex-col items-center justify-center gap-4 rounded-xl bg-orange-500 text-center md:h-96 md:rounded-none'>
-                  <Typography variant='h3' color='white' className='font-bold'>
+                  <Typography variant='j1' color='white' className='font-bold'>
                     1st
                   </Typography>
-                  <Typography variant='h6' color='white' className='font-bold'>
+                  <Typography variant='h1' color='white' className='font-bold'>
                     Geolympic 2023
                   </Typography>
                   <Typography
                     color='white'
                     className='w-[70%] font-medium leading-8'
                   >
-                    Rp2.000.000,00 + Free Pass Teknik Geomatika ITS
+                    Rp2.000.000 + Free Pass Teknik Geomatika ITS
                   </Typography>
                 </div>
               </div>
@@ -580,10 +590,10 @@ export default function Geolympic() {
                   className='mx-auto mb-4 w-16 md:mb-8 md:w-24'
                 />
                 <div className='flex h-56 w-full flex-col items-center justify-center gap-4 rounded-xl bg-orange-900 text-center md:h-64 md:rounded-none'>
-                  <Typography variant='h3' color='white' className='font-bold'>
+                  <Typography variant='j2' color='white' className='font-bold'>
                     3rd
                   </Typography>
-                  <Typography variant='h6' color='white' className='font-bold'>
+                  <Typography variant='h1' color='white' className='font-bold'>
                     Geolympic 2023
                   </Typography>
                   <Typography
@@ -611,7 +621,7 @@ export default function Geolympic() {
         <section className='py-16 md:py-24'>
           <div className='layout'>
             <Typography
-              variant='h5'
+              variant='j2'
               color='white'
               className='text-center font-bold'
             >
@@ -621,31 +631,19 @@ export default function Geolympic() {
             <div className='mt-8 w-full rounded-lg border-2 border-orange-500 p-8 pt-[28px] text-white'>
               <ul className='break- mx-auto w-fit break-words'>
                 <li className='mb-4 list-disc'>
-                  <Typography
-                    variant='h6'
-                    color='white'
-                    className='translate-y-1'
-                  >
+                  <Typography variant='h6' color='white'>
                     The competition is conducted in groups of 3 participants
                     from the same school.
                   </Typography>
                 </li>
                 <li className='mb-4 list-disc'>
-                  <Typography
-                    variant='h6'
-                    color='white'
-                    className='translate-y-1'
-                  >
+                  <Typography variant='h6' color='white'>
                     Participants are active SMA / SMK / equivalent students
                     throughout Indonesia.
                   </Typography>
                 </li>
                 <li className='list-disc'>
-                  <Typography
-                    variant='h6'
-                    color='white'
-                    className='translate-y-1'
-                  >
+                  <Typography variant='h6' color='white'>
                     Participants must take part in a series of Geolympic 2023
                     activities online and offline.
                   </Typography>
@@ -665,7 +663,7 @@ export default function Geolympic() {
           />
           <div className='layout py-12 md:py-24'>
             <Typography
-              variant='h5'
+              variant='j2'
               color='white'
               className='text-center font-bold'
             >
@@ -674,30 +672,18 @@ export default function Geolympic() {
             <div className='mt-8 w-full rounded-md border border-orange-100 bg-orange-700 p-8 text-white'>
               <ul className='break- mx-auto w-fit break-words'>
                 <li className='mb-4 list-decimal'>
-                  <Typography
-                    variant='h6'
-                    color='white'
-                    className='translate-y-1'
-                  >
+                  <Typography variant='h6' color='white'>
                     Participant registration starts on July 14 - August 26, 2023
                   </Typography>
                 </li>
                 <li className='mb-4 list-decimal'>
-                  <Typography
-                    variant='h6'
-                    color='white'
-                    className='translate-y-1'
-                  >
+                  <Typography variant='h6' color='white'>
                     Registration will be carried out online through the official
                     website of Geosentric at www.geosentric-its.com
                   </Typography>
                 </li>
                 <li className='mb-4 list-decimal'>
-                  <Typography
-                    variant='h6'
-                    color='white'
-                    className='translate-y-1'
-                  >
+                  <Typography variant='h6' color='white'>
                     The teams then fill in all the requested information
                     correctly.
                   </Typography>
@@ -714,22 +700,14 @@ export default function Geolympic() {
                   </Typography>
                 </li>
                 <li className='mb-4 list-decimal'>
-                  <Typography
-                    variant='h6'
-                    color='white'
-                    className='translate-y-1'
-                  >
+                  <Typography variant='h6' color='white'>
                     The teams then upload a scan of the student card in .jpg /
                     .pdf format.
                   </Typography>
                 </li>
 
                 <li className='list-decimal'>
-                  <Typography
-                    variant='h6'
-                    color='white'
-                    className='translate-y-1'
-                  >
+                  <Typography variant='h6' color='white'>
                     Each team will receive an e-mail reply as a confirmation
                     that the registration has been successfully carried out,
                     along with the registration number as a username to enter
@@ -769,14 +747,14 @@ export default function Geolympic() {
               </div>
               <Typography
                 color='white'
-                variant='h5'
+                variant='j2'
                 className='text-center font-bold md:text-left'
               >
                 Any Question?
               </Typography>
               <Typography
                 color='white'
-                className='mx-auto mt-8 w-4/5 text-center font-medium md:w-full md:text-left md:font-semibold'
+                className='mx-auto mt-4 w-4/5 text-center font-medium md:w-full md:text-left md:font-semibold'
               >
                 You can contact this contact whenever you want
               </Typography>
@@ -830,7 +808,7 @@ export default function Geolympic() {
             </div>
           </div>
         </section>
-        <section className='relative -mb-28'>
+        <section className='relative pb-8'>
           <div
             data-aos='zoom-in'
             data-aos-delay='500'
@@ -839,7 +817,7 @@ export default function Geolympic() {
           ></div>
 
           <div className='layout'>
-            <Typography variant='h5' color='white' className='font-bold'>
+            <Typography variant='j2' color='white' className='font-bold'>
               Faq Geolympic 2023
             </Typography>
             <div className='relative z-50 w-full pt-8'>
@@ -848,7 +826,9 @@ export default function Geolympic() {
                   {({ open }) => (
                     <>
                       <Disclosure.Button className='flex w-full justify-between rounded-t-lg border-b-[1px] border-orange-900 border-opacity-60 bg-[#AE4C13] bg-opacity-50 px-4 py-4 text-left text-sm font-medium text-white hover:bg-opacity-70 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-75'>
-                        <span>What is GEOLYMPIC?</span>
+                        <Typography as='span' color='white' variant='b3'>
+                          What is GEOLYMPIC?
+                        </Typography>
                         <BsChevronUp
                           className={`${
                             open ? 'rotate-180 transform' : ''
@@ -856,7 +836,6 @@ export default function Geolympic() {
                         />
                       </Disclosure.Button>
                       <Disclosure.Panel className='bg-faq-geolympic px-4 pb-4 pt-4 text-sm text-white'>
-                        {' '}
                         Geolympic is one of the events from Geosentric, which is
                         one of the big events of the ITS Geomatics Engineering
                         Department. The Geolympic is an academic olympiad that
@@ -870,9 +849,9 @@ export default function Geolympic() {
                   {({ open }) => (
                     <>
                       <Disclosure.Button className='flex w-full justify-between border-b-[1px] border-orange-900 border-opacity-60 bg-[#AE4C13] bg-opacity-50 px-4 py-4 text-left text-sm font-medium text-white hover:bg-opacity-70 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-75'>
-                        <span>
+                        <Typography as='span' color='white' variant='b3'>
                           Is the competition held as a team or individually?
-                        </span>
+                        </Typography>
                         <BsChevronUp
                           className={`${
                             open ? 'rotate-180 transform' : ''
@@ -889,7 +868,9 @@ export default function Geolympic() {
                   {({ open }) => (
                     <>
                       <Disclosure.Button className='flex w-full justify-between border-b-[1px] border-orange-900 border-opacity-60 bg-[#AE4C13] bg-opacity-50 px-4 py-4 text-left text-sm font-medium text-white hover:bg-opacity-70 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-75'>
-                        <span>How many people in a team?</span>
+                        <Typography as='span' color='white' variant='b3'>
+                          How many people in a team?
+                        </Typography>
                         <BsChevronUp
                           className={`${
                             open ? 'rotate-180 transform' : ''
@@ -906,9 +887,9 @@ export default function Geolympic() {
                   {({ open }) => (
                     <>
                       <Disclosure.Button className='flex w-full justify-between border-b-[1px] border-orange-900 border-opacity-60 bg-[#AE4C13] bg-opacity-50 px-4 py-4 text-left text-sm font-medium text-white hover:bg-opacity-70 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-75'>
-                        <span>
+                        <Typography as='span' color='white' variant='b3'>
                           Does one team have to come from the same school?
-                        </span>
+                        </Typography>
                         <BsChevronUp
                           className={`${
                             open ? 'rotate-180 transform' : ''
@@ -926,7 +907,9 @@ export default function Geolympic() {
                   {({ open }) => (
                     <>
                       <Disclosure.Button className='flex w-full justify-between border-b-[1px] border-orange-900 border-opacity-60 bg-[#AE4C13] bg-opacity-50 px-4 py-4 text-left text-sm font-medium text-white hover:bg-opacity-70 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-75'>
-                        <span>How many rounds are there in GEOLYMPIC?</span>
+                        <Typography as='span' color='white' variant='b3'>
+                          How many rounds are there in GEOLYMPIC?
+                        </Typography>
                         <BsChevronUp
                           className={`${
                             open ? 'rotate-180 transform' : ''
@@ -944,7 +927,9 @@ export default function Geolympic() {
                   {({ open }) => (
                     <>
                       <Disclosure.Button className='flex w-full justify-between border-b-[1px] border-orange-900 border-opacity-60 bg-[#AE4C13] bg-opacity-50 px-4 py-4 text-left text-sm font-medium text-white hover:bg-opacity-70 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-75'>
-                        <span>Where will these rounds be held?</span>
+                        <Typography as='span' color='white' variant='b3'>
+                          Where will these rounds be held?
+                        </Typography>
                         <BsChevronUp
                           className={`${
                             open ? 'rotate-180 transform' : ''
@@ -965,11 +950,11 @@ export default function Geolympic() {
                   {({ open }) => (
                     <>
                       <Disclosure.Button className='flex w-full justify-between border-b-[1px] border-orange-900 border-opacity-60 bg-[#AE4C13] bg-opacity-50 px-4 py-4 text-left text-sm font-medium text-white hover:bg-opacity-70 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-75'>
-                        <span>
+                        <Typography as='span' color='white' variant='b3'>
                           Can the fields of study that are worked on be chosen
                           or are they required to work on all contested fields
                           of study?
-                        </span>
+                        </Typography>
                         <BsChevronUp
                           className={`${
                             open ? 'rotate-180 transform' : ''
@@ -977,9 +962,9 @@ export default function Geolympic() {
                         />
                       </Disclosure.Button>
                       <Disclosure.Panel className='bg-faq-geolympic px-4 pb-4 pt-4 text-sm text-white'>
-                        The fields of study that are worked on can’t be chosen.
-                        So, all available fields of study that are contested
-                        must be worked on.
+                        The fields of study that are worked on can&apos;t be
+                        chosen. So, all available fields of study that are
+                        contested must be worked on.
                       </Disclosure.Panel>
                     </>
                   )}
@@ -988,9 +973,9 @@ export default function Geolympic() {
                   {({ open }) => (
                     <>
                       <Disclosure.Button className='flex w-full justify-between border-b-[1px] border-orange-900 border-opacity-60 bg-[#AE4C13] bg-opacity-50 px-4 py-4 text-left text-sm font-medium text-white hover:bg-opacity-70 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-75'>
-                        <span>
+                        <Typography as='span' color='white' variant='b3'>
                           What if we don&apos;t have a Student Identity Card?
-                        </span>
+                        </Typography>
                         <BsChevronUp
                           className={`${
                             open ? 'rotate-180 transform' : ''
@@ -1018,10 +1003,10 @@ export default function Geolympic() {
                           open ? '' : 'rounded-b-lg'
                         } flex w-full justify-between bg-[#AE4C13] bg-opacity-50 px-4 py-4 text-left text-sm font-medium text-white hover:bg-opacity-70 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-75`}
                       >
-                        <span>
+                        <Typography as='span' color='white' variant='b3'>
                           Do we have to use a laptop/PC when working on
                           questions?
-                        </span>
+                        </Typography>
                         <BsChevronUp
                           className={`${
                             open ? 'rotate-180 transform' : ''
@@ -1053,131 +1038,129 @@ export default function Geolympic() {
             Gallery Geolympic
           </Typography>
           <div className='px-4 pb-44 pt-16 md:px-24'>
-            {domLoaded && (
-              <Swiper
-                // modules={[Autoplay, Pagination, Navigation]}
-                // breakpoints={{
-                //   300: {
-                //     slidesPerView: 1,
-                //     spaceBetween: 20,
-                //   },
-                //   640: {
-                //     slidesPerView: 1,
-                //     spaceBetween: 20,
-                //   },
-                //   768: {
-                //     slidesPerView: 2,
-                //     spaceBetween: 20,
-                //   },
-                //   1024: {
-                //     slidesPerView: 3,
-                //     spaceBetween: 10,
-                //   },
-                // }}
-                className='mySwiper'
-              >
-                <SwiperSlide>
-                  <NextImage
-                    width={1125}
-                    height={567}
-                    src='/images/geolympic/IMG_1.jpg'
-                    className='mx-auto h-56 w-full xl:h-64'
-                    alt=''
-                    quality={100}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <NextImage
-                    width={1125}
-                    height={603}
-                    src='/images/geolympic/IMG_2.jpg'
-                    className='mx-auto h-56 w-full xl:h-64'
-                    alt=''
-                    quality={100}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <NextImage
-                    width={1125}
-                    height={634}
-                    src='/images/geolympic/IMG_3.jpg'
-                    className='mx-auto h-56 w-full xl:h-64'
-                    alt=''
-                    quality={100}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <NextImage
-                    width={1125}
-                    height={621}
-                    src='/images/geolympic/IMG_4.jpg'
-                    className='mx-auto h-56 w-full xl:h-64'
-                    alt=''
-                    quality={100}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <NextImage
-                    width={1125}
-                    height={636}
-                    src='/images/geolympic/IMG_5.jpg'
-                    className='mx-auto h-56 w-full xl:h-64'
-                    alt=''
-                    quality={100}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <NextImage
-                    width={1125}
-                    height={634}
-                    src='/images/geolympic/IMG_6.jpg'
-                    className='mx-auto h-56 w-full xl:h-64'
-                    alt=''
-                    quality={100}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <NextImage
-                    width={1125}
-                    height={624}
-                    src='/images/geolympic/IMG_7.jpg'
-                    className='mx-auto h-56 w-full xl:h-64'
-                    alt=''
-                    quality={100}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <NextImage
-                    width={1125}
-                    height={744}
-                    src='/images/geolympic/IMG_8.jpg'
-                    className='mx-auto h-56 w-full xl:h-64'
-                    alt=''
-                    quality={100}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <NextImage
-                    width={1125}
-                    height={743}
-                    src='/images/geolympic/IMG_9.jpg'
-                    className='mx-auto h-56 w-full xl:h-64'
-                    alt=''
-                    quality={100}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <NextImage
-                    width={1125}
-                    height={737}
-                    src='/images/geolympic/IMG_10.jpg'
-                    className='mx-auto h-56 w-full xl:h-64'
-                    alt=''
-                    quality={100}
-                  />
-                </SwiperSlide>
-              </Swiper>
-            )}
+            <Swiper
+              // modules={[Autoplay, Pagination, Navigation]}
+              breakpoints={{
+                300: {
+                  slidesPerView: 1,
+                  spaceBetween: 20,
+                },
+                640: {
+                  slidesPerView: 1,
+                  spaceBetween: 20,
+                },
+                768: {
+                  slidesPerView: 2,
+                  spaceBetween: 20,
+                },
+                1024: {
+                  slidesPerView: 3,
+                  spaceBetween: 10,
+                },
+              }}
+              className='mySwiper'
+            >
+              <SwiperSlide>
+                <NextImage
+                  width={1125}
+                  height={567}
+                  src='/images/geolympic/IMG_1.jpg'
+                  className='mx-auto h-56 w-full xl:h-64'
+                  alt=''
+                  quality={100}
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <NextImage
+                  width={1125}
+                  height={603}
+                  src='/images/geolympic/IMG_2.jpg'
+                  className='mx-auto h-56 w-full xl:h-64'
+                  alt=''
+                  quality={100}
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <NextImage
+                  width={1125}
+                  height={634}
+                  src='/images/geolympic/IMG_3.jpg'
+                  className='mx-auto h-56 w-full xl:h-64'
+                  alt=''
+                  quality={100}
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <NextImage
+                  width={1125}
+                  height={621}
+                  src='/images/geolympic/IMG_4.jpg'
+                  className='mx-auto h-56 w-full xl:h-64'
+                  alt=''
+                  quality={100}
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <NextImage
+                  width={1125}
+                  height={636}
+                  src='/images/geolympic/IMG_5.jpg'
+                  className='mx-auto h-56 w-full xl:h-64'
+                  alt=''
+                  quality={100}
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <NextImage
+                  width={1125}
+                  height={634}
+                  src='/images/geolympic/IMG_6.jpg'
+                  className='mx-auto h-56 w-full xl:h-64'
+                  alt=''
+                  quality={100}
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <NextImage
+                  width={1125}
+                  height={624}
+                  src='/images/geolympic/IMG_7.jpg'
+                  className='mx-auto h-56 w-full xl:h-64'
+                  alt=''
+                  quality={100}
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <NextImage
+                  width={1125}
+                  height={744}
+                  src='/images/geolympic/IMG_8.jpg'
+                  className='mx-auto h-56 w-full xl:h-64'
+                  alt=''
+                  quality={100}
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <NextImage
+                  width={1125}
+                  height={743}
+                  src='/images/geolympic/IMG_9.jpg'
+                  className='mx-auto h-56 w-full xl:h-64'
+                  alt=''
+                  quality={100}
+                />
+              </SwiperSlide>
+              <SwiperSlide>
+                <NextImage
+                  width={1125}
+                  height={737}
+                  src='/images/geolympic/IMG_10.jpg'
+                  className='mx-auto h-56 w-full xl:h-64'
+                  alt=''
+                  quality={100}
+                />
+              </SwiperSlide>
+            </Swiper>
           </div>
         </section>
       </div>

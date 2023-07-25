@@ -30,6 +30,7 @@ export type PasswordInputProps = {
   /** Manual validation using RHF, it is encouraged to use yup resolver instead */
   validation?: RegisterOptions;
   containerClassName?: string;
+  labelClassName?: string;
 } & React.ComponentPropsWithoutRef<'input'>;
 
 export default function PasswordInput({
@@ -42,6 +43,7 @@ export default function PasswordInput({
   validation,
   disabled,
   containerClassName,
+  labelClassName,
   ...rest
 }: PasswordInputProps) {
   const {
@@ -58,7 +60,12 @@ export default function PasswordInput({
   return (
     <div className={containerClassName}>
       {withLabel && (
-        <Typography as='label' variant='s3' className='block' htmlFor={id}>
+        <Typography
+          as='label'
+          variant='s3'
+          className={clsx('block', labelClassName)}
+          htmlFor={id}
+        >
           {label}
         </Typography>
       )}

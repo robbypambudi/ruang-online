@@ -19,7 +19,7 @@ export default function MacCard({
     <div
       className={clsxm(
         'overflow-hidden rounded-lg',
-        mode === 'light' && 'border border-typo-divider shadow-sm',
+        mode === 'light' && 'border-typo-divider border shadow-sm',
         className
       )}
       {...rest}

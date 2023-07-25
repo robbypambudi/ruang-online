@@ -1,8 +1,12 @@
 import produce from 'immer';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import { toast, ToastBar, Toaster } from 'react-hot-toast';
+import { toast, ToastBar, Toaster, ToastOptions } from 'react-hot-toast';
 import { HiX } from 'react-icons/hi';
+import { RiErrorWarningLine } from 'react-icons/ri';
+
+const topPosition = 'top-center';
+const toastClassname = 'w-[375px] [&>div]:justify-start';
 
 export default function DismissableToast() {
   const router = useRouter();
@@ -36,9 +40,13 @@ export default function DismissableToast() {
     <div>
       <Toaster
         reverseOrder={false}
-        position='top-center'
+        position={topPosition}
         toastOptions={{
-          className: 'font-medium rounded-lg',
+          style: {
+            borderRadius: '8px',
+            background: '#E8F0E0',
+            color: '#8AB364',
+          },
         }}
       >
         {(t) => (
@@ -49,7 +57,7 @@ export default function DismissableToast() {
                 {message}
                 {t.type !== 'loading' && (
                   <button
-                    className='rounded-full p-1 ring-primary-400 transition hover:bg-light focus:outline-none focus-visible:ring'
+                    className='rounded-full p-1 ring-primary-400 transition hover:bg-[#444] focus:outline-none focus-visible:ring'
                     onClick={() => toast.dismiss(t.id)}
                   >
                     <HiX />
@@ -63,3 +71,58 @@ export default function DismissableToast() {
     </div>
   );
 }
+
+const DEFAULT_TOAST: ToastOptions = {
+  style: {
+    background: '#F0F2F5',
+    color: '#9AA2B1',
+  },
+  icon: <RiErrorWarningLine />,
+  className: toastClassname,
+  position: topPosition,
+  duration: 5000,
+};
+
+const createCustomToast = (options: ToastOptions) => {
+  return { ...DEFAULT_TOAST, ...options };
+};
+
+const showToast = (message: string, options?: ToastOptions) => {
+  return toast(message, options || DEFAULT_TOAST);
+};
+
+export { createCustomToast, showToast };
+
+const SUCCESS_TOAST = createCustomToast({
+  style: {
+    background: '#E8F0E0',
+    color: '#8AB364',
+  },
+  icon: <RiErrorWarningLine size={30} />,
+  className: toastClassname,
+  position: topPosition,
+  duration: 5000,
+});
+const DANGER_TOAST = createCustomToast({
+  style: {
+    background: '#F7DBDB',
+    color: '#D84A4D',
+  },
+  icon: <RiErrorWarningLine size={30} />,
+  className: toastClassname,
+  position: topPosition,
+  duration: 5000,
+});
+
+const WARNING_TOAST = createCustomToast({
+  style: {
+    background: '#FFEFCC',
+    color: '#FEB100',
+  },
+  icon: <RiErrorWarningLine size={30} />,
+  className: toastClassname,
+  position: topPosition,
+  duration: 5000,
+});
+
+export { DANGER_TOAST, SUCCESS_TOAST, WARNING_TOAST };

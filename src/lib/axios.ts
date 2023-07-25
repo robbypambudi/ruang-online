@@ -1,20 +1,47 @@
 import axios, { AxiosError } from 'axios';
+import { GetServerSidePropsContext } from 'next';
+import Cookies from 'universal-cookie';
+
+import { getToken } from '@/lib/cookies';
 
 import { UninterceptedApiError } from '@/types/api';
 
 const api = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api/v1',
+  baseURL: 'https://api.geosentric-its.com/api',
   headers: {
     'Content-Type': 'application/json',
   },
   withCredentials: false,
 });
 
+let context = <GetServerSidePropsContext>{};
+const isServer = () => {
+  return typeof window === 'undefined';
+};
+
+api.defaults.withCredentials = false;
+
 api.interceptors.request.use(function (config) {
-  const token = localStorage.getItem('token');
   if (config.headers) {
+    let token: string | undefined;
+
+    if (isServer()) {
+      if (!context)
+        throw 'Api Context not found. You must call `setApiContext(context)` before calling api on server-side';
+
+      const cookies = new Cookies(context.req?.headers.cookie);
+      // if in production
+
+      /** Get cookies from context if server side */
+      token = cookies.get('@schematics/token');
+    } else {
+      /** Get cookies from context if server side */
+      token = getToken();
+    }
+
     config.headers.Authorization = token ? `Bearer ${token}` : '';
   }
+
   return config;
 });
 
@@ -42,5 +69,9 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export const setApiContext = (_context: GetServerSidePropsContext) => {
+  context = _context;
+};
 
 export default api;

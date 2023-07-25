@@ -6,8 +6,9 @@ import PrimaryLink from '@/components/links/PrimaryLink';
 import Typography from '@/components/typography/Typography';
 
 const breadcrumbs = {
-  '/': 'Landing Page',
-  '/sandbox/breadcrumb': 'Breadcrumb',
+  '/': 'Home',
+  '/dashboard': 'Dashboard',
+  '/dashboard/geolympic': 'Geolympic 2023',
 };
 type BreadcrumbProps = {
   crumbs: Array<keyof typeof breadcrumbs>;
@@ -27,7 +28,9 @@ export default function Breadcrumb({
       {crumbs.map((crumb) => (
         <React.Fragment key={crumb}>
           <PrimaryLink href={crumb} size='sm' className='font-medium'>
-            {breadcrumbs[crumb]}
+            <Typography as='span' variant='s3' color='primary'>
+              {breadcrumbs[crumb]}
+            </Typography>
           </PrimaryLink>
           <span className='text-sm font-medium text-typo'>/</span>
         </React.Fragment>

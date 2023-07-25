@@ -32,6 +32,7 @@ export type InputProps = {
   leftIcon?: IconType | string;
   rightNode?: React.ReactNode;
   containerClassName?: string;
+  labelClassName?: string;
 } & React.ComponentPropsWithoutRef<'input'>;
 
 export default function Input({
@@ -47,6 +48,7 @@ export default function Input({
   leftIcon: LeftIcon,
   rightNode,
   containerClassName,
+  labelClassName,
   ...rest
 }: InputProps) {
   const {
@@ -59,7 +61,12 @@ export default function Input({
   return (
     <div className={containerClassName}>
       {withLabel && (
-        <Typography as='label' variant='s3' className='block' htmlFor={id}>
+        <Typography
+          as='label'
+          variant='s3'
+          className={clsx('block', labelClassName)}
+          htmlFor={id}
+        >
           {label}
         </Typography>
       )}

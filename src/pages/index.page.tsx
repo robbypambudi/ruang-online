@@ -11,6 +11,7 @@ import Layout from '@/components/layout/Layout';
 import ButtonLink from '@/components/links/ButtonLink';
 import UnstyledLink from '@/components/links/UnstyledLink';
 import NextImage from '@/components/NextImage';
+import Seo from '@/components/Seo';
 import Typography from '@/components/typography/Typography';
 
 export default function Home() {
@@ -26,6 +27,7 @@ export default function Home() {
 
   return (
     <Layout>
+      <Seo />
       <main className='overflow-x-hidden bg-[#24202D]'>
         <section
           className={clsxm(

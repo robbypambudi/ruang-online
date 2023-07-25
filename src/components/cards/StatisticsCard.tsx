@@ -38,7 +38,7 @@ export default function StatisticsCard({
     <div
       className={clsxm(
         'rounded-xl bg-white p-3',
-        'border border-typo-divider',
+        'border-typo-divider border',
         'flex items-center gap-3',
         className
       )}

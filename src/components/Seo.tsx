@@ -4,11 +4,12 @@ import { useRouter } from 'next/router';
 import { openGraph } from '@/lib/helper';
 
 const defaultMeta = {
-  title: 'Aether Design System',
-  siteName: 'Aether Design System',
-  description: 'Design system used on projects',
+  title: 'Geosentric 2023',
+  siteName: 'Geosentric 2023',
+  description:
+    'Geomatics Science and Arts is the largest series of events Department of Geomatics Engineering organized by the Association of Geomatics ITS.',
   /** Without additional '/' on the end, e.g. https://theodorusclarence.com */
-  url: 'https://aether.thcl.dev',
+  url: 'https://geosentric-its.com',
   type: 'website',
   robots: 'follow, index',
   /**

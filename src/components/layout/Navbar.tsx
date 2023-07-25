@@ -58,7 +58,7 @@ export default function Navbar() {
         <nav className='hidden md:block'>
           <ul className='flex flex-row items-center justify-between gap-6 text-base'>
             <li>
-              <UnstyledLink href='#' className='flex p-2.5'>
+              <UnstyledLink href='/' className='flex p-2.5'>
                 <Typography
                   color='white'
                   className={clsxm(

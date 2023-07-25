@@ -21,7 +21,7 @@ export default function TBody<T extends RowData>({
 
   return (
     <tbody
-      className={clsxm('divide-y divide-typo-divider bg-white', className)}
+      className={clsxm('divide-typo-divider divide-y bg-white', className)}
       {...rest}
     >
       {isLoading && (

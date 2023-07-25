@@ -156,7 +156,7 @@ export default function BaseDialog({
                 className={clsx(
                   'mt-5 sm:mt-4 sm:flex sm:flex-row-reverse',
                   'px-4 pt-4 sm:px-6',
-                  'border-t border-typo-divider'
+                  'border-typo-divider border-t'
                 )}
               >
                 <Button

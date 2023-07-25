@@ -212,3 +212,68 @@ html {
   scrollbar-color: #7b7b7b #f7f7f7;
 }
 /* #endregion  /**======== Scrollbar =========== */
+
+.bg-geolympic {
+  background: linear-gradient(180deg, #24202d 19.58%, #ae4716 100%);
+}
+
+.bg-timeline-geolympic {
+  background: linear-gradient(174deg, #f8650e 0%, #9e5f4b 51.04%, #ed962f 100%);
+}
+
+.tl-geolym {
+  @apply -translate-x-0;
+}
+
+.tl-items {
+  display: none;
+}
+
+.bg-faq-geolympic {
+  background: var(
+    --gradien-glass,
+    linear-gradient(
+      148deg,
+      rgba(255, 255, 255, 0.05) 0%,
+      rgba(255, 255, 255, 0.3) 100%
+    )
+  );
+}
+
+.faq-geolym {
+  border: 2px solid #cca28b;
+}
+
+.swiper-pagination {
+  @apply !translate-y-10;
+}
+
+.swiper {
+  @apply overflow-y-visible;
+}
+
+.swiper-slide {
+  @apply bg-red-400;
+}
+
+@media (min-width: 1280px) {
+  .tl-geolym {
+    @apply -translate-x-6;
+  }
+}
+
+@media (min-width: 1024px) {
+  .tl-items {
+    display: block;
+  }
+
+  .tl-geolym {
+    @apply -translate-x-4;
+  }
+}
+
+@media (min-width: 700px) {
+  .bg-geolympic {
+    background: linear-gradient(180deg, #26202d 0%, #ae4716 100%);
+  }
+}

@@ -81,7 +81,7 @@ export function ModalRoot({
                 modalContainerClassName
               )}
             >
-              <div className='w-full divide-y divide-typo-divider'>
+              <div className='divide-typo-divider w-full divide-y'>
                 <header className='flex items-center justify-between px-4 py-4 sm:px-6'>
                   <Typography
                     as={Dialog.Title}

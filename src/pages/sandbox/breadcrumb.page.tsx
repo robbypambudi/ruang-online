@@ -19,7 +19,7 @@ export default function BreadcrumbPage() {
             <Breadcrumb className='mt-4' crumbs={['/']} />
             <Breadcrumb
               className='mt-4'
-              crumbs={['/', '/sandbox/breadcrumb']}
+              crumbs={['/', '/dashboard/geolympic']}
             />
           </div>
         </section>

@@ -13,19 +13,19 @@ function CardRoot({ children, className, title, ...rest }: CardProps) {
   return (
     <div
       className={clsxm([
-        'rounded-xl border border-typo-divider bg-white',
+        'border-typo-divider rounded-xl border bg-white',
         className,
       ])}
       {...rest}
     >
       {title && (
-        <div className='border-b border-typo-divider px-4 py-2 sm:px-6 sm:py-3'>
+        <div className='border-typo-divider border-b px-4 py-2 sm:px-6 sm:py-3'>
           <Typography variant='h5' as='h2'>
             {title}
           </Typography>
         </div>
       )}
-      <div className='divide-y divide-typo-divider px-4 sm:px-6'>
+      <div className='divide-typo-divider divide-y px-4 sm:px-6'>
         {children}
       </div>
     </div>
