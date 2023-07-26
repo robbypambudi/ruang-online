@@ -133,8 +133,8 @@ export default function TablePage() {
 
             <ServerTable
               columns={columns}
-              data={queryData?.data ?? []}
-              meta={queryData?.meta}
+              data={queryData?.data.data_per_page ?? []}
+              meta={queryData?.data.meta}
               header={
                 <PopupFilter
                   filterOption={filterOption}

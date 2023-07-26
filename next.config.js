@@ -8,12 +8,9 @@ const nextConfig = {
   pageExtensions: ['page.tsx', 'api.ts'],
   swcMinify: true,
 
-  // Uncoment to add domain whitelist
-  // images: {
-  //   domains: [
-  //     'res.cloudinary.com',
-  //   ],
-  // },
+  images: {
+    domains: ['sch.sgp1.cdn.digitaloceanspaces.com'],
+  },
 
   // SVGR
   webpack(config) {

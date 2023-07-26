@@ -36,7 +36,7 @@ type ServerTableProps<T extends object> = {
   data: T[];
   header?: React.ReactNode;
   isLoading: boolean;
-  meta: PaginatedApiResponse<T>['meta'] | undefined;
+  meta: PaginatedApiResponse<T>['data']['meta'] | undefined;
   tableState: ServerTableState;
   setTableState: SetServerTableState;
   omitSort?: boolean;
@@ -59,7 +59,7 @@ export default function ServerTable<T extends object>({
   const table = useReactTable({
     data,
     columns,
-    pageCount: meta?.last_page,
+    pageCount: meta?.max_page,
     state: {
       ...tableState,
     },
@@ -77,7 +77,6 @@ export default function ServerTable<T extends object>({
 
   return (
     <div className={clsxm('flex flex-col', className)} {...rest}>
-      <pre>{JSON.stringify({ isLoading }, null, 2)}</pre>
       <div
         className={clsx(
           'flex flex-col items-stretch gap-3 sm:flex-row',

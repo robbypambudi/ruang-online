@@ -9,6 +9,8 @@ const breadcrumbs = {
   '/': 'Home',
   '/dashboard': 'Dashboard',
   '/dashboard/geolympic': 'Geolympic 2023',
+
+  '/admin': 'Admin',
 };
 type BreadcrumbProps = {
   crumbs: Array<keyof typeof breadcrumbs>;
