@@ -34,11 +34,8 @@ export default function Home() {
             [
               'relative min-h-screen w-screen -translate-y-14 overflow-x-hidden',
             ],
-            [
-              'relative min-h-screen w-screen -translate-y-14 overflow-x-hidden',
-            ],
             ['flex flex-col items-center justify-around px-10'],
-            ['md:items-center lg:flex-row-reverse lg:px-60']
+            ['md:items-center lg:flex-row-reverse lg:px-40']
           )}
         >
           <NextImage

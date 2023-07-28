@@ -33,6 +33,7 @@ export type InputProps = {
   rightNode?: React.ReactNode;
   containerClassName?: string;
   labelClassName?: string;
+  helperTextClassName?: string;
 } & React.ComponentPropsWithoutRef<'input'>;
 
 export default function Input({
@@ -49,6 +50,7 @@ export default function Input({
   rightNode,
   containerClassName,
   labelClassName,
+  helperTextClassName,
   ...rest
 }: InputProps) {
   const {
@@ -109,7 +111,11 @@ export default function Input({
         )}
       </div>
       {helperText && (
-        <Typography variant='c1' color='secondary' className='mt-1'>
+        <Typography
+          variant='c1'
+          color='secondary'
+          className={clsx('mt-1', helperTextClassName)}
+        >
           {helperText}
         </Typography>
       )}

@@ -79,12 +79,12 @@ export default function MemberArrayField() {
               </div>
               <Input
                 id={`members[${index}].sosmed`}
-                label='Social Media'
-                placeholder='Enter social media'
+                label='WhatsApp Number'
+                placeholder='Enter whatsapp number'
                 validation={{
-                  required: 'Social media is required',
+                  required: 'Whatsapp number is required',
                 }}
-                helperText='*Please enter your social media account (Instagram, Twitter, Facebook, etc)'
+                helperText='Example: 6281234567890'
               />
               <UploadImage
                 id={`members[${index}].kartu_pelajar_url`}
