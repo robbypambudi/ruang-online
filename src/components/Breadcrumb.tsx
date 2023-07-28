@@ -12,6 +12,7 @@ const breadcrumbs = {
   '/admin': 'Admin',
   '/admin/geolympic/detail-peserta': 'Detail Peserta',
   '/dashboard/tryout': 'Tryout',
+  '/dashboard/tryout/detail-tryout': 'Detail Tryout',
 };
 type BreadcrumbProps = {
   crumbs: Array<keyof typeof breadcrumbs>;
@@ -31,7 +32,12 @@ export default function Breadcrumb({
       {crumbs.map((crumb) => (
         <React.Fragment key={crumb}>
           <PrimaryLink href={crumb} size='sm' className='font-medium'>
-            <Typography as='span' variant='s3' color='primary'>
+            <Typography
+              as='span'
+              variant='s3'
+              color='primary'
+              className='text-[#8A62D0]'
+            >
               {breadcrumbs[crumb]}
             </Typography>
           </PrimaryLink>

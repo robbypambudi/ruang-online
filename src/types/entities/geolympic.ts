@@ -17,3 +17,18 @@ export interface GeolympicList {
   status: string;
   members: Member[];
 }
+
+export interface GeolympicTryout {
+  id: string;
+  roles_id: string;
+  name: string;
+  start_time: string;
+  end_time: string;
+  duration: number;
+  code: string;
+  category: string;
+  summary: string;
+  is_active: boolean;
+  total_question: number;
+  total_participant: number;
+}
