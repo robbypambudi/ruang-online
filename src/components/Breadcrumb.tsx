@@ -11,6 +11,7 @@ const breadcrumbs = {
   '/dashboard/geolympic': 'Geolympic 2023',
   '/admin': 'Admin',
   '/admin/geolympic/detail-peserta': 'Detail Peserta',
+  '/dashboard/tryout': 'Tryout',
 };
 type BreadcrumbProps = {
   crumbs: Array<keyof typeof breadcrumbs>;

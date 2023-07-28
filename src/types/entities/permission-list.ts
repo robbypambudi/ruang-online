@@ -3,6 +3,8 @@ enum PermissionsEnum {
   'ADMIN',
   'geosentric.index',
   'dashboard_user.index',
+  'tryout.index',
+
   'admin.index',
 }
 

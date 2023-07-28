@@ -3,6 +3,7 @@ import router from 'next/router';
 import { serialize } from 'object-to-formdata';
 import * as React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import useFormPersist from 'react-hook-form-persist';
 import { FiArrowLeft } from 'react-icons/fi';
 
 import api from '@/lib/axios';
@@ -40,7 +41,7 @@ type GeosentricRegisterForm = {
 export default withAuth(GeosentricPage, 'USER', true);
 function GeosentricPage() {
   const methods = useForm<GeosentricRegisterForm>();
-  const { handleSubmit } = methods;
+  const { handleSubmit, watch, setValue } = methods;
   const user = useAuthStore.useUser();
 
   const { mutate } = useMutationToast<void, FormData>(
@@ -53,12 +54,18 @@ function GeosentricPage() {
     })
   );
 
+  const { clear } = useFormPersist('geolympioic', {
+    watch: watch,
+    setValue: setValue,
+    storage: window.localStorage,
+  });
+
   const { data } = useQuery<ApiResponse<{ data: number }>>([
     '/get_harga?event=geolympic',
   ]);
 
   React.useEffect(() => {
-    if (user?.event?.is_geolympic) {
+    if (user?.event?.is_geolympic.registration_status) {
       router.push('/dashboard/geolympic');
     }
   }, [user]);
@@ -67,7 +74,12 @@ function GeosentricPage() {
     const formdata = serialize(data, {
       indices: true,
     });
-    mutate(formdata);
+    mutate(formdata, {
+      onSuccess: () => {
+        clear();
+        router.push('/dashboard/geolympic');
+      },
+    });
   };
 
   function formatRupiah(data: number) {
@@ -105,7 +117,7 @@ function GeosentricPage() {
         </Typography>
         <FormProvider {...methods}>
           <form onSubmit={handleSubmit(onSubmit)} className='mt-4'>
-            <div className='grid grid-cols-1 gap-x-4 space-y-2 md:grid-cols-2'>
+            <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
               <Input
                 id='team_name'
                 label='Team Name'
@@ -122,22 +134,6 @@ function GeosentricPage() {
                   required: 'School name is required',
                 }}
               />
-              {/* <Input
-                id='username'
-                label='Username'
-                placeholder='Enter username'
-                validation={{
-                  required: 'Username is required',
-                }}
-              />
-              <Input
-                id='password'
-                label='Password'
-                placeholder='Enter password'
-                validation={{
-                  required: 'Password is required',
-                }}
-              /> */}
             </div>
             <div>
               <MemberArrayField />
@@ -155,9 +151,9 @@ function GeosentricPage() {
                     <li className='mt-2'>
                       <Typography className='font-semibold'>
                         1. Pay the registration fee to the account number below
-                        :{' '}
+                        : <br />
                         <span className='text-primary-500'>
-                          RISKYANIRMALA NOVATIANA 1299862385{' '}
+                          BNI: RISKYANIRMALA NOVATIANA 1299862385
                         </span>
                       </Typography>
                       <Typography className='font-semibold'>

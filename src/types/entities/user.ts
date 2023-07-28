@@ -15,7 +15,10 @@ export type User = {
   permissions: PermissionsList;
 
   event: {
-    is_geolympic: boolean;
+    is_geolympic: {
+      payment_status: 'unverified' | 'verified' | 'unregistered';
+      registration_status: boolean;
+    };
   };
 };
 
@@ -25,5 +28,8 @@ export interface MeResponse {
   permissions: Permissions;
   username: string;
 
-  is_geolympic: boolean;
+  is_geolympic: {
+    payment_status: 'unverified' | 'verified' | 'unregistered';
+    registration_status: boolean;
+  };
 }

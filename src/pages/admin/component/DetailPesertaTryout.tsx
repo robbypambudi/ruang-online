@@ -33,7 +33,7 @@ export default function DetailPesertaTryout({
               <Typography variant='h3'>
                 Jumlah Anggota : {data.members.length}
               </Typography>
-              <ButtonLink href={`/admin/geolympic/${data.team_name}`} size='sm'>
+              <ButtonLink href={`/admin/geolympic/${data.team_id}`} size='sm'>
                 Lihat Detail
               </ButtonLink>
             </div>

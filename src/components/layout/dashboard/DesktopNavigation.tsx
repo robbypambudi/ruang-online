@@ -87,15 +87,16 @@ export default function DesktopNavigation() {
       <div
         className={clsxm(
           [
-            'hidden rounded-lg bg-surface-base pl-20 lg:absolute lg:mt-[49vh] lg:block',
+            'bg-transparentt z-[-1] hidden animate-pulse rounded-lg pl-20 lg:absolute lg:mt-[49vh] lg:block',
           ],
           sidebarOpen && ['lg:pl-72']
         )}
       >
         <MdOutlineChevronRight
           className={clsxm(
-            ['h-8 w-8 cursor-pointer text-warning-500'],
-            sidebarOpen && ['rotate-180 transform delay-100 ease-in-out']
+            [' h-8 w-8 cursor-pointer text-red-500'],
+            sidebarOpen && ['rotate-180 transform delay-100 ease-in-out'],
+            !sidebarOpen && ['translate-x-2 delay-100 ease-in-out']
           )}
           onClick={() => setSidebarOpen(!sidebarOpen)}
         />

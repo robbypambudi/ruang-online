@@ -30,7 +30,7 @@ export default function MemberArrayField() {
                 Member {index + 1}
               </Typography>
             </div>
-            <div key={index} className='mt-2  space-y-4'>
+            <div key={index} className='mt-2 gap-4'>
               <Input
                 id={`members[${index}].name`}
                 label='Name'
@@ -66,7 +66,7 @@ export default function MemberArrayField() {
             </div>
           </div>
           <div>
-            <div className='space-y-2'>
+            <div className='gap-2'>
               <div className='flex justify-end gap-x-2'>
                 {fields.length <= 2 && (
                   <Button variant='outline' onClick={() => append({})}>

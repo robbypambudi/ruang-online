@@ -1,5 +1,5 @@
 import { FaUsers } from 'react-icons/fa';
-import { FiBook } from 'react-icons/fi';
+import { FiBook, FiBookOpen } from 'react-icons/fi';
 
 import { Navigation } from '@/types/navigate';
 
@@ -16,5 +16,11 @@ export const navigations: Navigation[] = [
     activeClassName: 'bg-typo text-white',
     permissions: ['geosentric.index'],
     icon: FiBook,
+  },
+  {
+    name: 'Tryout',
+    href: '/dashboard/tryout',
+    permissions: ['tryout.index'],
+    icon: FiBookOpen,
   },
 ];
