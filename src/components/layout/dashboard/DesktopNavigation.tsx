@@ -7,6 +7,7 @@ import clsxm from '@/lib/clsxm';
 
 import Button from '@/components/buttons/Button';
 import Navigation from '@/components/layout/dashboard/Navigation';
+import ButtonLink from '@/components/links/ButtonLink';
 import UnstyledLink from '@/components/links/UnstyledLink';
 import Logo from '@/components/logo';
 import NextImage from '@/components/NextImage';
@@ -67,6 +68,14 @@ export default function DesktopNavigation() {
               <Typography variant='c2' className='text-black md:leading-tight'>
                 {user ? user.email : 'testing@gmail.com'}
               </Typography>
+              <ButtonLink
+                href='/dashboard/change-password'
+                variant='secondary'
+                size='sm'
+                className='mt-2'
+              >
+                <Typography variant='c2'>Change Password</Typography>
+              </ButtonLink>
             </div>
           )}
         </section>
