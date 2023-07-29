@@ -3,7 +3,6 @@ import router from 'next/router';
 import { serialize } from 'object-to-formdata';
 import * as React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import useFormPersist from 'react-hook-form-persist';
 import { FiArrowLeft } from 'react-icons/fi';
 
 import api from '@/lib/axios';
@@ -41,7 +40,7 @@ type GeosentricRegisterForm = {
 export default withAuth(GeosentricPage, 'USER', true);
 function GeosentricPage() {
   const methods = useForm<GeosentricRegisterForm>();
-  const { handleSubmit, watch, setValue } = methods;
+  const { handleSubmit } = methods;
   const user = useAuthStore.useUser();
 
   const { mutate } = useMutationToast<void, FormData>(
@@ -53,12 +52,6 @@ function GeosentricPage() {
       });
     })
   );
-
-  const { clear } = useFormPersist('geolympioic', {
-    watch: watch,
-    setValue: setValue,
-    storage: window.localStorage,
-  });
 
   const { data } = useQuery<ApiResponse<{ data: number }>>([
     '/get_harga?event=geolympic',
@@ -76,7 +69,6 @@ function GeosentricPage() {
     });
     mutate(formdata, {
       onSuccess: () => {
-        clear();
         router.push('/dashboard/geolympic');
       },
     });
@@ -142,7 +134,7 @@ function GeosentricPage() {
               <Typography variant='h6' className='mt-2 font-bold'>
                 Payment
               </Typography>
-              <div className='grid grid-cols-2 gap-x-4'>
+              <div className='grid grid-cols-1 gap-x-4 md:grid-cols-2'>
                 <div className='mt-2'>
                   <Typography variant='h5' className='font-bold'>
                     {formatRupiah(data?.data.data || 0)}
