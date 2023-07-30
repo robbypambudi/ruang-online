@@ -1,8 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { BsCloudUpload, BsPeopleFill, BsPersonFill } from 'react-icons/bs';
-import { FiArrowLeft } from 'react-icons/fi';
-import { HiOutlineDocumentAdd } from 'react-icons/hi';
+import React from 'react';
+import { BiSolidInfoCircle } from 'react-icons/bi';
+import { BsPersonFill } from 'react-icons/bs';
+import { FiArrowLeft, FiChevronRight } from 'react-icons/fi';
+import { HiDocument, HiNewspaper } from 'react-icons/hi';
+
+import clsxm from '@/lib/clsxm';
 
 import Breadcrumb from '@/components/Breadcrumb';
 import Button from '@/components/buttons/Button';
@@ -13,14 +17,47 @@ import NextImage from '@/components/NextImage';
 import Seo from '@/components/Seo';
 import Typography from '@/components/typography/Typography';
 
+import useAuthStore from '@/store/useAuthStore';
+
+import Tabs from '@/pages/dashboard/tryout/component/Tabs';
+
 import { ApiResponse } from '@/types/api';
 import { GeolympicTryout } from '@/types/entities/geolympic';
 
-export default withAuth(DetailTryoutAdmin, 'ADMIN');
+export const TabsData = [
+  {
+    TabTitle: 'Ringkasan',
+    TabID: 'ringkasan',
+    LeftIcon: HiDocument,
+    href: '#',
+  },
+  {
+    TabTitle: 'Peraturan',
+    TabID: 'peraturan',
+    LeftIcon: HiNewspaper,
+    href: '#',
+  },
+];
+
+const TabsContents = [
+  {
+    TabID: 'ringkasan',
+    TabContent:
+      'This is contents Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur maasdasd sda sdasd sadasd sdasd sd sadsdsdsadsdsdsadsadsadsadsadsadsadsas sdsad ashdsahdj sahdja dhsa jdhsaj dsa dsaj dsadsa dshdsjakdkashd sajd askhdksaj djsha kd sad sakd ksa dsad asd sad sa dsahjda skdsakdaskdhaskd asdassdadsdasdas s dand sa dasdasd asdbsahdb sahdasdbas hdb ahdabddassdsa dshabd sabdsahbd sahbd sahd asadlasdasl dsajdb alfsadfjd ljkfsabd sadasd',
+  },
+  {
+    TabID: 'peraturan',
+    TabContent: 'This is Peraturan Content',
+  },
+];
+
+export default withAuth(DetailTryoutAdmin, ['tryout.index'], true);
 function DetailTryoutAdmin() {
   const router = useRouter();
   const { id } = router.query;
-  const url = `/admin/quiz_list/detail?quiz_list_id=${id}`;
+  const { user } = useAuthStore();
+  const [tabActive, setTabActive] = React.useState('ringkasan');
+  const url = `/quiz_list/detail?quiz_list_id=${id}`;
   const { data: dataDetailQuizList } = useQuery<ApiResponse<GeolympicTryout>>([
     url,
   ]);
@@ -39,9 +76,9 @@ function DetailTryoutAdmin() {
           <div className='flex flex-col'>
             <Breadcrumb
               crumbs={[
-                '/admin',
-                '/admin/tryout',
-                '/admin/tryout/detail-tryout',
+                '/dashboard',
+                '/dashboard/tryout',
+                '/dashboard/tryout/detail-tryout',
               ]}
             />
             <Typography variant='h2' className='font-bold'>
@@ -75,19 +112,19 @@ function DetailTryoutAdmin() {
                 <div className='flex items-center justify-center gap-3'>
                   <div className=''>
                     <BsPersonFill
-                      className='text-[#1A3FC4]'
+                      className='text-primary-500'
                       width={50}
                       height={50}
                     />
                   </div>
                   <Typography className='' variant='h1' font='montserrat'>
-                    {dataDetailQuizList?.data.total_participant} User
+                    {user?.name}
                   </Typography>
                 </div>
                 <div className='flex items-center justify-center gap-3'>
                   <div className=''>
-                    <BsPersonFill
-                      className='text-[#1A3FC4]'
+                    <BiSolidInfoCircle
+                      className='text-primary-500'
                       width={50}
                       height={50}
                     />
@@ -98,18 +135,6 @@ function DetailTryoutAdmin() {
                   </Typography>
                 </div>
               </div>
-              <div className='flex flex-col items-start gap-2.5 p-2.5'>
-                <Typography className='' variant='h1' font='montserrat'>
-                  Kode Tryout
-                </Typography>
-                <Typography
-                  className='font-bold text-[#1A3FC4]'
-                  variant='h1'
-                  font='montserrat'
-                >
-                  {dataDetailQuizList?.data.code}
-                </Typography>
-              </div>
             </div>
 
             <div className='flex gap-3'>
@@ -117,25 +142,9 @@ function DetailTryoutAdmin() {
                 className='shadow-lg'
                 variant='primary'
                 size='lg'
-                rightIcon={BsCloudUpload}
+                rightIcon={FiChevronRight}
               >
-                Aktif
-              </Button>
-              <Button
-                className='border border-[#37B965] bg-[#37B965] shadow-lg hover:bg-[#2a8d4d]'
-                variant='primary'
-                size='lg'
-                rightIcon={HiOutlineDocumentAdd}
-              >
-                Buat Soal
-              </Button>
-              <Button
-                className='shadow-lg'
-                variant='warning'
-                size='lg'
-                rightIcon={BsPeopleFill}
-              >
-                Peserta Tryout
+                Mulai Ujian
               </Button>
             </div>
           </div>
@@ -149,17 +158,37 @@ function DetailTryoutAdmin() {
           </div>
         </section>
 
-        <section className='flex flex-col items-center justify-center gap-2.5 rounded-xl bg-white p-8 shadow-xl'>
-          <Typography
-            className='w-fit rounded-xl bg-primary-200 px-8 py-3 text-primary-500'
-            variant='h2'
-            font='montserrat'
-          >
-            Ringkasan
-          </Typography>
-          <Typography className='' variant='b2' font='montserrat'>
-            {dataDetailQuizList?.data.summary}
-          </Typography>
+        <section className='flex flex-col items-center justify-center gap-4 rounded-xl bg-white p-8 shadow-xl'>
+          <div className='flex'>
+            {TabsData.map((tab, index) => (
+              <Tabs
+                className={clsxm(
+                  tabActive === tab.TabID
+                    ? [
+                        'border-primary-600 !text-primary-600 dark:border-primary-500 dark:text-primary-500',
+                        'hover:border-primary-700 hover:text-primary-700',
+                      ]
+                    : [
+                        'text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300',
+                        'border-transparent',
+                        'hover:border-gray-400',
+                      ]
+                )}
+                key={index}
+                OnClick={() => setTabActive(tab.TabID)}
+                TabTitle={tab.TabTitle}
+                LeftIcon={tab.LeftIcon}
+              />
+            ))}
+          </div>
+          <div>
+            {TabsContents.map(
+              (tabContent, index) =>
+                tabContent.TabID === tabActive && (
+                  <div key={index}>{tabContent.TabContent}</div>
+                )
+            )}
+          </div>
         </section>
       </main>
     </DashboardLayout>

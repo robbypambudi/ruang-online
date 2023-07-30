@@ -13,6 +13,8 @@ const breadcrumbs = {
   '/admin/geolympic/detail-peserta': 'Detail Peserta',
   '/dashboard/tryout': 'Tryout',
   '/dashboard/tryout/detail-tryout': 'Detail Tryout',
+  '/admin/tryout/detail-tryout': 'Detail Tryout',
+  '/admin/tryout': 'Tryout',
 };
 type BreadcrumbProps = {
   crumbs: Array<keyof typeof breadcrumbs>;
