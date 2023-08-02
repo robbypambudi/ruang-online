@@ -72,8 +72,8 @@ function DetailPesertaGeolympic() {
           <Breadcrumb
             crumbs={[
               '/dashboard',
-              '/dashboard/geolympic',
-              '/admin/geolympic/detail-peserta',
+              '/admin/tryout',
+              '/admin/tryout/detail-peserta',
             ]}
           />
         </div>

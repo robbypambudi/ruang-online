@@ -8,14 +8,15 @@ import Typography from '@/components/typography/Typography';
 const breadcrumbs = {
   '/': 'Home',
   '/dashboard': 'Dashboard',
-  '/dashboard/geolympic': 'Geolympic 2023',
-  '/admin': 'Admin',
-  '/admin/geolympic/detail-peserta': 'Detail Peserta',
   '/dashboard/tryout': 'Tryout',
+  '/dashboard/geolympic': 'Geolympic',
   '/dashboard/tryout/detail-tryout': 'Detail Tryout',
+
+  '/admin': 'Admin',
   '/admin/tryout/detail-tryout': 'Detail Tryout',
   '/admin/tryout': 'Tryout',
   '/admin/tryout/peserta': 'Peserta',
+  '/admin/tryout/detail-peserta': 'Detail Peserta',
   '/admin/tryout/buat': 'Buat Tryout',
 };
 type BreadcrumbProps = {

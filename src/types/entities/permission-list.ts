@@ -6,6 +6,7 @@ enum PermissionsEnum {
   'tryout.index',
   'admin.index',
   'admin_tryout.store',
+  'admin_tryout.index',
 }
 
 export type PermissionsList = Array<keyof typeof PermissionsEnum>;

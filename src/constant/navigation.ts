@@ -32,7 +32,7 @@ export const navigations: Navigation[] = [
   {
     name: 'Tryout',
     href: '/admin/tryout',
-    permissions: ['admin.index'],
+    permissions: ['admin_tryout.index'],
     icon: FiBookOpen,
   },
 ];

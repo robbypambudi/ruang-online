@@ -1,7 +1,7 @@
 import Cookies, { CookieSetOptions } from 'universal-cookie';
 
 const cookies = new Cookies();
-const securedCookies = '@secured/token';
+const securedCookies = '@geosentric/token';
 
 export const setCookie = (
   name: string,

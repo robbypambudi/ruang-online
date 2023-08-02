@@ -1,4 +1,5 @@
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+/* eslint-disable unused-imports/no-unused-vars */
+import { useRouter } from 'next/router';
 import * as React from 'react';
 
 import api from '@/lib/axios';
@@ -23,6 +24,13 @@ const hasPermission = (user: User | null, permission: PermissionsList) => {
   return permission.every((p) => user?.permissions?.includes(p));
 };
 
+/**
+ * Add role-based access control to a component
+ *
+ * @see https://react-typescript-cheatsheet.netlify.app/docs/hoc/full_example/
+ * @see https://github.com/mxthevs/nextjs-auth/blob/main/src/components/withAuth.tsx
+ */
+
 const ADMIN_ROUTE = '/admin';
 const USER_ROUTE = '/dashboard';
 const LOGIN_ROUTE = '/login';
@@ -32,10 +40,9 @@ export default function withAuth<T>(
   routePermission: PermissionsList | GeneralPermission,
   withRefetch = false
 ) {
-  return (props: Omit<T, keyof WithAuthProps>) => {
+  const ComponentWithAuth = (props: Omit<T, keyof WithAuthProps>) => {
     const router = useRouter();
-    const searchParams = useSearchParams();
-    const pathname = usePathname();
+    const { query } = router;
 
     //#region  //*=========== STORE ===========
     const isAuthenticated = useAuthStore.useIsAuthenticated();
@@ -58,7 +65,6 @@ export default function withAuth<T>(
         try {
           const res = await api.get<ApiResponse<MeResponse>>('/me');
           const permissions = res.data.data.permissions;
-
           login({
             name: res.data.data.name,
             email: res.data.data.email,
@@ -90,8 +96,8 @@ export default function withAuth<T>(
             routePermission === 'USER' ||
             !hasPermission(user, routePermission)
           ) {
-            if (searchParams.get('redirect')) {
-              router.replace(searchParams.get('redirect') as string);
+            if (query?.redirect) {
+              router.replace(query.redirect as string);
             } else if (
               routePermission === 'ADMIN' ||
               routePermission === 'USER'
@@ -121,12 +127,15 @@ export default function withAuth<T>(
         } else {
           // Prevent unauthenticated user from accessing protected pages
           if (routePermission !== 'auth') {
-            router.replace(`${LOGIN_ROUTE}?redirect=${pathname}`);
+            router.replace(
+              `${LOGIN_ROUTE}?redirect=${router.asPath}`,
+              `${LOGIN_ROUTE}`
+            );
           }
         }
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isAuthenticated, router, isLoading]);
+    }, [isAuthenticated, router, query, isLoading]);
 
     React.useEffect(() => {
       checkAuth();
@@ -157,4 +166,6 @@ export default function withAuth<T>(
 
     return <Component {...(props as T)} user={user} />;
   };
+
+  return ComponentWithAuth;
 }
