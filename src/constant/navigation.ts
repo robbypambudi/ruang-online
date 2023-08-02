@@ -23,4 +23,10 @@ export const navigations: Navigation[] = [
     permissions: ['tryout.index'],
     icon: FiBookOpen,
   },
+  {
+    name: 'Tryout',
+    href: '/admin/tryout',
+    permissions: ['admin.index'],
+    icon: FiBookOpen,
+  },
 ];

@@ -16,6 +16,8 @@ interface PaginatedData<T> {
   meta: {
     page: number;
     max_page: number;
+    total_data: number | null;
+    total_active_quiz: number | null;
   };
 }
 

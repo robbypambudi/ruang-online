@@ -25,10 +25,34 @@ export interface GeolympicTryout {
   start_time: string;
   end_time: string;
   duration: number;
+
   code: string;
   category: string;
   summary: string;
   is_active: boolean;
   total_question: number;
   total_participant: number;
+}
+
+export interface TryoutUser {
+  id: string;
+  name: string;
+  email: string;
+  role: string;
+}
+
+export interface TryoutUserDetail {
+  grade_id: string;
+  quiz_list_id: string;
+  user_id: string;
+  username: string;
+  email: string;
+  grade: number;
+  correct_answer: number;
+  incorrect_answer: number;
+  total_spend: number;
+  question_attemp: number;
+  end_date: string;
+  is_active: boolean;
+  status: string;
 }
