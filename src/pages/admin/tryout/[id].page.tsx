@@ -8,6 +8,7 @@ import Breadcrumb from '@/components/Breadcrumb';
 import Button from '@/components/buttons/Button';
 import withAuth from '@/components/hoc/withAuth';
 import DashboardLayout from '@/components/layout/dashboard/DashboardLayout';
+import ButtonLink from '@/components/links/ButtonLink';
 import IconLink from '@/components/links/IconLink';
 import NextImage from '@/components/NextImage';
 import Seo from '@/components/Seo';
@@ -121,14 +122,15 @@ function DetailTryoutAdmin() {
               >
                 Aktif
               </Button>
-              <Button
+              <ButtonLink
+                href={`/admin/tryout/question/buat?quiz_list_id=${id}&name=${dataDetailQuizList?.data.name}`}
                 className='border border-[#37B965] bg-[#37B965] shadow-lg hover:bg-[#2a8d4d]'
                 variant='primary'
                 size='lg'
                 rightIcon={HiOutlineDocumentAdd}
               >
                 Buat Soal
-              </Button>
+              </ButtonLink>
               <Button
                 className='shadow-lg'
                 variant='warning'
