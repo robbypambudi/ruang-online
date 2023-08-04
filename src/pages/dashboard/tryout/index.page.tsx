@@ -185,7 +185,7 @@ function DashboardTryout() {
                 rightIcon={BsArrowRightShort}
                 onClick={() => toast.success('Coming Soon')}
               >
-                Mulai Ujian
+                Lihat Ujian
               </Button>
             </div>
           </div>

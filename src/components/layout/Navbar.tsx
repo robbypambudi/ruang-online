@@ -33,7 +33,7 @@ export default function Navbar() {
   React.useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      if (scrollPosition > 2040) {
+      if (scrollPosition > 1300) {
         setActive('contact');
       } else {
         setActive('home');
@@ -149,7 +149,8 @@ export default function Navbar() {
                   <ButtonLink
                     href='/login'
                     size='base'
-                    className='bg-typo-white border-0'
+                    className='border-0'
+                    color='primary'
                   >
                     <Typography color='white' className='text-center'>
                       Login/Signup

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { ColumnDef } from '@tanstack/react-table';
 import * as React from 'react';
-import { FiArrowLeft, FiArrowRight, FiEye } from 'react-icons/fi';
+import { FiArrowRight, FiEye } from 'react-icons/fi';
 
 import { buildPaginatedTableURL } from '@/lib/table';
 import useServerTable from '@/hooks/useServerTable';
@@ -102,11 +102,6 @@ function DashboardAdminPage() {
 
       <header className='flex justify-between'>
         <div className='flex items-center gap-3'>
-          <IconLink
-            href='/dashboard'
-            icon={FiArrowLeft}
-            iconClassName='text-gray-500'
-          />
           <div className='flex flex-col'>
             <Breadcrumb crumbs={['/admin']} />
             <Typography variant='h2' className='font-bold'>

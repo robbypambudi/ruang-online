@@ -7,6 +7,7 @@ import 'aos/dist/aos.css';
 
 import clsxm from '@/lib/clsxm';
 
+import Button from '@/components/buttons/Button';
 import Layout from '@/components/layout/Layout';
 import ButtonLink from '@/components/links/ButtonLink';
 import UnstyledLink from '@/components/links/UnstyledLink';
@@ -15,6 +16,7 @@ import Seo from '@/components/Seo';
 import Typography from '@/components/typography/Typography';
 
 export default function Home() {
+  const about = React.useRef<HTMLDivElement>(null);
   React.useEffect(() => {
     AOS.init({
       anchorPlacement: 'top-bottom',
@@ -145,19 +147,24 @@ export default function Home() {
               Department of Geomatics Engineering organized by the Association
               of <span className='text-purple-300'>Geomatics ITS</span>.
             </Typography>
-            <ButtonLink
-              href='#discover'
+            <Button
+              onClick={() =>
+                about.current?.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'center',
+                })
+              }
               data-aos='fade-down'
               data-aos-delay='700'
               data-aos-offset='-50'
             >
               Lets Discover
-            </ButtonLink>
+            </Button>
           </div>
         </section>
         <NextImage
           src='/images/home/hero-line.png'
-          width={1420}
+          width={1700}
           height={144}
           alt='logo'
           className='absolute -bottom-5 w-full animate-pulse overflow-x-hidden lg:-bottom-16'
@@ -176,7 +183,7 @@ export default function Home() {
           data-aos-offset='-50'
         />
         <section
-          id='discover'
+          ref={about}
           className={clsxm(['lg:-translate-y-10'], ['px-10'], ['lg:px-40'])}
         >
           <NextImage
@@ -384,7 +391,7 @@ export default function Home() {
             >
               <NextImage
                 src='/images/home/desktop-timeline.png'
-                width={584}
+                width={700}
                 height={3}
                 alt='timeline'
                 className='hidden w-full lg:block'
@@ -482,7 +489,6 @@ export default function Home() {
               height={105}
               alt='triangle'
               className='absolute right-0 z-0 hidden -translate-y-40 lg:block'
-              data-aos='fade-left'
             />
             <div className='flex flex-col justify-between lg:flex-row'>
               <div>
@@ -527,7 +533,7 @@ export default function Home() {
                   <UnstyledLink
                     href='https://wa.me/6285745444962'
                     target='_blank'
-                    className='flex cursor-pointer gap-x-4 hover:animate-pulse'
+                    className='flex cursor-pointer items-center gap-x-4 hover:animate-pulse'
                   >
                     <BsWhatsapp className='h-[25px] w-[25px] rounded-md bg-white p-[5px] text-black' />
                     <Typography
@@ -537,7 +543,7 @@ export default function Home() {
                       085745444962
                     </Typography>
                   </UnstyledLink>
-                  <div className='flex gap-x-4'>
+                  <div className='flex items-center gap-x-4'>
                     <BsLine className='h-[25px] w-[25px] rounded-md bg-white p-[5px] text-black' />
                     <Typography
                       color='white'
@@ -567,7 +573,7 @@ export default function Home() {
                   <UnstyledLink
                     href='https://wa.me/6281292331829'
                     target='_blank'
-                    className='flex cursor-pointer gap-x-4 hover:animate-pulse'
+                    className='flex cursor-pointer items-center gap-x-4 hover:animate-pulse'
                   >
                     <BsWhatsapp className='h-[25px] w-[25px] rounded-md bg-white p-[5px] text-black' />
                     <Typography
@@ -577,7 +583,7 @@ export default function Home() {
                       081292331829
                     </Typography>
                   </UnstyledLink>
-                  <div className='flex gap-x-4'>
+                  <div className='flex items-center gap-x-4'>
                     <BsLine className='h-[25px] w-[25px] rounded-md bg-white p-[5px] text-black' />
                     <Typography
                       color='white'

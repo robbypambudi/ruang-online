@@ -1,5 +1,5 @@
 import { FaUsers } from 'react-icons/fa';
-import { FiBook, FiBookOpen } from 'react-icons/fi';
+import { FiBook, FiBookOpen, FiUser } from 'react-icons/fi';
 
 import { Navigation } from '@/types/navigate';
 
@@ -22,6 +22,12 @@ export const navigations: Navigation[] = [
     href: '/dashboard/tryout',
     permissions: ['tryout.index'],
     icon: FiBookOpen,
+  },
+  {
+    name: 'Peserta',
+    href: '/admin',
+    permissions: ['admin.index'],
+    icon: FiUser,
   },
   {
     name: 'Tryout',
