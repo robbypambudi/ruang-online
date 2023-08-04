@@ -11,8 +11,8 @@ const breadcrumbs = {
   '/dashboard/tryout': 'Tryout',
   '/dashboard/geolympic': 'Geolympic',
   '/dashboard/tryout/detail-tryout': 'Detail Tryout',
-
   '/admin': 'Admin',
+  '/dashboard/tryout/quiz/soal': 'Quiz',
   '/admin/tryout/detail-tryout': 'Detail Tryout',
   '/admin/tryout': 'Tryout',
   '/admin/tryout/participant': 'Peserta',
