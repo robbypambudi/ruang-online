@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { BsPeopleFill, BsPersonFill } from 'react-icons/bs';
 import { FiArrowLeft } from 'react-icons/fi';
-import { HiOutlineDocumentAdd, HiOutlineDocumentText } from 'react-icons/hi';
+import { HiOutlineDocumentAdd } from 'react-icons/hi';
 import { MdArrowCircleDown, MdArrowCircleUp } from 'react-icons/md';
 
 import api from '@/lib/axios';
@@ -163,22 +163,14 @@ function DetailTryoutAdmin() {
               >
                 Buat Soal
               </ButtonLink>
-              <Button
+              <ButtonLink
+                href={`/admin/tryout/participant?quiz_list_id=${id}`}
                 className='shadow-lg'
                 variant='warning'
                 size='lg'
                 rightIcon={BsPeopleFill}
               >
                 Peserta Tryout
-              </Button>
-              <ButtonLink
-                href={`/admin/tryout/question/${id}`}
-                className='shadow-lg'
-                variant='danger'
-                size='lg'
-                rightIcon={HiOutlineDocumentText}
-              >
-                Detail Soal
               </ButtonLink>
             </div>
           </div>

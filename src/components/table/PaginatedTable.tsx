@@ -12,7 +12,6 @@ import * as React from 'react';
 import { FiList } from 'react-icons/fi';
 
 import clsxm from '@/lib/clsxm';
-import useRenderCount from '@/hooks/useRenderCount';
 
 import Filter from '@/components/table/Filter';
 import PaginationControl from '@/components/table/PaginationControl';
@@ -37,8 +36,6 @@ export default function PaginatedTable<T extends object>({
   withFilter = false,
   ...rest
 }: PaginatedTableProps<T>) {
-  const renderCount = useRenderCount();
-
   const [globalFilter, setGlobalFilter] = React.useState('');
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
@@ -68,19 +65,6 @@ export default function PaginatedTable<T extends object>({
 
   return (
     <div className={clsxm('flex flex-col', className)} {...rest}>
-      <pre>
-        {JSON.stringify(
-          {
-            renderCount,
-            globalFilter: table.getState().globalFilter,
-            pagination: table.getState().pagination,
-            sorting: table.getState().sorting,
-          },
-          null,
-          2
-        )}
-      </pre>
-
       <div
         className={clsx(
           'flex flex-col items-stretch gap-3 sm:flex-row',

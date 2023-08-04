@@ -131,7 +131,7 @@ function TryoutAdmin() {
             variant='outline'
             icon={FiUsers}
             iconClassName='text-gray-500'
-            href={`/admin/tryout/users/${row.original.id}`}
+            href={`/admin/tryout/participant?quiz_list_id=${row.original.id}`}
           />
           <IconLink
             href={`/admin/tryout/${row.original.id}`}
