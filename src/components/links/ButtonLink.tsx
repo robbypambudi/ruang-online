@@ -13,6 +13,7 @@ const ButtonLinkVariant = [
   'outline',
   'ghost',
   'warning',
+  'danger',
 ] as const;
 const ButtonLinkSize = ['sm', 'base', 'lg'] as const;
 
@@ -90,6 +91,14 @@ const ButtonLink = React.forwardRef<HTMLAnchorElement, ButtonLinkProps>(
               'active:bg-amber-700',
               'disabled:bg-amber-700',
               'focus-visible:ring-amber-400',
+            ],
+            variant === 'danger' && [
+              'bg-red-500 text-white',
+              'border border-red-500',
+              'hover:bg-red-600 hover:text-white',
+              'active:bg-red-700',
+              'disabled:bg-red-700',
+              'focus-visible:ring-red-400',
             ],
             variant === 'outline' && [
               'text-typo',

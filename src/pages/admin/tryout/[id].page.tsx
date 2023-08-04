@@ -1,8 +1,12 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { BsCloudUpload, BsPeopleFill, BsPersonFill } from 'react-icons/bs';
+import { BsPeopleFill, BsPersonFill } from 'react-icons/bs';
 import { FiArrowLeft } from 'react-icons/fi';
-import { HiOutlineDocumentAdd } from 'react-icons/hi';
+import { HiOutlineDocumentAdd, HiOutlineDocumentText } from 'react-icons/hi';
+import { MdArrowCircleDown, MdArrowCircleUp } from 'react-icons/md';
+
+import api from '@/lib/axios';
+import useMutationToast from '@/hooks/toast/useMutationToast';
 
 import Breadcrumb from '@/components/Breadcrumb';
 import Button from '@/components/buttons/Button';
@@ -17,7 +21,12 @@ import Typography from '@/components/typography/Typography';
 import { ApiResponse } from '@/types/api';
 import { GeolympicTryout } from '@/types/entities/geolympic';
 
-export default withAuth(DetailTryoutAdmin, 'ADMIN');
+type ChangeStatus = {
+  quiz_list_id: string | undefined;
+  is_active: string;
+};
+
+export default withAuth(DetailTryoutAdmin, 'ADMIN', false);
 function DetailTryoutAdmin() {
   const router = useRouter();
   const { id } = router.query;
@@ -25,6 +34,16 @@ function DetailTryoutAdmin() {
   const { data: dataDetailQuizList } = useQuery<ApiResponse<GeolympicTryout>>([
     url,
   ]);
+
+  const { mutate } = useMutationToast<void, ChangeStatus>(
+    useMutation((data) => {
+      return api.post('/admin/quiz_list/active', data);
+    })
+  );
+
+  const iconStatus = dataDetailQuizList?.data.is_active
+    ? MdArrowCircleDown
+    : MdArrowCircleUp;
 
   return (
     <DashboardLayout>
@@ -118,9 +137,22 @@ function DetailTryoutAdmin() {
                 className='shadow-lg'
                 variant='primary'
                 size='lg'
-                rightIcon={BsCloudUpload}
+                rightIcon={iconStatus}
+                onClick={() =>
+                  mutate(
+                    {
+                      quiz_list_id: dataDetailQuizList?.data.id,
+                      is_active: dataDetailQuizList?.data.is_active ? '1' : '0',
+                    },
+                    {
+                      onSuccess: () => {
+                        router.reload();
+                      },
+                    }
+                  )
+                }
               >
-                Aktif
+                {dataDetailQuizList?.data.is_active ? 'Nonaktif' : 'Aktif'}
               </Button>
               <ButtonLink
                 href={`/admin/tryout/question/buat?quiz_list_id=${id}&name=${dataDetailQuizList?.data.name}&category=${dataDetailQuizList?.data.category}`}
@@ -139,6 +171,15 @@ function DetailTryoutAdmin() {
               >
                 Peserta Tryout
               </Button>
+              <ButtonLink
+                href={`/admin/tryout/question/${id}`}
+                className='shadow-lg'
+                variant='danger'
+                size='lg'
+                rightIcon={HiOutlineDocumentText}
+              >
+                Detail Soal
+              </ButtonLink>
             </div>
           </div>
           <div>
