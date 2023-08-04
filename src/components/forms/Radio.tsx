@@ -20,6 +20,7 @@ export type RadioProps = {
   hideError?: boolean;
   /** Manual validation using RHF, it is encouraged to use yup resolver instead */
   validation?: RegisterOptions;
+  id?: string;
 } & React.ComponentPropsWithoutRef<'input'>;
 
 export default function Radio({
@@ -32,6 +33,7 @@ export default function Radio({
   hideError = false,
   validation,
   disabled,
+  id,
   ...rest
 }: RadioProps) {
   const {
@@ -48,7 +50,7 @@ export default function Radio({
           {...rest}
           type='radio'
           name={name}
-          id={`${name}_${value}`}
+          id={id ? id : `${name}_${value}`}
           value={value}
           disabled={disabled}
           readOnly={readOnly}

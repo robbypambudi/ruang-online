@@ -123,7 +123,7 @@ function DetailTryoutAdmin() {
                 Aktif
               </Button>
               <ButtonLink
-                href={`/admin/tryout/question/buat?quiz_list_id=${id}&name=${dataDetailQuizList?.data.name}`}
+                href={`/admin/tryout/question/buat?quiz_list_id=${id}&name=${dataDetailQuizList?.data.name}&category=${dataDetailQuizList?.data.category}`}
                 className='border border-[#37B965] bg-[#37B965] shadow-lg hover:bg-[#2a8d4d]'
                 variant='primary'
                 size='lg'

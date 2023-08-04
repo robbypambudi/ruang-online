@@ -9,7 +9,7 @@ import { UninterceptedApiError } from '@/types/api';
 const isServer = () => {
   return typeof window === 'undefined';
 };
-const context = <GetServerSidePropsContext>{};
+let context = <GetServerSidePropsContext>{};
 
 const api = axios.create({
   baseURL: 'https://api.geosentric-its.com/api',
@@ -66,5 +66,10 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+
+export const setApiContext = (_context: GetServerSidePropsContext) => {
+  context = _context;
+  return;
+};
 
 export default api;

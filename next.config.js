@@ -4,7 +4,7 @@ const nextConfig = {
     dirs: ['src'],
   },
 
-  reactStrictMode: true,
+  // reactStrictMode: true,
   pageExtensions: ['page.tsx', 'api.ts'],
   swcMinify: true,
 

@@ -7,6 +7,7 @@ import { buildPaginatedTableURL } from '@/lib/table';
 import useServerTable from '@/hooks/useServerTable';
 
 import Breadcrumb from '@/components/Breadcrumb';
+import withAuth from '@/components/hoc/withAuth';
 import DashboardLayout from '@/components/layout/dashboard/DashboardLayout';
 import IconLink from '@/components/links/IconLink';
 import SEO from '@/components/Seo';
@@ -17,7 +18,8 @@ import Typography from '@/components/typography/Typography';
 import { PaginatedApiResponse } from '@/types/api';
 import { GeolympicTryout } from '@/types/entities/geolympic';
 
-export default function TryoutAdmin() {
+export default withAuth(TryoutAdmin, ['admin_tryout.index']);
+function TryoutAdmin() {
   const { tableState, setTableState } = useServerTable<GeolympicTryout>();
 
   const url = buildPaginatedTableURL({
