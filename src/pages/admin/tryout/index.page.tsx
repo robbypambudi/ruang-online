@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ColumnDef } from '@tanstack/react-table';
 import { FiArrowRight, FiFileText, FiUsers } from 'react-icons/fi';
 import { LuFileCheck } from 'react-icons/lu';
+import { MdAdd } from 'react-icons/md';
 
 import { buildPaginatedTableURL } from '@/lib/table';
 import useServerTable from '@/hooks/useServerTable';
@@ -9,6 +10,7 @@ import useServerTable from '@/hooks/useServerTable';
 import Breadcrumb from '@/components/Breadcrumb';
 import withAuth from '@/components/hoc/withAuth';
 import DashboardLayout from '@/components/layout/dashboard/DashboardLayout';
+import ButtonLink from '@/components/links/ButtonLink';
 import IconLink from '@/components/links/IconLink';
 import SEO from '@/components/Seo';
 import ServerTable from '@/components/table/ServerTable';
@@ -184,6 +186,15 @@ function TryoutAdmin() {
             <div className='flex items-center justify-center rounded-xl bg-green-200 p-3'>
               <LuFileCheck className='text-2xl text-green-500' />
             </div>
+          </div>
+          <div className='ml-auto'>
+            <ButtonLink
+              href='/admin/tryout/buat'
+              variant='primary'
+              rightIcon={MdAdd}
+            >
+              Tambah Soal
+            </ButtonLink>
           </div>
         </section>
         <div className='mt-8'>
