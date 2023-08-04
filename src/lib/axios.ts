@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import { GetServerSidePropsContext } from 'next/types';
+import requestIp from 'request-ip';
 import Cookies from 'universal-cookie';
 
 import { getToken } from '@/lib/cookies';
@@ -28,8 +29,18 @@ api.interceptors.request.use(function (config) {
         throw 'Api Context not found. You must call `setApiContext(context)` before calling api on server-side';
 
       const cookies = new Cookies(context.req?.headers.cookie);
+
+      const detectedIp = requestIp.getClientIp(context.req);
+
+      if (
+        detectedIp &&
+        process.env.NEXT_PUBLIC_STATUS_PRODUCTION === 'vercel'
+      ) {
+        config.headers['X-Forwarded-For'] = detectedIp;
+      }
+
       /** Get cookies from context if server side */
-      // get cookie from context by name @spectra/token
+      // get cookie from context by name @geosentric/token
       token = cookies.get('@geosentric/token');
     } else {
       /** Get cookies from context if server side */

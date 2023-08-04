@@ -4,7 +4,6 @@ import * as React from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
 
 import api, { setApiContext } from '@/lib/axios';
-import logger from '@/lib/logger';
 import { generateToastQuery } from '@/lib/toast';
 
 import Breadcrumb from '@/components/Breadcrumb';
@@ -115,7 +114,8 @@ export const getServerSideProps = async (
       },
     };
   } catch (error) {
-    logger(error, 'error');
+    // eslint-disable-next-line no-console
+    console.log(error);
 
     return {
       redirect: {
