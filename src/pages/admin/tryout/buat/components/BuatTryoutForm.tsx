@@ -24,16 +24,20 @@ export default function BuatTryoutForm() {
               }}
             />
             <DatePicker
-              label='Tanggal Lahir'
+              label='Tanggal Mulai'
               id='start_date'
-              placeholder='Tanggal Lahir'
-              validation={{ required: 'Tanggal Lahir is required' }}
+              placeholder='Tanggal Mulai'
+              validation={{ required: 'Tanggal Mulai tidak boleh kosong!' }}
+              showTimeInput
+              dateFormat='yyyy-MM-dd HH:mm:ss'
             />
             <DatePicker
               label='Tanggal Selesai'
               id='end_date'
-              placeholder='Tanggal Lahir'
-              validation={{ required: 'Tanggal Lahir is required' }}
+              placeholder='Tanggal Selesai'
+              validation={{ required: 'Tanggal Selesai tidak boleh kosong!' }}
+              showTimeInput
+              dateFormat='yyyy-MM-dd HH:mm:ss'
             />
           </div>
           <div className='space-y-4'>
@@ -54,6 +58,19 @@ export default function BuatTryoutForm() {
                 required: 'Kategori Tryout tidak boleh kosong!',
               }}
             />
+            <Input
+              id='duration'
+              label='Durasi Pengerjaan (dalam menit)'
+              placeholder='Durasi Pengerjaan'
+              validation={{
+                required: 'Durasi pengerjaan tidak boleh kosong!',
+                // number only
+                pattern: {
+                  value: /^[0-9]*$/,
+                  message: 'Durasi pengerjaan harus berupa angka!',
+                },
+              }}
+            />
           </div>
         </div>
         <div className='mt-4 space-y-2'>
@@ -70,16 +87,18 @@ export default function BuatTryoutForm() {
           </label>
           <div className='mt-1 grid grid-flow-col grid-rows-2'>
             <RadioButton
-              label='Aktif'
+              label='Ready'
               name='status'
               value='1'
-              validation={{ required: 'Status is required' }}
+              validation={{ required: 'Status tidak boleh kosong!' }}
+              hideError
             />
             <RadioButton
-              label='Shopeepay'
+              label='Draft'
               name='status'
-              value='Shopeepay'
-              validation={{ required: 'Shopeepay is required' }}
+              value='0'
+              validation={{ required: 'Status tidak boleh kosong!' }}
+              hideError
             />
           </div>
           <p className='text-xs text-gray-500'>
