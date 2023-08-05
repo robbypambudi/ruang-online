@@ -13,6 +13,7 @@ import Breadcrumb from '@/components/Breadcrumb';
 import withAuth from '@/components/hoc/withAuth';
 import DashboardLayout from '@/components/layout/dashboard/DashboardLayout';
 import IconLink from '@/components/links/IconLink';
+import Seo from '@/components/Seo';
 import Typography from '@/components/typography/Typography';
 
 import BuatTryoutForm from '@/pages/admin/tryout/buat/components/BuatTryoutForm';
@@ -59,6 +60,7 @@ function BuatTryoutPage() {
 
   return (
     <DashboardLayout>
+      <Seo templateTitle='Buat Tryout' />
       <header className='flex justify-between'>
         <div className='flex items-center gap-3'>
           <IconLink

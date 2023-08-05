@@ -58,7 +58,7 @@ function DetailPesertaGeolympic() {
 
   return (
     <DashboardLayout>
-      <Seo templateTitle='Detail Peserta Mechanical Competition' />
+      <Seo templateTitle='Detail Peserta Geolympic' />
       <div className='flex w-full flex-col justify-between md:flex-row'>
         <div>
           <Typography as='h6' variant='s2' className='text-[#8A62D0]'>

@@ -31,9 +31,9 @@ function DetailTryoutAdmin() {
   const router = useRouter();
   const { id } = router.query;
   const url = `/admin/quiz_list/detail?quiz_list_id=${id}`;
-  const { data: dataDetailQuizList } = useQuery<ApiResponse<GeolympicTryout>>([
-    url,
-  ]);
+  const { data: dataDetailQuizList, refetch } = useQuery<
+    ApiResponse<GeolympicTryout>
+  >([url]);
 
   const { mutate } = useMutationToast<void, ChangeStatus>(
     useMutation((data) => {
@@ -146,7 +146,7 @@ function DetailTryoutAdmin() {
                     },
                     {
                       onSuccess: () => {
-                        router.reload();
+                        refetch();
                       },
                     }
                   )

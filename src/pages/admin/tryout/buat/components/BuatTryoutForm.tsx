@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FiChevronLeft, FiSave } from 'react-icons/fi';
+import { FiSave } from 'react-icons/fi';
 
 import Button from '@/components/buttons/Button';
 import DatePicker from '@/components/forms/DatePicker';
@@ -7,7 +7,6 @@ import ErrorMessage from '@/components/forms/ErrorMessage';
 import Input from '@/components/forms/Input';
 import RadioButton from '@/components/forms/Radio';
 import TextArea from '@/components/forms/TextArea';
-import ButtonLink from '@/components/links/ButtonLink';
 
 export default function BuatTryoutForm() {
   return (
@@ -62,13 +61,9 @@ export default function BuatTryoutForm() {
               id='duration'
               label='Durasi Pengerjaan (dalam menit)'
               placeholder='Durasi Pengerjaan'
+              type='number'
               validation={{
                 required: 'Durasi pengerjaan tidak boleh kosong!',
-                // number only
-                pattern: {
-                  value: /^[0-9]*$/,
-                  message: 'Durasi pengerjaan harus berupa angka!',
-                },
               }}
             />
           </div>
@@ -102,20 +97,12 @@ export default function BuatTryoutForm() {
             />
           </div>
           <p className='text-xs text-gray-500'>
-            Status tryout yang aktif akan ditampilkan di halaman utama user
+            Status tryout yang <span className='font-semibold'>READY</span> akan
+            ditampilkan di halaman utama user
           </p>
           <ErrorMessage id='status' />
         </div>
         <div className='mt-5 space-x-4'>
-          <ButtonLink
-            type='button'
-            variant='outline'
-            leftIcon={FiChevronLeft}
-            href='/admin/list-tryout'
-            leftIconClassName='text-gray-500'
-          >
-            Kembali
-          </ButtonLink>
           <Button type='submit' variant='primary' leftIcon={FiSave}>
             Buat Tryout
           </Button>

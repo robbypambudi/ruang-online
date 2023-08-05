@@ -193,7 +193,7 @@ function TryoutAdmin() {
               variant='primary'
               rightIcon={MdAdd}
             >
-              Tambah Soal
+              Tambah Tryout
             </ButtonLink>
           </div>
         </section>
