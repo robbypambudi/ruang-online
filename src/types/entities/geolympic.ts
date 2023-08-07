@@ -25,7 +25,6 @@ export interface GeolympicTryout {
   start_time: string;
   end_time: string;
   duration: number;
-
   code: string;
   category: string;
   summary: string;

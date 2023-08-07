@@ -1,5 +1,7 @@
 import Cookies, { CookieSetOptions } from 'universal-cookie';
 
+import { ListQusetionProps } from '@/types/entities/question';
+
 const cookies = new Cookies();
 const securedCookies = '@geosentric/token';
 
@@ -30,4 +32,20 @@ export const removeToken = () => {
     sameSite: 'strict',
     secure: true,
   });
+};
+
+// Set the All Questions
+export const setAllQuestions = (questions: ListQusetionProps[]) => {
+  setCookie('@geosentric/questions', JSON.stringify(questions), {
+    path: '/',
+    maxAge: 60 * 60 * 24, // 1 day
+    sameSite: 'strict',
+    secure: true,
+  });
+};
+
+// Get all questions
+export const getAllQuestions = () => {
+  const cookieValue = cookies.get('@geosentric/questions');
+  return cookieValue;
 };

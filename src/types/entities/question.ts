@@ -28,3 +28,22 @@ export default interface QuestionForm {
   quiz_list_id: string;
   questions: Question[];
 }
+
+export type UserAnswer = {
+  id: string;
+  answer: string;
+};
+
+export type ListDetailQuestionProps = {
+  category: string;
+  image_url: string | null;
+  index: number;
+  name: string;
+  question: string;
+  answers: UserAnswer[];
+};
+
+export type ListQusetionProps = {
+  question_id: string;
+  status: string;
+};
