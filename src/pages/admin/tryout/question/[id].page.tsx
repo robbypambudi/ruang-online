@@ -3,6 +3,9 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { BiPencil, BiTrash } from 'react-icons/bi';
 import { FiArrowLeft } from 'react-icons/fi';
+import Latex from 'react-latex-next';
+
+import 'katex/dist/katex.min.css';
 
 import api from '@/lib/axios';
 import useMutationToast from '@/hooks/toast/useMutationToast';
@@ -34,6 +37,8 @@ export type DetailSoal = {
   name: string;
   answers: DetailAnswer[];
 };
+
+const INITIAL_MACROS = { '\\f': '#1f(#2)' };
 
 export default function DetailSoal() {
   const router = useRouter();
@@ -143,12 +148,13 @@ export default function DetailSoal() {
                         <Typography variant='h1' font='poppins'>
                           Soal No {index + 1} - {name}
                         </Typography>
+
                         <Typography
                           className='mt-2'
                           variant='b1'
                           font='montserrat'
                         >
-                          {question}
+                          <Latex macros={INITIAL_MACROS}>{question}</Latex>
                         </Typography>
                       </div>
                       <div>
@@ -194,7 +200,7 @@ export default function DetailSoal() {
                                 is_correct ? 'font-semibold text-green-500' : ''
                               }
                             >
-                              {answer}
+                              <Latex macros={INITIAL_MACROS}>{answer}</Latex>
                             </li>
                           );
                         })}

@@ -5,6 +5,9 @@ import React from 'react';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { FaPlus, FaTrash } from 'react-icons/fa';
 import { FiArrowLeft } from 'react-icons/fi';
+import Latex from 'react-latex-next';
+
+import 'katex/dist/katex.min.css';
 
 import api, { setApiContext } from '@/lib/axios';
 import clsxm from '@/lib/clsxm';
@@ -68,6 +71,8 @@ const QuestionTypeIds = {
   'ff3dc386-cfbc-4f5d-8c82-2c8053e4b201': 'short_answer',
 };
 
+const INITIAL_MACROS = { '\\f': '#1f(#2)' };
+
 export default function EditQuestion({
   questionTypes,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
@@ -101,6 +106,7 @@ export default function EditQuestion({
 
   const { question_type_id } = methods.watch();
 
+  const pertanyaan = detailSoal?.data.question;
   const nomer = detailSoal?.data.index;
   const jawaban = detailSoal?.data.answers;
 
@@ -114,6 +120,8 @@ export default function EditQuestion({
       },
     });
   };
+
+  const [text, setText] = React.useState(pertanyaan);
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -174,6 +182,7 @@ export default function EditQuestion({
                   }}
                   containerClassName='md:w-1/2 w-full'
                 />
+
                 <Input
                   defaultValue={detailSoal?.data.category}
                   id='category'
@@ -194,7 +203,11 @@ export default function EditQuestion({
                 validation={{
                   required: 'Soal tidak boleh kosong!',
                 }}
+                onChange={(e) => {
+                  setText(e.target.value);
+                }}
               />
+              <Latex macros={INITIAL_MACROS}>{text ?? ''}</Latex>
               <Input
                 id='image_url'
                 label='Image URL'
