@@ -10,12 +10,12 @@ export interface QuestionType {
   name: keyof typeof QUESTION_TYPE_NAME;
 }
 
-interface Answer {
+export interface Answer {
   answer: string;
   is_correct: number;
 }
 
-interface Question {
+export interface Question {
   question_type_id: QuestionType['id'];
   category: string;
   question: string;

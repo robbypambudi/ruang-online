@@ -18,6 +18,8 @@ const breadcrumbs = {
   '/admin/tryout/participant': 'Peserta',
   '/admin/tryout/detail-peserta': 'Detail Peserta',
   '/admin/tryout/buat': 'Buat Tryout',
+  '/admin/tryout/question': 'Soal',
+  '/admin/tryout/question/edit': 'Edit',
 };
 type BreadcrumbProps = {
   crumbs: Array<keyof typeof breadcrumbs>;
@@ -25,6 +27,7 @@ type BreadcrumbProps = {
 
 export default function Breadcrumb({
   className,
+  id = '',
   crumbs: _crumbs,
   ...rest
 }: BreadcrumbProps) {
@@ -36,7 +39,15 @@ export default function Breadcrumb({
     <div className={clsxm('space-x-1', className)} {...rest}>
       {crumbs.map((crumb) => (
         <React.Fragment key={crumb}>
-          <PrimaryLink href={crumb} size='sm' className='font-medium'>
+          <PrimaryLink
+            href={
+              crumb === '/admin/tryout/detail-tryout'
+                ? `/admin/tryout/${id}`
+                : crumb
+            }
+            size='sm'
+            className='font-medium'
+          >
             <Typography
               as='span'
               variant='s3'

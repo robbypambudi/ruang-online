@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { BsPeopleFill, BsPersonFill } from 'react-icons/bs';
 import { FiArrowLeft } from 'react-icons/fi';
-import { HiOutlineDocumentAdd } from 'react-icons/hi';
+import { HiOutlineDocumentAdd, HiOutlineDocumentText } from 'react-icons/hi';
 import { MdArrowCircleDown, MdArrowCircleUp } from 'react-icons/md';
 
 import api from '@/lib/axios';
@@ -72,7 +72,7 @@ function DetailTryoutAdmin() {
       </header>
 
       <main className='flex flex-col gap-y-6 py-6'>
-        <section className='flex flex-col-reverse items-center justify-between rounded-xl bg-white p-2.5 shadow-lg lg:flex-row'>
+        <section className='flex flex-col-reverse items-center justify-between rounded-xl bg-white p-2.5 shadow-[0_2px_8px_rgb(0,0,0,0.15)] lg:flex-row'>
           <div className='flex flex-col justify-between gap-y-10 px-5 py-3'>
             <Typography
               className='w-fit rounded-xl bg-primary-200 px-8 py-3 text-primary-500'
@@ -172,6 +172,15 @@ function DetailTryoutAdmin() {
               >
                 Peserta Tryout
               </ButtonLink>
+              <ButtonLink
+                href={`/admin/tryout/question/${id}?name=${dataDetailQuizList?.data.name}&status=${dataDetailQuizList?.data.is_active}`}
+                className='shadow-lg'
+                variant='danger'
+                size='lg'
+                rightIcon={HiOutlineDocumentText}
+              >
+                Detail Soal
+              </ButtonLink>
             </div>
           </div>
           <div>
@@ -184,7 +193,7 @@ function DetailTryoutAdmin() {
           </div>
         </section>
 
-        <section className='flex flex-col items-center justify-center gap-2.5 rounded-xl bg-white p-8 shadow-xl'>
+        <section className='flex flex-col items-center justify-center gap-2.5 rounded-xl bg-white p-8 shadow-[0_2px_8px_rgb(0,0,0,0.15)]'>
           <Typography
             className='w-fit rounded-xl bg-primary-200 px-8 py-3 text-primary-500'
             variant='h2'

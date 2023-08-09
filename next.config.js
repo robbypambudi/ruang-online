@@ -9,7 +9,7 @@ const nextConfig = {
   swcMinify: true,
 
   images: {
-    domains: ['sch.sgp1.cdn.digitaloceanspaces.com'],
+    domains: ['sch.sgp1.cdn.digitaloceanspaces.com', 'picsum.photos'],
   },
 
   // SVGR
