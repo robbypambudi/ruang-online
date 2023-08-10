@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { BiSolidInfoCircle } from 'react-icons/bi';
@@ -8,25 +8,25 @@ import { HiDocument, HiNewspaper } from 'react-icons/hi';
 
 import api from '@/lib/axios';
 import clsxm from '@/lib/clsxm';
-import { getAllQuestions } from '@/lib/cookies';
+import { setAllQuestions } from '@/lib/cookies';
+import useMutationToast from '@/hooks/toast/useMutationToast';
 
 import Breadcrumb from '@/components/Breadcrumb';
+import Button from '@/components/buttons/Button';
 import withAuth from '@/components/hoc/withAuth';
 import DashboardLayout from '@/components/layout/dashboard/DashboardLayout';
-import ButtonLink from '@/components/links/ButtonLink';
 import IconLink from '@/components/links/IconLink';
 import NextImage from '@/components/NextImage';
 import Seo from '@/components/Seo';
 import Typography from '@/components/typography/Typography';
 
 import useAuthStore from '@/store/useAuthStore';
-import useQuizStore from '@/store/useQuizStore';
 
 import Tabs from '@/pages/dashboard/tryout/component/Tabs';
 
 import { ApiResponse } from '@/types/api';
 import { GeolympicTryout } from '@/types/entities/geolympic';
-import { ListQusetionProps } from '@/types/entities/question';
+import { ListQusetions } from '@/types/entities/question';
 
 export const TabsData = [
   {
@@ -55,26 +55,42 @@ const TabsContents = [
   },
 ];
 
-export default withAuth(DetailTryoutAdmin, ['tryout.index'], true);
+export default withAuth(DetailTryoutAdmin, ['tryout.index']);
 function DetailTryoutAdmin() {
   const router = useRouter();
-  const { id } = router.query;
   const { user } = useAuthStore();
-  const { allQuestions, setAllQuestionsStore } = useQuizStore();
+
+  const { id } = router.query as { id: string };
   const [tabActive, setTabActive] = React.useState('ringkasan');
+
   const url = `/quiz_list/detail?quiz_list_id=${id}`;
   const { data: dataDetailQuizList } = useQuery<ApiResponse<GeolympicTryout>>([
     url,
   ]);
 
-  const QuestionListApi = `/quiz_list/question-list?quiz_list_id=${id}`;
-  const SaveQuestions = () => {
-    if (allQuestions === null || getAllQuestions() === null) {
-      api.get<ApiResponse<ListQusetionProps[]>>(QuestionListApi).then((res) => {
-        const ListQuestionData = res.data.data;
-        setAllQuestionsStore(ListQuestionData);
-      });
+  const { mutate: getListQuestion } = useMutationToast(
+    useMutation((data: { id: string }) => {
+      return api.get<ApiResponse<ListQusetions[]>>(
+        `/quiz_list/question-list?quiz_list_id=${data.id}`
+      );
+    }),
+    {
+      loading: 'Mendapatkan soal...',
+      success: 'Soal berhasil didapatkan, silahkan mengerjakan soal',
+      error: 'Gagal mendapatkan soal',
     }
+  );
+
+  const SaveQuestions = () => {
+    getListQuestion(
+      { id: id },
+      {
+        onSuccess: async ({ data }) => {
+          await setAllQuestions(data.data);
+          router.push(`/dashboard/tryout/quiz/${id}?soal=1`);
+        },
+      }
+    );
   };
 
   return (
@@ -153,8 +169,7 @@ function DetailTryoutAdmin() {
             </div>
 
             <div className='flex gap-3'>
-              <ButtonLink
-                href={`/dashboard/tryout/quiz/${id}?soal=1`}
+              <Button
                 onClick={() => {
                   SaveQuestions();
                 }}
@@ -164,7 +179,7 @@ function DetailTryoutAdmin() {
                 rightIcon={FiChevronRight}
               >
                 Mulai Ujian
-              </ButtonLink>
+              </Button>
             </div>
           </div>
           <div>

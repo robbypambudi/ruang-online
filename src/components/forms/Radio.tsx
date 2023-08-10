@@ -9,7 +9,7 @@ import Typography from '@/components/typography/Typography';
 
 export type RadioProps = {
   /** Input label */
-  label: string;
+  label: string | React.ReactNode;
   name: string;
   value: string;
   /** Small text below input, useful for additional information */

@@ -34,16 +34,21 @@ export type UserAnswer = {
   answer: string;
 };
 
-export type ListDetailQuestionProps = {
+export type UserCheckpoint = {
+  question_id: string;
+};
+
+export type DetailQuestions = {
   category: string;
   image_url: string | null;
   index: number;
   name: string;
+  time_left: string;
   question: string;
   answers: UserAnswer[];
 };
 
-export type ListQusetionProps = {
+export type ListQusetions = {
   question_id: string;
   status: string;
 };

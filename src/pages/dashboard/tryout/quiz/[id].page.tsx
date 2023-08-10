@@ -1,16 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
+import queryString from 'query-string';
 import * as React from 'react';
-import { Controller, FormProvider, useForm } from 'react-hook-form';
-import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
+import { FiArrowLeft } from 'react-icons/fi';
 
-import api from '@/lib/axios';
 import clsxm from '@/lib/clsxm';
 import { getAllQuestions } from '@/lib/cookies';
 
 import Breadcrumb from '@/components/Breadcrumb';
-import Button from '@/components/buttons/Button';
-import Radio from '@/components/forms/Radio';
 import withAuth from '@/components/hoc/withAuth';
 import DashboardLayout from '@/components/layout/dashboard/DashboardLayout';
 import ButtonLink from '@/components/links/ButtonLink';
@@ -18,47 +15,37 @@ import IconLink from '@/components/links/IconLink';
 import Seo from '@/components/Seo';
 import Typography from '@/components/typography/Typography';
 
-import useQuizStore from '@/store/useQuizStore';
+import Countdown from '@/pages/dashboard/tryout/quiz/components/Countdown';
+import QuizList from '@/pages/dashboard/tryout/quiz/components/QuizList';
 
 import { ApiResponse } from '@/types/api';
-import {
-  ListDetailQuestionProps,
-  ListQusetionProps,
-  UserAnswer,
-} from '@/types/entities/question';
+import { DetailQuestions, ListQusetions } from '@/types/entities/question';
 
-export default withAuth(SoalPage, 'USER', true);
+export default withAuth(SoalPage, 'USER');
 function SoalPage() {
   const router = useRouter();
-  const { id, soal } = router.query;
-  const methods = useForm();
-  const { setAllQuestionsStore } = useQuizStore();
 
-  const QuestionListApi = `/quiz_list/question-list?quiz_list_id=${id}`;
+  const { id, soal } = router.query as { id: string; soal: string };
 
-  const ListQuestions: ListQusetionProps[] = getAllQuestions();
-  React.useEffect(() => {
-    ListQuestions === null &&
-      api.get<ApiResponse<ListQusetionProps[]>>(QuestionListApi).then((res) => {
-        const ListQuestionData = res.data.data;
-        setAllQuestionsStore(ListQuestionData);
-      });
-  }, [ListQuestions, QuestionListApi, setAllQuestionsStore]);
+  const ListQuestions: ListQusetions[] = getAllQuestions();
 
-  const QuestionDetailApi = `/quiz_list/question-detail?question_id=${
-    ListQuestions ? ListQuestions[Number(soal) - 1].question_id : ''
-  }`;
+  const url = queryString.stringifyUrl({
+    url: '/quiz_list/question-detail',
+    query: { question_id: ListQuestions[parseInt(soal) - 1].question_id },
+  });
 
   const { data: ListDetailQuestionData } = useQuery<
-    ApiResponse<ListDetailQuestionProps>
-  >([QuestionDetailApi]);
+    ApiResponse<DetailQuestions>
+  >([url], {
+    keepPreviousData: true,
+  });
 
-  async function SubmitQuizAnswers(answer: UserAnswer) {
-    return await api.post<ApiResponse<UserAnswer>>(`/quiz_list/submit-answer`, {
-      question_id: ListQuestions[Number(soal) - 1].question_id,
-      answer: answer,
-    });
+  if (!ListQuestions || !ListDetailQuestionData) {
+    return <div>Loading...</div>;
   }
+
+  const hms = ListDetailQuestionData.data.time_left.split(':');
+  const remainingTime = +hms[0] * 60 * 60 + +hms[1] * 60 + +hms[2];
 
   return (
     <DashboardLayout>
@@ -98,66 +85,18 @@ function SoalPage() {
               >
                 Soal {soal}
               </Typography>
-              <Typography variant='s2' className=''>
-                Sisa Waktu : <span className='text-[#1A3FC4]'>01:23:42</span>
-              </Typography>
+              <Countdown remainingTime={remainingTime} />
             </div>
 
             {/* Soal */}
-            <div className='flex flex-col gap-3 border-2 border-[#D3D6CC] p-3'>
-              <Typography variant='s2' className=''>
-                {ListDetailQuestionData?.data.question}
-              </Typography>
-              <div className='flex flex-col gap-2.5 p-3'>
-                <FormProvider {...methods}>
-                  {ListDetailQuestionData?.data.answers.map((answer, index) => (
-                    <Controller
-                      key={index}
-                      name='answer'
-                      control={methods.control}
-                      defaultValue=''
-                      render={({ field }) => (
-                        <Radio
-                          {...field}
-                          label={answer.answer}
-                          value={answer.answer}
-                        />
-                      )}
-                    />
-                  ))}
-                </FormProvider>
-              </div>
-            </div>
-
-            {/* Button */}
-            <div className='flex justify-between'>
-              {Number(soal) !== 1 && (
-                <ButtonLink
-                  leftIcon={FiArrowLeft}
-                  href={`/dashboard/tryout/quiz/${id}?soal=${Number(soal) - 1}`}
-                  aria-disabled={Number(soal) === 1 ? true : false}
-                >
-                  Soal Sebelumnya
-                </ButtonLink>
-              )}
-
-              <Button variant='warning'>Ragu-ragu</Button>
-              {Number(soal) < ListQuestions.length ? (
-                <ButtonLink
-                  rightIcon={FiArrowRight}
-                  href={`/dashboard/tryout/quiz/${id}?soal=${Number(soal) + 1}`}
-                  onClick={() => {
-                    const FormData = methods.getValues();
-                    const selectedAnswers = FormData.answer;
-                    SubmitQuizAnswers(selectedAnswers);
-                  }}
-                >
-                  Soal Berikutnya
-                </ButtonLink>
-              ) : (
-                <Button>Submit</Button>
-              )}
-            </div>
+            {ListDetailQuestionData && (
+              <QuizList
+                ListDetailQuestionData={ListDetailQuestionData.data}
+                ListQuestions={ListQuestions}
+                soal={parseInt(soal)}
+                id={id}
+              />
+            )}
           </div>
 
           {/* List soal */}
@@ -175,9 +114,12 @@ function SoalPage() {
                     ['h-14 w-14 border-2 border-primary-500'],
                     ['hover:border-primary-300 hover:bg-primary-300'],
                     Number(soal) === index + 1
-                      ? ['border-primary-700 bg-primary-700 text-white']
+                      ? ['!border-primary-700 !bg-primary-700 !text-white']
                       : ['bg-transparent text-primary-500'],
-                    question.status === 'answered' && 'bg-green-500'
+                    question.status === 'answered' &&
+                      'border-green-500 bg-green-500 text-black',
+                    question.status === 'checkpoint' &&
+                      'border-warning-500 bg-warning-500 text-black'
                   )}
                 >
                   {index + 1}
