@@ -18,6 +18,8 @@ import NextImage from '@/components/NextImage';
 import Seo from '@/components/Seo';
 import Typography from '@/components/typography/Typography';
 
+import REGEX from '@/constant/regex';
+
 type RegisterForm = {
   name: string;
   username: string;
@@ -120,6 +122,10 @@ export default function LoginPage() {
                   labelClassName='text-white'
                   validation={{
                     required: 'Username is required',
+                    pattern: {
+                      value: REGEX.USERNAME,
+                      message: `Alphabet, number, or (-),(_),(.),(@))`,
+                    },
                   }}
                   placeholder='Enter your Username'
                 />

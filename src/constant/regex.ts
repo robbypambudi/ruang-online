@@ -10,5 +10,6 @@ const REGEX = {
   /** @see https://gist.github.com/DebkanchanSamadder/1eb07af7d9595256535c5c71ea79d66e#just-latitude-with-optional-decimal-numbers */
   LATITUDE: /^-?([0-8]?[0-9]|90)(\.[0-9]{1,15})?$/,
   LONGITUDE: /^-?([0-9]{1,2}|1[0-7][0-9]|180)(\.[0-9]{1,15})?$/,
+  USERNAME: /^[a-z0-9\-_.@]+$/,
 };
 export default REGEX;
