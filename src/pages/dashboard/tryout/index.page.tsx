@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { toast } from 'react-hot-toast';
 import { AiOutlineFileText } from 'react-icons/ai';
 import { BiUser } from 'react-icons/bi';
 import { BsArrowRightShort } from 'react-icons/bs';
@@ -16,10 +16,27 @@ import Typography from '@/components/typography/Typography';
 
 import useAuthStore from '@/store/useAuthStore';
 
+import { ApiResponse } from '@/types/api';
+
+interface Quiz {
+  id: string;
+  roles_id: string;
+  name: string;
+  start_time: string;
+  end_time: string;
+  duration: number;
+  code: string;
+  category: string;
+  summary: string;
+  is_active: boolean;
+}
+
 export default withAuth(DashboardTryout, ['tryout.index'], true);
 function DashboardTryout() {
   const router = useRouter();
   const user = useAuthStore.useUser();
+
+  const { data: quizList } = useQuery<ApiResponse<Quiz[]>>(['/quiz_list']);
 
   React.useEffect(() => {
     if (user?.event?.is_geolympic.payment_status === 'unregistered') {
@@ -141,54 +158,79 @@ function DashboardTryout() {
               Daftar Ujian
             </Typography>
           </div>
-          <div className='w-full space-y-4 rounded-xl bg-surface-base p-8 shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
-            <div className='flex items-center gap-2'>
-              <AiOutlineFileText className='text-4xl' />
-              <div>
-                <Typography variant='h4' className='font-semibold'>
-                  Geolympic 2023
-                </Typography>
-              </div>
-            </div>
-            <div className='border-t-2 border-dashed border-gray-400 pt-4'>
-              <table className='w-full'>
-                <tbody>
-                  <tr>
-                    <td>
-                      <Typography variant='b1' className='font-normal'>
-                        Mulai
-                      </Typography>
-                    </td>
-                    <td>
-                      <Typography variant='b1' className='font-normal'>
-                        : Coming Soon
-                      </Typography>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <Typography variant='b1' className='font-normal'>
-                        Selesai
-                      </Typography>
-                    </td>
-                    <td>
-                      <Typography variant='b1' className='font-normal'>
-                        : Coming Soon
-                      </Typography>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <Button
-                variant='primary'
-                className='mt-4'
-                rightIcon={BsArrowRightShort}
-                onClick={() => toast.success('Coming Soon')}
+          {quizList?.data.map((quiz) => {
+            return (
+              <div
+                key={quiz.id}
+                className='w-full space-y-4 rounded-xl bg-surface-base p-8 shadow-[0_3px_10px_rgb(0,0,0,0.2)]'
               >
-                Lihat Ujian
-              </Button>
-            </div>
-          </div>
+                <div className='flex items-center gap-2'>
+                  <AiOutlineFileText className='text-4xl' />
+                  <div>
+                    <Typography variant='h4' className='font-semibold'>
+                      {quiz.name}
+                    </Typography>
+                  </div>
+                </div>
+                <div className='border-t-2 border-dashed border-gray-400 pt-4'>
+                  <table className='w-full'>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <Typography variant='b1' className='font-normal'>
+                            Mulai
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography variant='b1' className='font-normal'>
+                            :{' '}
+                            {new Date(quiz.start_time).toLocaleString('id-ID', {
+                              weekday: 'long',
+                              day: 'numeric',
+                              month: 'long',
+                              year: 'numeric',
+                              hour: 'numeric',
+                              minute: 'numeric',
+                              timeZoneName: 'short',
+                            })}
+                          </Typography>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <Typography variant='b1' className='font-normal'>
+                            Selesai
+                          </Typography>
+                        </td>
+                        <td>
+                          <Typography variant='b1' className='font-normal'>
+                            :{' '}
+                            {new Date(quiz.end_time).toLocaleString('id-ID', {
+                              weekday: 'long',
+                              day: 'numeric',
+                              month: 'long',
+                              year: 'numeric',
+                              hour: 'numeric',
+                              minute: 'numeric',
+                              timeZoneName: 'short',
+                            })}
+                          </Typography>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <Button
+                    variant='primary'
+                    className='mt-4'
+                    rightIcon={BsArrowRightShort}
+                    onClick={() => router.push(`/dashboard/tryout/${quiz.id}`)}
+                  >
+                    Lihat Ujian
+                  </Button>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </DashboardLayout>
