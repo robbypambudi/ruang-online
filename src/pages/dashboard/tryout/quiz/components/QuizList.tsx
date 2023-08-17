@@ -14,7 +14,6 @@ import useMutationToast from '@/hooks/toast/useMutationToast';
 import useDialog from '@/hooks/useDialog';
 
 import Button from '@/components/buttons/Button';
-import Input from '@/components/forms/Input';
 import Radio from '@/components/forms/Radio';
 import Typography from '@/components/typography/Typography';
 
@@ -22,6 +21,7 @@ import { ApiResponse } from '@/types/api';
 import {
   DetailQuestions,
   ListQusetions,
+  StartEndQuiz,
   UserAnswer,
   UserCheckpoint,
 } from '@/types/entities/question';
@@ -44,6 +44,12 @@ export default function QuizList({
   const router = useRouter();
   const methods = useForm<UserAnswer>();
 
+  const { mutate: endQuiz } = useMutationToast<void, StartEndQuiz>(
+    useMutation((data) => {
+      return api.post('/quiz_list/quiz-attempt', data);
+    })
+  );
+
   const dialog = useDialog();
   const openWarning = () => {
     dialog({
@@ -52,9 +58,14 @@ export default function QuizList({
       submitText: 'Sure',
       variant: 'warning',
       catchOnCancel: true,
-    }).then(() => {
-      destroyAllQuestions();
-      router.push(`/dashboard/tryout/${id}`);
+    }).then(async () => {
+      await endQuiz({
+        quiz_list_id: id,
+        start_attempt: false,
+        end_attempt: true,
+      });
+      await destroyAllQuestions();
+      router.push(`/dashboard/tryout`);
     });
   };
 
@@ -80,19 +91,8 @@ export default function QuizList({
     }
   );
 
-  const { getValues } = methods;
-
-  const onSubmit = ({ next_soal }: { next_soal?: number }) => {
-    const data = getValues();
-    saveAnswer(data, {
-      onSuccess: async () => {
-        await changeQuestionStatusAnswerByIndex(
-          soal - 1,
-          data.answer ? 'answered' : 'not_answered'
-        );
-        router.push(`/dashboard/tryout/quiz/${id}?soal=${next_soal}`);
-      },
-    });
+  const nextPage = ({ next_soal }: { next_soal?: number }) => {
+    router.push(`/dashboard/tryout/quiz/${id}?soal=${next_soal}`);
   };
 
   const onDone = () => {
@@ -110,27 +110,66 @@ export default function QuizList({
           </Typography>
           <div className='flex flex-col gap-2.5 p-3'>
             {ListDetailQuestionData.answers.map((answer, index) => (
-              <div key={index} className='flex items-center overflow-hidden'>
+              <div
+                key={index}
+                className='flex items-center overflow-hidden'
+                onClick={async () =>
+                  await saveAnswer(
+                    {
+                      question_id: ListQuestions[soal - 1].question_id,
+                      answer: answer.answer,
+                    },
+                    {
+                      onSuccess: async () => {
+                        await changeQuestionStatusAnswerByIndex(
+                          soal - 1,
+                          true,
+                          ListQuestions[soal - 1].is_checkpoint
+                        );
+                      },
+                    }
+                  )
+                }
+              >
                 <Radio label={null} value={answer.answer} name='answer' />
                 <Typography variant='s2' className='ml-3'>
                   <Latex macros={INITIAL_MACROS}>{answer.answer}</Latex>
                 </Typography>
               </div>
             ))}
-            <Input
-              id='question_id'
-              type='hidden'
-              value={ListQuestions[soal - 1].question_id}
-              label={null}
-            />
           </div>
         </div>
+        {ListQuestions[soal - 1].is_answered && (
+          <Button
+            className='mt-4'
+            variant='danger'
+            onClick={async () => {
+              await saveAnswer(
+                {
+                  question_id: ListQuestions[soal - 1].question_id,
+                  answer: '',
+                },
+                {
+                  onSuccess: async () => {
+                    await changeQuestionStatusAnswerByIndex(
+                      soal - 1,
+                      false,
+                      ListQuestions[soal - 1].is_checkpoint
+                    );
+                  },
+                }
+              );
+            }}
+          >
+            Hapus Jawaban
+          </Button>
+        )}
         <div className='mt-4 flex justify-between'>
           <Button
             leftIcon={FiArrowLeft}
             disabled={soal === 1 ? true : false}
             onClick={() =>
-              onSubmit({
+              nextPage({
                 next_soal: soal - 1,
               })
             }
@@ -140,17 +179,24 @@ export default function QuizList({
 
           <Button
             variant='warning'
-            onClick={() =>
-              checkpointAnswer({ question_id: ListQuestions[soal].question_id })
-            }
+            onClick={() => {
+              checkpointAnswer({
+                question_id: ListQuestions[soal - 1].question_id,
+              });
+              changeQuestionStatusAnswerByIndex(
+                soal - 1,
+                ListQuestions[soal - 1].is_answered,
+                ListQuestions[soal - 1].is_checkpoint ? false : true
+              );
+            }}
           >
-            Ragu-ragu
+            {ListQuestions[soal - 1].is_checkpoint && 'Batal'} Ragu-ragu
           </Button>
           {soal < ListQuestions.length ? (
             <Button
               rightIcon={FiArrowRight}
               onClick={() =>
-                onSubmit({
+                nextPage({
                   next_soal: soal + 1,
                 })
               }

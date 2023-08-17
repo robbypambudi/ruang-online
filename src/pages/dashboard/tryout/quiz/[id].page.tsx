@@ -115,11 +115,10 @@ function SoalPage() {
                     ['hover:border-primary-300 hover:bg-primary-300'],
                     Number(soal) === index + 1
                       ? ['!border-primary-700 !bg-primary-700 !text-white']
-                      : ['bg-transparent text-primary-500'],
-                    question.status === 'answered' &&
+                      : ['bg-transparent text-black'],
+                    question.is_answered &&
                       'border-green-500 bg-green-500 text-black',
-                    question.status === 'checkpoint' &&
-                      'border-warning-500 bg-warning-500 text-black'
+                    question.is_checkpoint && '!border-warning-500 text-black'
                   )}
                 >
                   {index + 1}

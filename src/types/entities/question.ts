@@ -30,7 +30,7 @@ export default interface QuestionForm {
 }
 
 export type UserAnswer = {
-  id: string;
+  question_id: string;
   answer: string;
 };
 
@@ -50,5 +50,12 @@ export type DetailQuestions = {
 
 export type ListQusetions = {
   question_id: string;
-  status: string;
+  is_answered: boolean;
+  is_checkpoint: boolean;
 };
+
+export interface StartEndQuiz {
+  quiz_list_id: string;
+  start_attempt: boolean;
+  end_attempt: boolean;
+}

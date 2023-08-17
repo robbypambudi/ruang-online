@@ -8,35 +8,24 @@ import { FiArrowLeft } from 'react-icons/fi';
 import { GoQuestion } from 'react-icons/go';
 
 import Breadcrumb from '@/components/Breadcrumb';
-import Button from '@/components/buttons/Button';
 import withAuth from '@/components/hoc/withAuth';
 import DashboardLayout from '@/components/layout/dashboard/DashboardLayout';
+import ButtonLink from '@/components/links/ButtonLink';
 import IconLink from '@/components/links/IconLink';
 import Typography from '@/components/typography/Typography';
 
 import useAuthStore from '@/store/useAuthStore';
 
 import { ApiResponse } from '@/types/api';
-
-interface Quiz {
-  id: string;
-  roles_id: string;
-  name: string;
-  start_time: string;
-  end_time: string;
-  duration: number;
-  code: string;
-  category: string;
-  summary: string;
-  is_active: boolean;
-}
+import { GetQuizList } from '@/types/entities/geolympic';
 
 export default withAuth(DashboardTryout, ['tryout.index'], true);
 function DashboardTryout() {
   const router = useRouter();
   const user = useAuthStore.useUser();
 
-  const { data: quizList } = useQuery<ApiResponse<Quiz[]>>(['/quiz_list']);
+  const url = '/quiz_list';
+  const { data: QuizListData } = useQuery<ApiResponse<GetQuizList[]>>([url]);
 
   React.useEffect(() => {
     if (user?.event?.is_geolympic.payment_status === 'unregistered') {
@@ -158,12 +147,9 @@ function DashboardTryout() {
               Daftar Ujian
             </Typography>
           </div>
-          {quizList?.data.map((quiz) => {
-            return (
-              <div
-                key={quiz.id}
-                className='w-full space-y-4 rounded-xl bg-surface-base p-8 shadow-[0_3px_10px_rgb(0,0,0,0.2)]'
-              >
+          <div className='w-full space-y-4 rounded-xl bg-surface-base p-8 shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
+            {QuizListData?.data.map((quiz, index) => (
+              <div key={index} className='flex flex-col gap-2'>
                 <div className='flex items-center gap-2'>
                   <AiOutlineFileText className='text-4xl' />
                   <div>
@@ -183,16 +169,7 @@ function DashboardTryout() {
                         </td>
                         <td>
                           <Typography variant='b1' className='font-normal'>
-                            :{' '}
-                            {new Date(quiz.start_time).toLocaleString('id-ID', {
-                              weekday: 'long',
-                              day: 'numeric',
-                              month: 'long',
-                              year: 'numeric',
-                              hour: 'numeric',
-                              minute: 'numeric',
-                              timeZoneName: 'short',
-                            })}
+                            : {quiz.start_time}
                           </Typography>
                         </td>
                       </tr>
@@ -204,33 +181,24 @@ function DashboardTryout() {
                         </td>
                         <td>
                           <Typography variant='b1' className='font-normal'>
-                            :{' '}
-                            {new Date(quiz.end_time).toLocaleString('id-ID', {
-                              weekday: 'long',
-                              day: 'numeric',
-                              month: 'long',
-                              year: 'numeric',
-                              hour: 'numeric',
-                              minute: 'numeric',
-                              timeZoneName: 'short',
-                            })}
+                            : {quiz.end_time}
                           </Typography>
                         </td>
                       </tr>
                     </tbody>
                   </table>
-                  <Button
+                  <ButtonLink
                     variant='primary'
                     className='mt-4'
                     rightIcon={BsArrowRightShort}
-                    onClick={() => router.push(`/dashboard/tryout/${quiz.id}`)}
+                    href={`/dashboard/tryout/${quiz.id}`}
                   >
                     Lihat Ujian
-                  </Button>
+                  </ButtonLink>
                 </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
       </div>
     </DashboardLayout>

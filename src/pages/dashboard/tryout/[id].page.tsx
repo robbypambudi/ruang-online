@@ -26,7 +26,7 @@ import Tabs from '@/pages/dashboard/tryout/component/Tabs';
 
 import { ApiResponse } from '@/types/api';
 import { GeolympicTryout } from '@/types/entities/geolympic';
-import { ListQusetions } from '@/types/entities/question';
+import { ListQusetions, StartEndQuiz } from '@/types/entities/question';
 
 export const TabsData = [
   {
@@ -68,6 +68,12 @@ function DetailTryoutAdmin() {
     url,
   ]);
 
+  const { mutate: startQuiz } = useMutationToast<void, StartEndQuiz>(
+    useMutation((data) => {
+      return api.post('/quiz_list/quiz-attempt', data);
+    })
+  );
+
   const { mutate: getListQuestion } = useMutationToast(
     useMutation((data: { id: string }) => {
       return api.get<ApiResponse<ListQusetions[]>>(
@@ -81,7 +87,12 @@ function DetailTryoutAdmin() {
     }
   );
 
-  const SaveQuestions = () => {
+  const SaveQuestions = async () => {
+    await startQuiz({
+      quiz_list_id: id,
+      start_attempt: true,
+      end_attempt: false,
+    });
     getListQuestion(
       { id: id },
       {

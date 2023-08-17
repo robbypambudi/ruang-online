@@ -48,10 +48,12 @@ export const getAllQuestions = () => {
 
 export const changeQuestionStatusAnswerByIndex = (
   index: number,
-  status: 'answered' | 'not_answered'
+  is_answered?: boolean,
+  is_checkpoint?: boolean
 ) => {
   const cookieValue = cookies.get('@geo/questions');
-  cookieValue[index].status = status;
+  cookieValue[index].is_answered = is_answered;
+  cookieValue[index].is_checkpoint = is_checkpoint;
   setAllQuestions(cookieValue);
 };
 

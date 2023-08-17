@@ -33,6 +33,19 @@ export interface GeolympicTryout {
   total_participant: number;
 }
 
+export interface GetQuizList {
+  id: string;
+  roles_id: string;
+  name: string;
+  start_time: string;
+  end_time: string;
+  duration: number;
+  code: string;
+  category: string;
+  summary: string;
+  is_active: boolean;
+}
+
 export interface TryoutUser {
   id: string;
   name: string;
