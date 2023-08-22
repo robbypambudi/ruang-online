@@ -30,8 +30,8 @@ export default interface QuestionForm {
 }
 
 export type UserAnswer = {
-  question_id: string;
-  answer: string;
+  id: string;
+  answer: string | null;
 };
 
 export type UserCheckpoint = {
@@ -48,9 +48,9 @@ export type DetailQuestions = {
   answers: UserAnswer[];
 };
 
-export type ListQusetions = {
+export type QusetionsList = {
   question_id: string;
-  is_answered: boolean;
+  is_answered: string | undefined | boolean;
   is_checkpoint: boolean;
 };
 

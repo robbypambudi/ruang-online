@@ -1,63 +1,89 @@
-import { useQuery } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
-import queryString from 'query-string';
 import * as React from 'react';
-import { FiArrowLeft } from 'react-icons/fi';
 
-import clsxm from '@/lib/clsxm';
-import { getAllQuestions } from '@/lib/cookies';
+import { getAllQuestions } from '@/lib/localstorage';
 
 import Breadcrumb from '@/components/Breadcrumb';
 import withAuth from '@/components/hoc/withAuth';
 import DashboardLayout from '@/components/layout/dashboard/DashboardLayout';
 import ButtonLink from '@/components/links/ButtonLink';
-import IconLink from '@/components/links/IconLink';
 import Seo from '@/components/Seo';
 import Typography from '@/components/typography/Typography';
 
-import Countdown from '@/pages/dashboard/tryout/quiz/components/Countdown';
-import QuizList from '@/pages/dashboard/tryout/quiz/components/QuizList';
+import QuizContainer from '@/pages/dashboard/tryout/quiz/container/QuizContainer';
 
-import { ApiResponse } from '@/types/api';
-import { DetailQuestions, ListQusetions } from '@/types/entities/question';
+import { QusetionsList } from '@/types/entities/question';
 
 export default withAuth(SoalPage, 'USER');
 function SoalPage() {
-  const router = useRouter();
+  //#region  //*=========== Prevent For Right Click ===========
+  const ref = React.useRef<HTMLDivElement>(null);
 
-  const { id, soal } = router.query as { id: string; soal: string };
+  React.useEffect(() => {
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+    };
+    // const handleCopy = (evt: ClipboardEvent) => {
+    //   if (evt.clipboardData) {
+    //     evt.clipboardData.setData(
+    //       'text/plain',
+    //       'Anda tidak dapat menyalin soal ini, tindakan ini termasuk pelanggaran dan dapat mengakibatkan akun anda diblokir oleh sistem kami'
+    //     );
+    //   }
+    //   evt.preventDefault();
+    // };
+    const handleBlur = () => {
+      document.title = 'Kembali ke halaman tryout';
+      alert(
+        'Anda tidak dapat menyalin soal ini, tindakan ini termasuk pelanggaran dan dapat mengakibatkan akun anda diblokir oleh sistem kami'
+      );
+    };
 
-  const ListQuestions: ListQusetions[] = getAllQuestions();
+    const handleFocus = () => {
+      document.title = 'Quiz | Geosentric 2023';
+    };
 
-  const url = queryString.stringifyUrl({
-    url: '/quiz_list/question-detail',
-    query: { question_id: ListQuestions[parseInt(soal) - 1].question_id },
-  });
+    if (window) {
+      window.addEventListener('contextmenu', handleContextMenu);
+      // window.addEventListener('copy', (event) => {
+      //   handleCopy(event as ClipboardEvent);
+      // });
+      window.addEventListener('blur', handleBlur);
+      window.addEventListener('focus', handleFocus);
+    }
 
-  const { data: ListDetailQuestionData } = useQuery<
-    ApiResponse<DetailQuestions>
-  >([url], {
-    keepPreviousData: true,
-  });
+    return () => {
+      if (window) {
+        window.removeEventListener('contextmenu', handleContextMenu);
+        // window.removeEventListener('copy', handleCopy);
+        window.removeEventListener('blur', handleBlur);
+        window.removeEventListener('focus', handleFocus);
+      }
+    };
+  }, []);
 
-  if (!ListQuestions || !ListDetailQuestionData) {
-    return <div>Loading...</div>;
-  }
-
-  const hms = ListDetailQuestionData.data.time_left.split(':');
-  const remainingTime = +hms[0] * 60 * 60 + +hms[1] * 60 + +hms[2];
+  //#region  //*=========== Get Question List ===========
+  const ListQuestions: QusetionsList[] = getAllQuestions();
 
   return (
     <DashboardLayout>
       <Seo templateTitle='Quiz' />
 
+      <div ref={ref}>
+        {!ListQuestions ? (
+          <NotFoundQuestionList />
+        ) : (
+          <QuizContainer ListQuestions={ListQuestions} />
+        )}
+      </div>
+    </DashboardLayout>
+  );
+}
+
+function NotFoundQuestionList() {
+  return (
+    <div>
       <header className='flex justify-between'>
         <div className='flex items-center gap-3'>
-          <IconLink
-            href='/dashboard'
-            icon={FiArrowLeft}
-            iconClassName='text-gray-500'
-          />
           <div className='flex flex-col'>
             <Breadcrumb
               crumbs={[
@@ -72,62 +98,15 @@ function SoalPage() {
           </div>
         </div>
       </header>
-
-      <div className='py-6 '>
-        <div className='flex flex-col gap-6 rounded-xl p-3 lg:flex-row'>
-          {/* SOAL */}
-          <div className='flex w-full flex-col gap-6 rounded-xl bg-white px-5 py-3 shadow-xl'>
-            {/* Nomoer Soal dan sisa waktu */}
-            <div className='flex h-auto w-full items-center justify-between'>
-              <Typography
-                variant='h1'
-                className='flex gap-2.5 rounded-xl bg-[#D8E7FF] px-8 py-3 text-[#1A3FC4]'
-              >
-                Soal {soal}
-              </Typography>
-              <Countdown remainingTime={remainingTime} />
-            </div>
-
-            {/* Soal */}
-            {ListDetailQuestionData && (
-              <QuizList
-                ListDetailQuestionData={ListDetailQuestionData.data}
-                ListQuestions={ListQuestions}
-                soal={parseInt(soal)}
-                id={id}
-              />
-            )}
-          </div>
-
-          {/* List soal */}
-          <div className='flex flex-col gap-3 rounded-xl bg-white shadow-xl'>
-            <div className='flex gap-2.5 border-b-2 border-b-[#D3D6CC] p-3'>
-              <Typography variant='h1'>Nomor Soal</Typography>
-            </div>
-
-            <div className='flex h-96 w-96 flex-wrap gap-3 px-4 py-10'>
-              {ListQuestions.map((question, index) => (
-                <ButtonLink
-                  href={`/dashboard/tryout/quiz/${id}?soal=${index + 1}`}
-                  key={index}
-                  className={clsxm(
-                    ['h-14 w-14 border-2 border-primary-500'],
-                    ['hover:border-primary-300 hover:bg-primary-300'],
-                    Number(soal) === index + 1
-                      ? ['!border-primary-700 !bg-primary-700 !text-white']
-                      : ['bg-transparent text-black'],
-                    question.is_answered &&
-                      'border-green-500 bg-green-500 text-black',
-                    question.is_checkpoint && '!border-warning-500 text-black'
-                  )}
-                >
-                  {index + 1}
-                </ButtonLink>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </DashboardLayout>
+      <main className='py-6'>
+        <Typography>
+          Soal tidak ditemukan, silahkan klik tombol selesai untuk kembali ke
+          halaman tryout
+        </Typography>
+        <ButtonLink className='mt-4' variant='primary' href='/dashboard/tryout'>
+          Kembali
+        </ButtonLink>
+      </main>
+    </div>
   );
 }

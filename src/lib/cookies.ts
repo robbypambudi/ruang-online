@@ -1,7 +1,5 @@
 import Cookies, { CookieSetOptions } from 'universal-cookie';
 
-import { ListQusetions } from '@/types/entities/question';
-
 const cookies = new Cookies();
 const securedCookies = '@geosentric/token';
 
@@ -30,33 +28,4 @@ export const removeToken = () => {
     path: '/',
     sameSite: 'strict',
   });
-};
-
-// Set the All Questions
-export const setAllQuestions = (questions: ListQusetions[]) => {
-  setCookie('@geo/questions', JSON.stringify(questions), {
-    path: '/',
-    maxAge: 60 * 60 * 24, // 1 day
-  });
-};
-
-// Get all questions
-export const getAllQuestions = () => {
-  const cookieValue = cookies.get('@geo/questions');
-  return cookieValue;
-};
-
-export const changeQuestionStatusAnswerByIndex = (
-  index: number,
-  is_answered?: boolean,
-  is_checkpoint?: boolean
-) => {
-  const cookieValue = cookies.get('@geo/questions');
-  cookieValue[index].is_answered = is_answered;
-  cookieValue[index].is_checkpoint = is_checkpoint;
-  setAllQuestions(cookieValue);
-};
-
-export const destroyAllQuestions = () => {
-  cookies.remove('@geo/questions');
 };

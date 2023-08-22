@@ -12,6 +12,7 @@ import withAuth from '@/components/hoc/withAuth';
 import DashboardLayout from '@/components/layout/dashboard/DashboardLayout';
 import ButtonLink from '@/components/links/ButtonLink';
 import IconLink from '@/components/links/IconLink';
+import Seo from '@/components/Seo';
 import Typography from '@/components/typography/Typography';
 
 import useAuthStore from '@/store/useAuthStore';
@@ -73,6 +74,7 @@ function DashboardTryout() {
 
   return (
     <DashboardLayout>
+      <Seo templateTitle='Detail Tryout' />
       <header className='flex justify-between'>
         <div className='flex items-center gap-3'>
           <IconLink
@@ -148,6 +150,16 @@ function DashboardTryout() {
             </Typography>
           </div>
           <div className='w-full space-y-4 rounded-xl bg-surface-base p-8 shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
+            {QuizListData?.data.length === 0 && (
+              <div className='flex flex-col items-center justify-center space-y-4'>
+                <div className='flex flex-col items-center justify-center space-y-4'>
+                  <GoQuestion className='text-6xl text-primary-500' />
+                  <Typography variant='h3' className='font-semibold'>
+                    Belum ada ujian
+                  </Typography>
+                </div>
+              </div>
+            )}
             {QuizListData?.data.map((quiz, index) => (
               <div key={index} className='flex flex-col gap-2'>
                 <div className='flex items-center gap-2'>

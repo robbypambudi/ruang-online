@@ -8,7 +8,7 @@ import { HiDocument, HiNewspaper } from 'react-icons/hi';
 
 import api from '@/lib/axios';
 import clsxm from '@/lib/clsxm';
-import { setAllQuestions } from '@/lib/cookies';
+import { setAllQuestions } from '@/lib/localstorage';
 import useMutationToast from '@/hooks/toast/useMutationToast';
 
 import Breadcrumb from '@/components/Breadcrumb';
@@ -26,7 +26,7 @@ import Tabs from '@/pages/dashboard/tryout/component/Tabs';
 
 import { ApiResponse } from '@/types/api';
 import { GeolympicTryout } from '@/types/entities/geolympic';
-import { ListQusetions, StartEndQuiz } from '@/types/entities/question';
+import { QusetionsList, StartEndQuiz } from '@/types/entities/question';
 
 export const TabsData = [
   {
@@ -68,41 +68,45 @@ function DetailTryoutAdmin() {
     url,
   ]);
 
-  const { mutate: startQuiz } = useMutationToast<void, StartEndQuiz>(
-    useMutation((data) => {
-      return api.post('/quiz_list/quiz-attempt', data);
-    })
+  const { mutate: startQuiz } = useMutationToast<
+    ApiResponse<QusetionsList[]>,
+    StartEndQuiz
+  >(
+    useMutation(
+      async (data) => {
+        return api
+          .post('/quiz_list/quiz-attempt', data)
+          .then(async () => {
+            return api.get<ApiResponse<QusetionsList[]>>(
+              `/quiz_list/question-list?quiz_list_id=${data.quiz_list_id}`
+            );
+          })
+          .then((res) => {
+            if (res.data.data.length !== 0) {
+              setAllQuestions(res.data.data);
+              return res.data;
+            } else {
+              throw new Error(res.data.message);
+            }
+          });
+      },
+      {
+        onSuccess: () => {
+          router.push(`/dashboard/tryout/quiz/${id}?soal=1`);
+        },
+      }
+    )
   );
 
-  const { mutate: getListQuestion } = useMutationToast(
-    useMutation((data: { id: string }) => {
-      return api.get<ApiResponse<ListQusetions[]>>(
-        `/quiz_list/question-list?quiz_list_id=${data.id}`
-      );
-    }),
-    {
-      loading: 'Mendapatkan soal...',
-      success: 'Soal berhasil didapatkan, silahkan mengerjakan soal',
-      error: 'Gagal mendapatkan soal',
-    }
-  );
-
+  //#region  //*=========== Save Question ===========
   const SaveQuestions = async () => {
     await startQuiz({
       quiz_list_id: id,
       start_attempt: true,
       end_attempt: false,
     });
-    getListQuestion(
-      { id: id },
-      {
-        onSuccess: async ({ data }) => {
-          await setAllQuestions(data.data);
-          router.push(`/dashboard/tryout/quiz/${id}?soal=1`);
-        },
-      }
-    );
   };
+  //#endregion  //*======== Save Question ===========
 
   return (
     <DashboardLayout>
@@ -130,7 +134,7 @@ function DetailTryoutAdmin() {
         </div>
       </header>
 
-      <main className='flex flex-col gap-y-6 py-6'>
+      <main className='flex w-full flex-col gap-y-6 py-6'>
         <section className='flex flex-col-reverse items-center justify-between rounded-xl bg-white p-2.5 shadow-lg lg:flex-row'>
           <div className='flex flex-col justify-between gap-y-10 px-5 py-3'>
             <Typography

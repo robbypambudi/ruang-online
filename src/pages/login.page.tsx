@@ -123,9 +123,14 @@ export default function LoginPage() {
                 }}
                 placeholder='Enter your password'
               />
-              <Button type='submit' variant='primary' className='w-full'>
-                Login
-              </Button>
+              <div className='flex flex-col items-end justify-end'>
+                <Button type='submit' variant='primary' className='w-full'>
+                  Login
+                </Button>
+                <PrimaryLink href='/forgot-password' variant='primary'>
+                  Forogot Password
+                </PrimaryLink>
+              </div>
               <div>
                 <Typography color='white'>
                   Don&apos;t have an account?{' '}
