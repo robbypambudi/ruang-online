@@ -1,3 +1,5 @@
+import { PaymentStatus } from '@/types/entities/payment';
+
 interface Member {
   name: string;
   tempat_lahir: string;
@@ -14,7 +16,7 @@ export interface GeolympicList {
   team_name: string;
   asal_sekolah: string;
   bukti_pembayaran_url: string;
-  status: string;
+  status: PaymentStatus;
   members: Member[];
 }
 

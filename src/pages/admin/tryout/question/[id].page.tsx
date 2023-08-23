@@ -16,6 +16,7 @@ import useDialog from '@/hooks/useDialog';
 
 import Breadcrumb from '@/components/Breadcrumb';
 import IconButton from '@/components/buttons/IconButton';
+import withAuth from '@/components/hoc/withAuth';
 import DashboardLayout from '@/components/layout/dashboard/DashboardLayout';
 import IconLink from '@/components/links/IconLink';
 import NextImageLightbox from '@/components/NextImageLightbox';
@@ -48,7 +49,8 @@ type SearchForm = {
   search: string;
 };
 
-export default function DetailSoal() {
+export default withAuth(DetailSoalPage, ['admin_tryout.index']);
+function DetailSoalPage() {
   const router = useRouter();
   const methods = useForm<SearchForm>();
   const dialog = useDialog();

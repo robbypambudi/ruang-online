@@ -13,12 +13,14 @@ import DashboardLayout from '@/components/layout/dashboard/DashboardLayout';
 import IconLink from '@/components/links/IconLink';
 import Seo from '@/components/Seo';
 import ServerTable from '@/components/table/ServerTable';
+import Tag from '@/components/tag/Tag';
 import Typography from '@/components/typography/Typography';
 
 import DetailPesertaTryout from '@/pages/admin/component/DetailPesertaTryout';
 
 import { PaginatedApiResponse } from '@/types/api';
 import { GeolympicList } from '@/types/entities/geolympic';
+import { PAYMENT_STATUS } from '@/types/entities/payment';
 
 export default withAuth(DashboardAdminPage, ['admin.index'], true);
 function DashboardAdminPage() {
@@ -34,7 +36,10 @@ function DashboardAdminPage() {
   const columns: ColumnDef<GeolympicList>[] = [
     {
       header: 'No',
-      cell: ({ row }) => <Typography>{row.index + 1}</Typography>,
+      cell: ({ row }) =>
+        tableState.pagination.pageSize * tableState.pagination.pageIndex +
+        row.index +
+        1,
       size: 5,
     },
     {
@@ -51,6 +56,11 @@ function DashboardAdminPage() {
       accessorKey: 'status',
       header: 'Status',
       size: 5,
+      cell: ({ row }) => (
+        <Tag color={row.original.status === 'verified' ? 'success' : 'warning'}>
+          {PAYMENT_STATUS[row.original.status]}
+        </Tag>
+      ),
     },
     {
       id: 'actions',

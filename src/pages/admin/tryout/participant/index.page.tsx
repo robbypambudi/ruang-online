@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ColumnDef } from '@tanstack/react-table';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import { FiArrowLeft, FiEye } from 'react-icons/fi';
+import { FiArrowLeft, FiEye, FiPlus } from 'react-icons/fi';
 
 import Breadcrumb from '@/components/Breadcrumb';
 import withAuth from '@/components/hoc/withAuth';
@@ -97,7 +97,7 @@ function TryoutParticipantIndexPage() {
         <IconLink
           variant='outline'
           icon={FiEye}
-          href={'/admin/geolympic/' + row.original.user_id}
+          href={'/admin/geolympic/' + row.original.grade_id}
         />
       ),
     },
@@ -125,8 +125,9 @@ function TryoutParticipantIndexPage() {
         <div>
           <ButtonLink
             href={`/admin/tryout/participant/assign?quiz_list_id=${quiz_list_id}`}
+            leftIcon={FiPlus}
           >
-            Assign Peserta
+            Masukkan Peserta
           </ButtonLink>
         </div>
       </header>

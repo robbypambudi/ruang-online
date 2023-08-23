@@ -52,7 +52,7 @@ function DetailTryoutAdmin() {
       <header className='flex justify-between'>
         <div className='flex items-center gap-3'>
           <IconLink
-            href='/dashboard'
+            href='/admin/tryout'
             icon={FiArrowLeft}
             iconClassName='text-gray-500'
           />

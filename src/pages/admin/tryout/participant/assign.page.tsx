@@ -22,6 +22,7 @@ import Typography from '@/components/typography/Typography';
 
 import { PaginatedApiResponse } from '@/types/api';
 import { GeolympicList } from '@/types/entities/geolympic';
+import { PAYMENT_STATUS } from '@/types/entities/payment';
 
 type TryoutParticipantData = {
   quiz_list_id: string;
@@ -65,7 +66,10 @@ function TryoutParticipantIndexPage() {
   const columns: ColumnDef<GeolympicList & { status_quiz: string }>[] = [
     {
       header: 'No',
-      cell: ({ row }) => <Typography>{row.index + 1}</Typography>,
+      cell: ({ row }) =>
+        tableState.pagination.pageSize * tableState.pagination.pageIndex +
+        row.index +
+        1,
       size: 5,
     },
     {
@@ -82,6 +86,13 @@ function TryoutParticipantIndexPage() {
       accessorKey: 'status',
       header: 'Status',
       size: 5,
+      cell: ({ row }) => (
+        <Tag
+          color={row.original.status === 'unverified' ? 'danger' : 'success'}
+        >
+          {PAYMENT_STATUS[row.original.status]}
+        </Tag>
+      ),
     },
     {
       id: 'Status Quiz',
@@ -90,7 +101,7 @@ function TryoutParticipantIndexPage() {
         <Tag
           color={
             row.original.status_quiz === 'Belum Terdaftar'
-              ? 'DEFAULT'
+              ? 'warning'
               : 'success'
           }
         >

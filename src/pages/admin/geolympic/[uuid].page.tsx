@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import Error from 'next/error';
 import { useRouter } from 'next/router';
+import { FiArrowLeft } from 'react-icons/fi';
 
 import api from '@/lib/axios';
 import clsxm from '@/lib/clsxm';
@@ -11,6 +12,7 @@ import Button from '@/components/buttons/Button';
 import withAuth from '@/components/hoc/withAuth';
 import ImagePreview from '@/components/image/ImagePreview';
 import DashboardLayout from '@/components/layout/dashboard/DashboardLayout';
+import IconLink from '@/components/links/IconLink';
 import Seo from '@/components/Seo';
 import Typography from '@/components/typography/Typography';
 
@@ -59,25 +61,27 @@ function DetailPesertaGeolympic() {
   return (
     <DashboardLayout>
       <Seo templateTitle='Detail Peserta Geolympic' />
-      <div className='flex w-full flex-col justify-between md:flex-row'>
-        <div>
-          <Typography as='h6' variant='s2' className='text-[#8A62D0]'>
-            Geolympic
-          </Typography>
-          <Typography as='h2' variant='j2' className='text-typo'>
-            Daftar Peserta
-          </Typography>
-        </div>
-        <div className='flex flex-col items-end gap-4'>
-          <Breadcrumb
-            crumbs={[
-              '/dashboard',
-              '/admin/tryout',
-              '/admin/tryout/detail-peserta',
-            ]}
+      <header className='flex justify-between'>
+        <div className='flex items-center gap-3'>
+          <IconLink
+            href='/admin'
+            icon={FiArrowLeft}
+            iconClassName='text-gray-500'
           />
+          <div className='flex flex-col'>
+            <Breadcrumb
+              crumbs={[
+                '/dashboard',
+                '/admin/tryout',
+                '/admin/tryout/detail-peserta',
+              ]}
+            />
+            <Typography variant='h2' className='font-bold'>
+              Welcome Back
+            </Typography>
+          </div>
         </div>
-      </div>
+      </header>
 
       <main className='flex flex-col gap-5 p-6 md:flex-row'>
         <div className='flex w-full flex-col'>

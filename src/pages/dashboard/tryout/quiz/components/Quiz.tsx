@@ -53,13 +53,15 @@ export default function Quiz({
           </Latex>
         </Typography>
         {ListDetailQuestionData.image_url && (
-          <NextImageLightbox
-            src={ListDetailQuestionData.image_url}
-            alt='soal'
-            width={300}
-            height={200}
-            className='w-92'
-          />
+          <div>
+            <NextImageLightbox
+              src={ListDetailQuestionData.image_url}
+              alt='soal'
+              width={420}
+              height={200}
+              className='w-92'
+            />
+          </div>
         )}
         {ListDetailQuestionData && ListQuestions && (
           <QuizForm

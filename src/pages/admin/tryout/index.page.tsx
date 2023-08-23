@@ -52,23 +52,26 @@ function TryoutAdmin() {
   const columns: ColumnDef<GeolympicTryout>[] = [
     {
       header: 'No',
-      cell: ({ row }) => <Typography>{row.index + 1}</Typography>,
-      size: 0,
+      cell: ({ row }) =>
+        tableState.pagination.pageSize * tableState.pagination.pageIndex +
+        row.index +
+        1,
+      size: 5,
     },
     {
       accessorKey: 'name',
       header: 'Nama Ujian',
-      size: 0,
+      size: 25,
     },
     {
       accessorKey: 'code',
       header: 'Kode Ujian',
-      size: 0,
+      size: 10,
     },
     {
       accessorKey: 'category',
       header: 'Kategori',
-      size: 0,
+      size: 5,
     },
     {
       accessorKey: 'start_time',
@@ -84,7 +87,7 @@ function TryoutAdmin() {
           WIB
         </Typography>
       ),
-      size: 0,
+      size: 10,
     },
     {
       accessorKey: 'end_time',
@@ -100,27 +103,27 @@ function TryoutAdmin() {
           WIB
         </Typography>
       ),
-      size: 0,
+      size: 10,
     },
     {
       accessorKey: 'status',
       header: 'Status',
       cell: ({ row }) => (
-        <Typography>
+        <div>
           {!row.original.is_active ? (
-            <Tag color='danger'>Tidak Aktif</Tag>
+            <Tag color='danger'>Non Aktif</Tag>
           ) : statusQuiz(row.original.start_time, row.original.end_time) ===
             'Selesai' ? (
-            <Tag color='primary'>Selesai</Tag>
+            <Tag color='primary'>Done</Tag>
           ) : statusQuiz(row.original.start_time, row.original.end_time) ===
             'Sedang Berlangsung' ? (
-            <Tag color='warning'>Sedang Berlangsung</Tag>
+            <Tag color='warning'>On Going</Tag>
           ) : (
             <Tag color='success'>Aktif</Tag>
           )}
-        </Typography>
+        </div>
       ),
-      size: 0,
+      size: 25,
     },
     {
       id: 'actions',
@@ -140,7 +143,7 @@ function TryoutAdmin() {
           />
         </div>
       ),
-      size: 0,
+      size: 10,
     },
   ];
 
