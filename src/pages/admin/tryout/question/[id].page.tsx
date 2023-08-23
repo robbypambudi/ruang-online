@@ -1,6 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { matchSorter } from 'match-sorter';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 import { BiPencil, BiTrash } from 'react-icons/bi';
 import { FiArrowLeft } from 'react-icons/fi';
 import Latex from 'react-latex-next';
@@ -8,6 +10,7 @@ import Latex from 'react-latex-next';
 import 'katex/dist/katex.min.css';
 
 import api from '@/lib/axios';
+import clsxm from '@/lib/clsxm';
 import useMutationToast from '@/hooks/toast/useMutationToast';
 import useDialog from '@/hooks/useDialog';
 
@@ -15,8 +18,9 @@ import Breadcrumb from '@/components/Breadcrumb';
 import IconButton from '@/components/buttons/IconButton';
 import DashboardLayout from '@/components/layout/dashboard/DashboardLayout';
 import IconLink from '@/components/links/IconLink';
-import NextImage from '@/components/NextImage';
+import NextImageLightbox from '@/components/NextImageLightbox';
 import Seo from '@/components/Seo';
+import Tag from '@/components/tag/Tag';
 import Typography from '@/components/typography/Typography';
 
 import { ApiResponse } from '@/types/api';
@@ -40,16 +44,36 @@ export type DetailSoal = {
 
 const INITIAL_MACROS = { '\\f': '#1f(#2)' };
 
+type SearchForm = {
+  search: string;
+};
+
 export default function DetailSoal() {
   const router = useRouter();
-  const { id, name: quizName, status } = router.query;
+  const methods = useForm<SearchForm>();
   const dialog = useDialog();
+
+  const { id, name: quizName, status } = router.query;
+
+  const { watch } = methods;
 
   const url = `/admin/quiz_list/question-answer?quiz_list_id=${id}`;
 
-  const { data: detailSoal, refetch } = useQuery<ApiResponse<DetailSoal[]>>([
-    url,
-  ]);
+  const { data: queryData, refetch } = useQuery<ApiResponse<DetailSoal[]>>(
+    [url],
+    {
+      keepPreviousData: true,
+    }
+  );
+
+  const search = watch('search');
+  const listSoal = React.useMemo(() => {
+    return matchSorter(queryData?.data ?? [], search ?? '', {
+      keys: ['question', 'category', 'name'],
+      baseSort: (a, b) => (a.item.name < b.item.name ? 1 : -1),
+      keepDiacritics: true,
+    });
+  }, [queryData, search]);
 
   const { mutate } = useMutationToast<void, DetailSoal>(
     useMutation((data) => {
@@ -82,7 +106,7 @@ export default function DetailSoal() {
       <header className='flex justify-between'>
         <div className='flex items-center gap-3'>
           <IconLink
-            href='/dashboard'
+            href={`/admin/tryout/${id}`}
             icon={FiArrowLeft}
             iconClassName='text-gray-500'
           />
@@ -120,11 +144,20 @@ export default function DetailSoal() {
             >
               {quizName}
             </Typography>
+            <FormProvider {...methods}>
+              <input
+                className='w-[340px] rounded-md bg-white shadow-lg'
+                type='text'
+                placeholder='Cari Soal'
+                {...methods.register('search')}
+              />
+            </FormProvider>
           </div>
         </section>
+
         <section className='mt-6'>
           <div>
-            {detailSoal?.data.map((item: DetailSoal, index: number) => {
+            {listSoal.map((item: DetailSoal, index: number) => {
               const {
                 question,
                 type,
@@ -148,48 +181,39 @@ export default function DetailSoal() {
                         <Typography variant='h1' font='poppins'>
                           Soal No {index + 1} - {name}
                         </Typography>
-
-                        <Typography
-                          className='mt-2'
-                          variant='b1'
-                          font='montserrat'
-                        >
-                          <Latex macros={INITIAL_MACROS}>{question}</Latex>
-                        </Typography>
                       </div>
-                      <div>
+                      <div className=''>
                         <Typography variant='b3' font='poppins'>
                           {typeSoal}
                         </Typography>
-                        <Typography
-                          className='text-right'
-                          variant='b3'
-                          font='poppins'
-                        >
+                        <Tag color='primary' size='sm'>
                           {category}
-                        </Typography>
+                        </Tag>
                       </div>
                     </div>
+                    <Typography className='mt-2' variant='b1' font='montserrat'>
+                      <Latex macros={INITIAL_MACROS}>{question}</Latex>
+                    </Typography>
 
                     {item.image_url && (
                       <div>
-                        <NextImage
-                          src='https://picsum.photos/300/200'
+                        <NextImageLightbox
+                          src={item.image_url}
                           alt='soal'
-                          width={300}
+                          width={420}
                           height={200}
-                          className='w-72 rounded-xl'
+                          className='w-92'
                         />
                       </div>
                     )}
-                    <div className='flex flex-col gap-4'>
+                    <div className='mt-4 flex flex-col'>
                       <ol
-                        className={`list-inside ${
+                        className={clsxm('list-inside space-y-1', [
                           type === 'multiple_choice_single_answer' ||
                           type === 'multiple_choice_multiple_answer'
                             ? 'list-[upper-alpha]'
-                            : ''
-                        }`}
+                            : '',
+                        ])}
                       >
                         {answers.map((item: DetailAnswer, index: number) => {
                           const { answer, is_correct } = item;

@@ -1,7 +1,7 @@
 import { NextRouter, useRouter } from 'next/router';
 import * as React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { FiArrowLeft, FiRepeat, FiSave } from 'react-icons/fi';
+import { FiArrowLeft, FiArrowRight, FiRepeat, FiSave } from 'react-icons/fi';
 import Latex from 'react-latex-next';
 
 import 'katex/dist/katex.min.css';
@@ -14,6 +14,7 @@ import useDialog from '@/hooks/useDialog';
 
 import Button from '@/components/buttons/Button';
 import Radio from '@/components/forms/Radio';
+import NextImageLightbox from '@/components/NextImageLightbox';
 import Typography from '@/components/typography/Typography';
 
 import { useQuestionStore } from '@/pages/dashboard/tryout/quiz/hooks/useQuestionStore';
@@ -51,6 +52,15 @@ export default function Quiz({
             {ListDetailQuestionData?.question}
           </Latex>
         </Typography>
+        {ListDetailQuestionData.image_url && (
+          <NextImageLightbox
+            src={ListDetailQuestionData.image_url}
+            alt='soal'
+            width={300}
+            height={200}
+            className='w-92'
+          />
+        )}
         {ListDetailQuestionData && ListQuestions && (
           <QuizForm
             listAnswer={ListDetailQuestionData.answers}
@@ -124,12 +134,13 @@ function QuizForm({
       description: (
         <>
           <Typography variant='s3'>
-            Apakah anda yakin ingin mengakhiri sesi tryout ini?
+            Apakah anda yakin ingin mengakhiri sesi tryout ini? <br />
+            Periksa kembali jawaban anda sebelum mengakhiri sesi tryout ini.
           </Typography>
         </>
       ),
-      submitText: 'Sure',
-      variant: 'warning',
+      submitText: 'Selesai Ujian',
+      variant: 'danger',
       catchOnCancel: true,
     }).then(async () => {
       startEndQuestion(
@@ -259,17 +270,34 @@ function QuizForm({
           {userAnswer.is_checkpoint && 'Batal'} Ragu-ragu
         </Button>
         {countQuestion === soal ? (
-          <Button
-            rightIcon={FiSave}
-            onClick={() => {
-              onDone();
-            }}
-          >
-            Selesai
-          </Button>
+          <>
+            {typeof userAnswer.is_answered === 'string' &&
+            userAnswer.is_answered !== '' ? (
+              <Button
+                rightIcon={FiSave}
+                onClick={() => {
+                  onDone();
+                }}
+              >
+                Selesai
+              </Button>
+            ) : (
+              <Button
+                leftIcon={FiSave}
+                onClick={() =>
+                  nextPage({
+                    next_soal: soal,
+                  })
+                }
+              >
+                Simpan
+              </Button>
+            )}
+          </>
         ) : (
           <Button
-            rightIcon={FiSave}
+            leftIcon={FiSave}
+            rightIcon={FiArrowRight}
             onClick={() =>
               nextPage({
                 next_soal: soal + 1,

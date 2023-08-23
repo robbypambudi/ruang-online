@@ -22,19 +22,12 @@ function SoalPage() {
     const handleContextMenu = (e: MouseEvent) => {
       e.preventDefault();
     };
-    // const handleCopy = (evt: ClipboardEvent) => {
-    //   if (evt.clipboardData) {
-    //     evt.clipboardData.setData(
-    //       'text/plain',
-    //       'Anda tidak dapat menyalin soal ini, tindakan ini termasuk pelanggaran dan dapat mengakibatkan akun anda diblokir oleh sistem kami'
-    //     );
-    //   }
-    //   evt.preventDefault();
-    // };
+
     const handleBlur = () => {
       document.title = 'Kembali ke halaman tryout';
       alert(
-        'Anda tidak dapat menyalin soal ini, tindakan ini termasuk pelanggaran dan dapat mengakibatkan akun anda diblokir oleh sistem kami'
+        'Anda terdeteksi keluar dari halaman tryout, hal ini merupakan sebuah indikasi kecurangan. Silahkan kembali ke halaman tryout dan jangan keluar dari halaman tryout sebelum waktu habis. Tercatat :' +
+          new Date().toLocaleString()
       );
     };
 
@@ -44,9 +37,7 @@ function SoalPage() {
 
     if (window) {
       window.addEventListener('contextmenu', handleContextMenu);
-      // window.addEventListener('copy', (event) => {
-      //   handleCopy(event as ClipboardEvent);
-      // });
+
       window.addEventListener('blur', handleBlur);
       window.addEventListener('focus', handleFocus);
     }
