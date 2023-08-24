@@ -79,7 +79,11 @@ export default function EditQuestion({
   const router = useRouter();
   const { id, name, status, quiz_id } = router.query;
 
-  const { data: detailSoal, isLoading } = useQuery<ApiResponse<DetailSoal>>([
+  const {
+    data: detailSoal,
+    isLoading,
+    refetch,
+  } = useQuery<ApiResponse<DetailSoal>>([
     `/admin/quiz_list/question-detail?question_id=${id}`,
   ]);
 
@@ -92,17 +96,18 @@ export default function EditQuestion({
     }
   );
 
-  const methods = useForm<QuestionEdit>();
+  const methods = useForm<QuestionEdit>({
+    defaultValues: {
+      question_type_id:
+        QuestionTypes[detailSoal?.data.type as keyof typeof QuestionTypes],
+      category: detailSoal?.data.category,
+      question: detailSoal?.data.question,
+      image_url: detailSoal?.data.image_url,
+      name: detailSoal?.data.name,
+    },
+  });
 
-  const { setValue, handleSubmit } = methods;
-
-  React.useEffect(() => {
-    if (!isLoading && detailSoal?.data) {
-      const defaultVariant =
-        QuestionTypes[detailSoal.data.type as keyof typeof QuestionTypes];
-      setValue('question_type_id', defaultVariant);
-    }
-  }, [isLoading, detailSoal, setValue]);
+  const { handleSubmit } = methods;
 
   const { question_type_id } = methods.watch();
 
@@ -114,6 +119,7 @@ export default function EditQuestion({
     data.question_id = id as string;
     mutate(data, {
       onSuccess: () => {
+        refetch();
         router.push(
           `/admin/tryout/question/${quiz_id}?name=${name}&status=${status}`
         );
@@ -173,7 +179,6 @@ export default function EditQuestion({
             <div className='space-y-2 border-b-2 border-gray-300 py-4'>
               <div className='flex flex-col items-center gap-x-4 md:flex-row'>
                 <Input
-                  defaultValue={detailSoal?.data.name}
                   id='name'
                   label='Question Name'
                   placeholder='Masukkan Nama Disini'
@@ -184,7 +189,6 @@ export default function EditQuestion({
                 />
 
                 <Input
-                  defaultValue={detailSoal?.data.category}
                   id='category'
                   label='Category'
                   placeholder='Masukkan Kategori Disini'
@@ -196,7 +200,6 @@ export default function EditQuestion({
               </div>
 
               <TextArea
-                defaultValue={detailSoal?.data.question}
                 id='question'
                 label='Question'
                 placeholder='Masukkan Soal Disini'

@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import * as React from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
@@ -12,10 +13,36 @@ import Typography from '@/components/typography/Typography';
 
 import useAuthStore from '@/store/useAuthStore';
 
+import { ApiResponse } from '@/types/api';
+
+type Member = {
+  name: string;
+  tempat_lahir: string;
+  tanggal_lahir: string;
+  alamat: string;
+  sosmed: string;
+  kartu_pelajar_url: string;
+  is_ketua: boolean;
+};
+
+type Team = {
+  team_id: string;
+  user_id: string;
+  team_name: string;
+  asal_sekolah: string;
+  bukti_pembayaran_url: string;
+  status: string;
+  members: Member[];
+};
+
 export default withAuth(GeolympicPage, 'USER', true);
 function GeolympicPage() {
   const user = useAuthStore.useUser();
   const router = useRouter();
+
+  const { data: detailTeam } = useQuery<ApiResponse<Team>, Error>([
+    `/geolympic`,
+  ]);
 
   React.useEffect(() => {
     if (!user?.event?.is_geolympic.registration_status) {
@@ -85,6 +112,21 @@ function GeolympicPage() {
             )}
           </>
         )}
+        <div className='mt-6 rounded-md border border-purple-500 bg-white p-4 shadow-md hover:shadow-lg'>
+          <Typography variant='h5' className='font-bold'>
+            Hello, {detailTeam?.data?.team_name}! 🎉
+          </Typography>
+          <Typography className='mt-2'>Members :</Typography>
+
+          {detailTeam?.data?.members.map((member, index) => (
+            <div key={index} className='mt-2'>
+              -{' '}
+              <Typography className='inline font-bold'>
+                {member.name}
+              </Typography>
+            </div>
+          ))}
+        </div>
       </div>
     </DashboardLayout>
   );

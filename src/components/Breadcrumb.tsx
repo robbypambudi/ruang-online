@@ -18,6 +18,7 @@ const breadcrumbs = {
   '/admin/tryout/participant': 'Peserta',
   '/admin/tryout/detail-peserta': 'Detail Peserta',
   '/admin/tryout/buat': 'Buat Tryout',
+  '/admin/tryout/edit': 'Edit Tryout',
   '/admin/tryout/question': 'Soal',
   '/admin/tryout/question/edit': 'Edit',
 };

@@ -59,3 +59,17 @@ export interface StartEndQuiz {
   start_attempt: boolean;
   end_attempt: boolean;
 }
+export interface DetailQuiz {
+  id: string;
+  roles_id: string;
+  name: string;
+  start_time: string;
+  end_time: string;
+  duration: number;
+  code: string;
+  category: string;
+  summary: string;
+  is_active: boolean;
+  total_question: number;
+  total_participant: number;
+}

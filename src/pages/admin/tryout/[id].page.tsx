@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import { BsPeopleFill, BsPersonFill } from 'react-icons/bs';
-import { FiArrowLeft } from 'react-icons/fi';
+import { FiArrowLeft, FiEdit } from 'react-icons/fi';
 import { HiOutlineDocumentAdd, HiOutlineDocumentText } from 'react-icons/hi';
 import { MdArrowCircleDown, MdArrowCircleUp } from 'react-icons/md';
 
@@ -74,14 +74,24 @@ function DetailTryoutAdmin() {
       <main className='flex flex-col gap-y-6 py-6'>
         <section className='flex flex-col-reverse items-center justify-between rounded-xl bg-white p-2.5 shadow-[0_2px_8px_rgb(0,0,0,0.15)] lg:flex-row'>
           <div className='flex flex-col justify-between gap-y-10 px-5 py-3'>
-            <Typography
-              className='w-fit rounded-xl bg-primary-200 px-8 py-3 text-primary-500'
-              variant='h1'
-              font='montserrat'
-            >
-              Geosentric ITS 2023 -{' '}
-              {dataDetailQuizList?.data.is_active ? 'Aktif' : 'Belum Aktif'}
-            </Typography>
+            <div className='flex gap-2'>
+              <Typography
+                className='w-fit rounded-xl bg-primary-200 px-8 py-3 text-primary-500'
+                variant='h1'
+                font='montserrat'
+              >
+                Geosentric ITS 2023 -{' '}
+                {dataDetailQuizList?.data.is_active ? 'Aktif' : 'Belum Aktif'}
+              </Typography>
+              <div className='my-auto'>
+                <IconLink
+                  variant='outline'
+                  size='lg'
+                  href={`/admin/tryout/edit/${id}`}
+                  icon={FiEdit}
+                />
+              </div>
+            </div>
             <Typography
               className='text-center text-5xl font-bold lg:text-left'
               variant='h1'

@@ -55,6 +55,7 @@ export interface TryoutUser {
   role: string;
 }
 
+// PATCH : '/admin/quiz_list?quiz_list_id=${id}&name=${data.name}'
 export interface TryoutUserDetail {
   grade_id: string;
   quiz_list_id: string;
