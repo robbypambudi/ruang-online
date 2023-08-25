@@ -19,7 +19,7 @@ import IconButton from '@/components/buttons/IconButton';
 import withAuth from '@/components/hoc/withAuth';
 import DashboardLayout from '@/components/layout/dashboard/DashboardLayout';
 import IconLink from '@/components/links/IconLink';
-import NextImageLightbox from '@/components/NextImageLightbox';
+import NextImageQuizLightbox from '@/components/NextImageQuizLightBox';
 import Seo from '@/components/Seo';
 import Tag from '@/components/tag/Tag';
 import Typography from '@/components/typography/Typography';
@@ -199,7 +199,7 @@ function DetailSoalPage() {
 
                     {item.image_url && (
                       <div>
-                        <NextImageLightbox
+                        <NextImageQuizLightbox
                           src={item.image_url}
                           alt='soal'
                           width={420}

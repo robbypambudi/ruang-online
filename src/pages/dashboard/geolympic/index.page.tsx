@@ -114,7 +114,7 @@ function GeolympicPage() {
         )}
         <div className='mt-6 rounded-md border border-purple-500 bg-white p-4 shadow-md hover:shadow-lg'>
           <Typography variant='h5' className='font-bold'>
-            Hello, {detailTeam?.data?.team_name}! 🎉
+            Hello, {detailTeam?.data?.team_name}
           </Typography>
           <Typography className='mt-2'>Members :</Typography>
 
