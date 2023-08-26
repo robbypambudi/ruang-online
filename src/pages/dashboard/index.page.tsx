@@ -59,7 +59,11 @@ function DashboardPage() {
               href={
                 user?.event?.is_geolympic.registration_status
                   ? '/dashboard/tryout'
-                  : '/dashboard/geolympic'
+                  : generateToastQuery({
+                      message: 'Pendaftaran Sudah Ditutup',
+                      type: 'error',
+                      url: '/dashboard',
+                    })
               }
               className='mt-4 border border-purple-500 text-purple-500 transition-all duration-300 ease-in-out hover:bg-purple-500 hover:text-white'
               variant='outline'
