@@ -167,10 +167,14 @@ function TryoutParticipantIndexPage() {
           />
           <div className='flex flex-col'>
             <Breadcrumb
-              crumbs={['/admin', '/admin/tryout', '/admin/tryout/buat']}
+              crumbs={[
+                '/admin',
+                '/admin/tryout',
+                '/admin/tryout/participant/assign/peserta',
+              ]}
             />
             <Typography variant='h2' className='font-bold'>
-              Buat Tryout
+              Assign Peserta
             </Typography>
           </div>
         </div>

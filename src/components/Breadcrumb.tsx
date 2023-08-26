@@ -21,6 +21,7 @@ const breadcrumbs = {
   '/admin/tryout/edit': 'Edit Tryout',
   '/admin/tryout/question': 'Soal',
   '/admin/tryout/question/edit': 'Edit',
+  '/admin/tryout/participant/assign/peserta': 'Assign Peserta',
 };
 type BreadcrumbProps = {
   crumbs: Array<keyof typeof breadcrumbs>;
