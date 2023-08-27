@@ -8,7 +8,7 @@ export interface TryoutParticipant {
   correct_answer: number;
   incorrect_answer: number;
   total_spend: number;
-  question_attempt: number;
+  question_attemp: number;
   end_date: Date;
   is_active: boolean;
   status: string;

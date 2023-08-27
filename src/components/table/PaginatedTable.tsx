@@ -80,7 +80,7 @@ export default function PaginatedTable<T extends object>({
               table.setPageSize(Number(e.target.value));
             }}
           >
-            {[5, 10, 25].map((page) => (
+            {[5, 10, 25, 100, 500, 1000].map((page) => (
               <option key={page} value={page}>
                 {page} Entries
               </option>

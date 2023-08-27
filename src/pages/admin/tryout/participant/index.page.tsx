@@ -1,10 +1,14 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { ColumnDef } from '@tanstack/react-table';
 import { useRouter } from 'next/router';
 import * as React from 'react';
-import { FiArrowLeft, FiEye, FiPlus } from 'react-icons/fi';
+import { FiArrowLeft, FiAward, FiEye, FiPlus } from 'react-icons/fi';
+
+import api from '@/lib/axios';
+import useMutationToast from '@/hooks/toast/useMutationToast';
 
 import Breadcrumb from '@/components/Breadcrumb';
+import Button from '@/components/buttons/Button';
 import withAuth from '@/components/hoc/withAuth';
 import DashboardLayout from '@/components/layout/dashboard/DashboardLayout';
 import ButtonLink from '@/components/links/ButtonLink';
@@ -16,6 +20,10 @@ import Typography from '@/components/typography/Typography';
 import { ApiResponse } from '@/types/api';
 import { TryoutParticipant } from '@/types/entities/tryout-participant';
 
+type GenerateGrade = {
+  quiz_list_id: string;
+};
+
 export default withAuth(TryoutParticipantIndexPage, [
   'admin_tryout_participant.index',
 ]);
@@ -24,7 +32,7 @@ function TryoutParticipantIndexPage() {
 
   const { quiz_list_id } = router.query;
 
-  const { data: unpaginatedData } = useQuery<
+  const { data: unpaginatedData, refetch } = useQuery<
     ApiResponse<TryoutParticipant[]>,
     Error
   >([`/admin/quiz_list/user?quiz_list_id=${quiz_list_id}`], {
@@ -36,12 +44,14 @@ function TryoutParticipantIndexPage() {
     {
       accessorKey: 'username',
       header: 'Username',
-      // To set size, add size in pixel
-      size: 10,
     },
     {
       accessorKey: 'email',
       header: 'Email',
+    },
+    {
+      accessorKey: 'team_name',
+      header: 'Team Name',
     },
     {
       accessorKey: 'grade',
@@ -73,7 +83,7 @@ function TryoutParticipantIndexPage() {
       header: 'Question Attempt',
       accessorKey: 'question_attemp',
       cell: ({ row }) => (
-        <Typography>{row.original.question_attempt ?? '-'}</Typography>
+        <Typography>{row.original.question_attemp ?? '-'}</Typography>
       ),
     },
     {
@@ -103,6 +113,12 @@ function TryoutParticipantIndexPage() {
     },
   ];
 
+  const { mutate: generateGrade } = useMutationToast<void, GenerateGrade>(
+    useMutation((data) => {
+      return api.post('/admin/quiz_list/grade/generate', data);
+    })
+  );
+
   return (
     <DashboardLayout>
       <Seo templateTitle='Peserta Tryout' />
@@ -122,13 +138,29 @@ function TryoutParticipantIndexPage() {
             </Typography>
           </div>
         </div>
-        <div>
+        <div className='space-x-2'>
           <ButtonLink
             href={`/admin/tryout/participant/assign?quiz_list_id=${quiz_list_id}`}
             leftIcon={FiPlus}
           >
             Masukkan Peserta
           </ButtonLink>
+          <Button
+            onClick={() =>
+              generateGrade(
+                { quiz_list_id: quiz_list_id as string },
+                {
+                  onSuccess: () => {
+                    refetch();
+                  },
+                }
+              )
+            }
+            leftIcon={FiAward}
+            variant='danger'
+          >
+            Hitung Nilai
+          </Button>
         </div>
       </header>
 
