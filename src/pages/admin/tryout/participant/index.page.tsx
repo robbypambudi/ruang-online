@@ -2,6 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { ColumnDef } from '@tanstack/react-table';
 import { useRouter } from 'next/router';
 import * as React from 'react';
+import { useDownloadExcel } from 'react-export-table-to-excel';
 import { FiArrowLeft, FiAward, FiEye, FiPlus } from 'react-icons/fi';
 
 import api from '@/lib/axios';
@@ -38,6 +39,14 @@ function TryoutParticipantIndexPage() {
   >([`/admin/quiz_list/user?quiz_list_id=${quiz_list_id}`], {
     enabled: quiz_list_id !== undefined,
     keepPreviousData: true,
+  });
+
+  const tableRef = React.useRef(null);
+
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: tableRef.current,
+    filename: 'Nilai Tryout Geosentric 2023',
+    sheet: 'Nilai Tryout Geosentric 2023',
   });
 
   const columns: ColumnDef<TryoutParticipant>[] = [
@@ -161,6 +170,9 @@ function TryoutParticipantIndexPage() {
           >
             Hitung Nilai
           </Button>
+          <Button onClick={onDownload} variant='outline'>
+            Export to Excel
+          </Button>
         </div>
       </header>
 
@@ -170,6 +182,7 @@ function TryoutParticipantIndexPage() {
             data={unpaginatedData?.data ?? []}
             columns={columns}
             withFilter
+            tableRef={tableRef}
           />
         </section>
       </main>
