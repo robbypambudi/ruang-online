@@ -137,6 +137,7 @@ function TryoutParticipantIndexPage() {
           <PaginatedTable
             data={unpaginatedData?.data ?? []}
             columns={columns}
+            withFilter
           />
         </section>
       </main>
