@@ -96,16 +96,21 @@ export default function EditQuestion({
     }
   );
 
-  const methods = useForm<QuestionEdit>({
-    defaultValues: {
-      question_type_id:
-        QuestionTypes[detailSoal?.data.type as keyof typeof QuestionTypes],
-      category: detailSoal?.data.category,
-      question: detailSoal?.data.question,
-      image_url: detailSoal?.data.image_url,
-      name: detailSoal?.data.name,
-    },
-  });
+  // useEffect for default value
+  const methods = useForm<QuestionEdit>();
+
+  React.useEffect(() => {
+    if (detailSoal?.data) {
+      methods.reset({
+        question_type_id:
+          QuestionTypes[detailSoal?.data.type as keyof typeof QuestionTypes],
+        category: detailSoal?.data.category,
+        question: detailSoal?.data.question,
+        image_url: detailSoal?.data.image_url,
+        name: detailSoal?.data.name,
+      });
+    }
+  }, [detailSoal?.data, methods]);
 
   const { handleSubmit } = methods;
 
