@@ -26,8 +26,9 @@ function DashboardTryout() {
   const user = useAuthStore.useUser();
 
   const url = '/quiz_list';
-  const { data: QuizListData } = useQuery<ApiResponse<GetQuizList[]>>([url]);
-
+  const { data: QuizListData, isLoading } = useQuery<
+    ApiResponse<GetQuizList[]>
+  >([url]);
   React.useEffect(() => {
     if (user?.event?.is_geolympic.payment_status === 'unregistered') {
       router.push('/dashboard/geolympic/buat');
@@ -150,13 +151,19 @@ function DashboardTryout() {
             </Typography>
           </div>
           <div className='w-full space-y-4 rounded-xl bg-surface-base p-8 shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
-            {QuizListData?.data.length === 0 && (
+            {(QuizListData?.data.length === 0 || !QuizListData) && (
               <div className='flex flex-col items-center justify-center space-y-4'>
                 <div className='flex flex-col items-center justify-center space-y-4'>
                   <GoQuestion className='text-6xl text-primary-500' />
-                  <Typography variant='h3' className='font-semibold'>
-                    Belum ada ujian
-                  </Typography>
+                  {isLoading ? (
+                    <Typography variant='h3' className='font-semibold'>
+                      Loading...
+                    </Typography>
+                  ) : (
+                    <Typography variant='h3' className='font-semibold'>
+                      Belum ada ujian
+                    </Typography>
+                  )}
                 </div>
               </div>
             )}

@@ -9,6 +9,7 @@ const breadcrumbs = {
   '/': 'Home',
   '/dashboard': 'Dashboard',
   '/dashboard/tryout': 'Tryout',
+  '/dashboard/tryout/result': 'Hasil Tryout',
   '/dashboard/geolympic': 'Geolympic',
   '/dashboard/tryout/detail-tryout': 'Detail Tryout',
   '/admin': 'Admin',

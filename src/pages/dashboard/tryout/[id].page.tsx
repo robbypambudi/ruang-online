@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { BiSolidInfoCircle } from 'react-icons/bi';
 import { BsPersonFill } from 'react-icons/bs';
-import { FiArrowLeft, FiChevronRight } from 'react-icons/fi';
+import { FiArrowLeft, FiAward, FiChevronRight } from 'react-icons/fi';
 import { HiDocument, HiNewspaper } from 'react-icons/hi';
 
 import api from '@/lib/axios';
@@ -15,6 +15,7 @@ import Breadcrumb from '@/components/Breadcrumb';
 import Button from '@/components/buttons/Button';
 import withAuth from '@/components/hoc/withAuth';
 import DashboardLayout from '@/components/layout/dashboard/DashboardLayout';
+import ButtonLink from '@/components/links/ButtonLink';
 import IconLink from '@/components/links/IconLink';
 import NextImage from '@/components/NextImage';
 import Seo from '@/components/Seo';
@@ -108,6 +109,10 @@ function DetailTryoutAdmin() {
   };
   //#endregion  //*======== Save Question ===========
 
+  if (!user || !dataDetailQuizList) {
+    return null;
+  }
+
   return (
     <DashboardLayout>
       <Seo templateTitle='Detail Tryout' />
@@ -184,17 +189,32 @@ function DetailTryoutAdmin() {
             </div>
 
             <div className='flex gap-3'>
-              <Button
-                onClick={() => {
-                  SaveQuestions();
-                }}
-                className='shadow-lg'
-                variant='primary'
-                size='lg'
-                rightIcon={FiChevronRight}
-              >
-                Mulai Ujian
-              </Button>
+              {new Date(dataDetailQuizList.data.start_time).getTime() <
+                new Date().getTime() &&
+                new Date(dataDetailQuizList.data.end_time).getTime() >
+                  new Date().getTime() && (
+                  <Button
+                    onClick={() => {
+                      SaveQuestions();
+                    }}
+                    className='shadow-lg'
+                    variant='primary'
+                    rightIcon={FiChevronRight}
+                  >
+                    Mulai Ujian
+                  </Button>
+                )}
+              {new Date(dataDetailQuizList.data.end_time).getTime() <
+                new Date().getTime() && (
+                <ButtonLink
+                  href={`/dashboard/tryout/result/${id}`}
+                  className='shadow-lg'
+                  variant='danger'
+                  rightIcon={FiAward}
+                >
+                  Lihat Hasil
+                </ButtonLink>
+              )}
             </div>
           </div>
           <div>

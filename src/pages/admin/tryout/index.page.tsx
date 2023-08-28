@@ -36,7 +36,7 @@ function TryoutAdmin() {
     keepPreviousData: true,
   });
 
-  function statusQuiz(waktuMulai: string, waktuSelesai: string) {
+  function statusQuiz(waktuMulai: Date, waktuSelesai: Date) {
     const waktuSekarang = new Date();
 
     const mulaiUjian = new Date(waktuMulai);

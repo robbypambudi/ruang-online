@@ -24,8 +24,8 @@ export interface GeolympicTryout {
   id: string;
   roles_id: string;
   name: string;
-  start_time: string;
-  end_time: string;
+  start_time: Date;
+  end_time: Date;
   duration: number;
   code: string;
   category: string;
