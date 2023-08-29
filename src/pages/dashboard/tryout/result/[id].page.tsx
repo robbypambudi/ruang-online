@@ -137,7 +137,7 @@ export default function ResultPage() {
                   variant='danger'
                   rightIcon={RiFilePaper2Line}
                 >
-                  Lihat Hasil
+                  Lihat Pembahasan
                 </ButtonLink>
               </div>
             </div>
