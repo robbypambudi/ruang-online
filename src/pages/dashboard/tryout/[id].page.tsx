@@ -207,7 +207,7 @@ function DetailTryoutAdmin() {
               {new Date(dataDetailQuizList.data.end_time).getTime() <
                 new Date().getTime() && (
                 <ButtonLink
-                  href={`/dashboard/tryout/result/${id}`}
+                  href={`/dashboard/tryout/result/${id}?name=${dataDetailQuizList.data.name}`}
                   className='shadow-lg'
                   variant='danger'
                   rightIcon={FiAward}
