@@ -189,21 +189,16 @@ function DetailTryoutAdmin() {
             </div>
 
             <div className='flex gap-3'>
-              {new Date(dataDetailQuizList.data.start_time).getTime() <
-                new Date().getTime() &&
-                new Date(dataDetailQuizList.data.end_time).getTime() >
-                  new Date().getTime() && (
-                  <Button
-                    onClick={() => {
-                      SaveQuestions();
-                    }}
-                    className='shadow-lg'
-                    variant='primary'
-                    rightIcon={FiChevronRight}
-                  >
-                    Mulai Ujian
-                  </Button>
-                )}
+              <Button
+                onClick={() => {
+                  SaveQuestions();
+                }}
+                className='shadow-lg'
+                variant='primary'
+                rightIcon={FiChevronRight}
+              >
+                Mulai Ujian
+              </Button>
               {new Date(dataDetailQuizList.data.end_time).getTime() <
                 new Date().getTime() && (
                 <ButtonLink
