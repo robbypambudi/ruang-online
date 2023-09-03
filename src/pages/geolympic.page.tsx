@@ -60,14 +60,15 @@ export default function Geolympic() {
               <Typography variant='j1' color='white'>
                 Geolympic 2023
               </Typography>
-              <Typography color='white'>
+              <Typography color='white' className='font-semibold'>
                 Geolympic (
                 <span className='text-orange-500'>
                   Geomatics Science and Exploration Olympiad
                 </span>
-                ) is an
-                <br className='1xl:block hidden' />
-                <span className='text-orange-500'>Olympic activity</span> on
+                ) is an <br className='1xl:block hidden' />
+                <span className='text-orange-500'>
+                  Olympic activity
+                </span> on{' '}
                 <span className='text-orange-500'>basic sciences</span> related
                 to Geomatics Engineering which is held for high
                 school/equivalent students throughout Indonesia. Target
@@ -83,14 +84,15 @@ export default function Geolympic() {
               </div>
             </div>
             <div className='col-span-2 lg:col-span-5'>
-              <NextImage
-                src='/images/geolympic/hero-logo.png'
-                alt='logo'
-                width={860}
-                height={861}
-                data-aos='zoom-in'
-                className='mx-auto hidden w-[90%] scale-100 md:block lg:mx-0 lg:ml-auto lg:scale-[1.3]'
-              />
+              <div data-aos='zoom-in'>
+                <NextImage
+                  src='/images/geolympic/hero-logo.png'
+                  alt='logo'
+                  width={860}
+                  height={861}
+                  className='mx-auto hidden w-[30rem] md:block'
+                />
+              </div>
               <NextImage
                 src='/images/geolympic/hero-logo-mobile.png'
                 alt='logo mobile'
