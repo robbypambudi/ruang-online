@@ -70,7 +70,7 @@ function DashboardPage() {
             >
               {user?.event?.is_geolympic.registration_status
                 ? 'Lihat Tryout'
-                : 'Daftar Sekarang'}
+                : 'Register Now'}
             </ButtonLink>
           </div>
           <div className='mt-5 flex min-h-[380px] max-w-[500px] flex-col items-center justify-center gap-3 rounded-md bg-white p-4 px-8 py-6 shadow-[rgba(50,_50,_105,_0.15)_0px_2px_5px_0px,_rgba(0,_0,_0,_0.05)_0px_1px_1px_0px] transition-all duration-300 hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)]'>
@@ -92,11 +92,7 @@ function DashboardPage() {
               in the form of digital posters
             </Typography>
             <ButtonLink
-              href={generateToastQuery({
-                message: 'Coming Soon!',
-                type: 'success',
-                url: '/dashboard',
-              })}
+              href='/geopost'
               className='mt-4 border border-purple-500 text-purple-500 transition-all duration-300 ease-in-out hover:bg-purple-500 hover:text-white'
               variant='outline'
             >
