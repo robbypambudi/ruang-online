@@ -27,9 +27,16 @@ function BuatTryoutAdmin({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
 
-  const { quiz_list_id, name, questions, category } = router.query;
+  const { quiz_list_id, name, questions, category, is_default } = router.query;
 
-  if (router.isReady && !quiz_list_id && !name && !questions && !category) {
+  if (
+    router.isReady &&
+    !quiz_list_id &&
+    !name &&
+    !questions &&
+    !category &&
+    !is_default
+  ) {
     return (
       <div className='flex h-screen items-center justify-center'>
         <Typography variant='h1'>Loading</Typography>
@@ -90,6 +97,7 @@ function BuatTryoutAdmin({
                 size={parseInt(questions as string)}
                 quiz_list_id={quiz_list_id as string}
                 category={category as string}
+                is_default={is_default as string}
               />
             )}
           </QuestionTypeContext.Provider>

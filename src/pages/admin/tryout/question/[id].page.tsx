@@ -29,7 +29,7 @@ import { QUESTION_TYPE_NAME } from '@/types/entities/question';
 
 export type DetailAnswer = {
   answer: string;
-  is_correct: boolean;
+  is_correct: number;
 };
 
 export type DetailSoal = {
@@ -55,7 +55,7 @@ function DetailSoalPage() {
   const methods = useForm<SearchForm>();
   const dialog = useDialog();
 
-  const { id, name: quizName, status } = router.query;
+  const { id, name: quizName, status, is_default } = router.query;
 
   const { watch } = methods;
 
@@ -223,7 +223,9 @@ function DetailSoalPage() {
                             <li
                               key={index}
                               className={
-                                is_correct ? 'font-semibold text-green-500' : ''
+                                is_correct > 0
+                                  ? 'font-semibold text-green-500'
+                                  : ''
                               }
                             >
                               <Latex macros={INITIAL_MACROS}>{answer}</Latex>
@@ -234,7 +236,7 @@ function DetailSoalPage() {
                     </div>
                     <div className='flex w-full justify-end'>
                       <IconLink
-                        href={`/admin/tryout/question/edit/${idSoal}?name=${quizName}&status=${status}&quiz_id=${id}`}
+                        href={`/admin/tryout/question/edit/${idSoal}?name=${quizName}&status=${status}&quiz_id=${id}&is_default=${is_default}`}
                         icon={BiPencil}
                         iconClassName='text-gray-500'
                         className='shadow-[0_2px_7px_rgb(0,0,0,0.15)]'

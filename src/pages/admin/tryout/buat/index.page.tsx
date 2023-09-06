@@ -27,6 +27,7 @@ type createGeolympicTryout = {
   code: string;
   category: string;
   status: 1;
+  is_default: boolean;
 };
 
 export default withAuth(BuatTryoutPage, ['admin_tryout.store']);

@@ -68,39 +68,69 @@ export default function BuatTryoutForm() {
             />
           </div>
         </div>
-        <div className='mt-4 space-y-2'>
-          <TextArea
-            label='Ringkasan Tryout'
-            id='summary'
-            placeholder='Deskripsi'
-          />
-          <label
-            htmlFor='status'
-            className='block text-sm font-semibold text-typo'
-          >
-            Status Tryout
-          </label>
-          <div className='mt-1 grid grid-flow-col grid-rows-2'>
-            <RadioButton
-              label='Ready'
-              name='status'
-              value='1'
-              validation={{ required: 'Status tidak boleh kosong!' }}
-              hideError
-            />
-            <RadioButton
-              label='Draft'
-              name='status'
-              value='0'
-              validation={{ required: 'Status tidak boleh kosong!' }}
-              hideError
-            />
+        <TextArea
+          label='Ringkasan Tryout'
+          id='summary'
+          placeholder='Deskripsi'
+        />
+        <div className='mt-4 grid grid-cols-2 space-y-2'>
+          <div>
+            <label
+              htmlFor='status'
+              className='block text-sm font-semibold text-typo'
+            >
+              Status Tryout
+            </label>
+            <div className='mt-1 grid grid-flow-col grid-rows-2'>
+              <RadioButton
+                label='Ready'
+                name='status'
+                value='1'
+                validation={{ required: 'Status tidak boleh kosong!' }}
+                hideError
+              />
+              <RadioButton
+                label='Draft'
+                name='status'
+                value='0'
+                validation={{ required: 'Status tidak boleh kosong!' }}
+                hideError
+              />
+            </div>
+            <p className='text-xs text-gray-500'>
+              Status tryout yang <span className='font-semibold'>READY</span>{' '}
+              akan ditampilkan di halaman utama user
+            </p>
+            <ErrorMessage id='status' />
           </div>
-          <p className='text-xs text-gray-500'>
-            Status tryout yang <span className='font-semibold'>READY</span> akan
-            ditampilkan di halaman utama user
-          </p>
-          <ErrorMessage id='status' />
+          <div className=''>
+            <label
+              htmlFor='status'
+              className='block text-sm font-semibold text-typo'
+            >
+              Sistem Penilaian
+            </label>
+            <div className='mt-1 grid grid-flow-col grid-rows-2'>
+              <RadioButton
+                label='Otomatis (Jumlah Benar / Soal) * 100'
+                name='is_default'
+                value='1'
+                validation={{
+                  required: 'Sistem Penilaian tidak boleh kosong!',
+                }}
+                hideError
+              />
+              <RadioButton
+                label='Custom Point Tiap Soal'
+                name='is_default'
+                value='0'
+                validation={{
+                  required: 'Sistem Penilaian tidak boleh kosong!',
+                }}
+                hideError
+              />
+            </div>
+          </div>
         </div>
         <div className='mt-5 space-x-4'>
           <Button type='submit' variant='primary' leftIcon={FiSave}>

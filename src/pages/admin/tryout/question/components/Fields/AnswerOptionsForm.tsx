@@ -18,9 +18,11 @@ import { QuestionType } from '@/types/entities/question';
 export default function AnswerOptionsForm({
   number,
   answerType,
+  is_default,
 }: {
   number: number;
   answerType: string;
+  is_default: string;
 }) {
   const { fields, append, remove } = useFieldArray({
     name: `questions.${number}.answers[]`,
@@ -70,6 +72,7 @@ export default function AnswerOptionsForm({
                 questionType={question_type}
                 index={index}
                 number={number}
+                is_default={is_default}
               />
             )}
             {!question_type && (
@@ -95,7 +98,9 @@ export default function AnswerOptionsForm({
                           question_type.name === 'long_answer' ||
                           question_type.name === 'short_answer'
                             ? '1'
-                            : '0',
+                            : is_default === 'false'
+                            ? -1
+                            : 0,
                       })
                     }
                     icon={FaPlus}
@@ -125,9 +130,15 @@ type AnswerTypeProps = {
   number: number;
   index: number;
   questionType: QuestionType;
+  is_default: string;
 };
 
-function AnswerTypeOptions({ number, index, questionType }: AnswerTypeProps) {
+function AnswerTypeOptions({
+  number,
+  index,
+  questionType,
+  is_default,
+}: AnswerTypeProps) {
   return (
     <>
       {questionType.name === 'multiple_choice_multiple_answer' ||
@@ -160,17 +171,27 @@ function AnswerTypeOptions({ number, index, questionType }: AnswerTypeProps) {
             'hidden'
         )}
       >
-        <SearchableSelectInput
-          id={`questions.${number}.answers.${index}.is_correct`}
-          label={null}
-          options={[
-            { label: 'Benar', value: '1' },
-            { label: 'Salah', value: '0' },
-          ]}
-          validation={{
-            required: 'Jawaban tidak boleh kosong!',
-          }}
-        />
+        {is_default === 'true' && (
+          <SearchableSelectInput
+            id={`questions.${number}.answers.${index}.is_correct`}
+            label={null}
+            options={[
+              { label: 'Benar', value: '1' },
+              { label: 'Salah', value: '0' },
+            ]}
+            validation={{
+              required: 'Jawaban tidak boleh kosong!',
+            }}
+          />
+        )}
+        {is_default == 'false' && (
+          <Input
+            id={`questions.${number}.answers.${index}.is_correct`}
+            label={null}
+            containerClassName='mx-3'
+            placeholder='Poin'
+          />
+        )}
       </div>
     </>
   );

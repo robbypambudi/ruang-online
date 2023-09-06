@@ -19,12 +19,14 @@ type QuestionFormProps = {
   size: number;
   quiz_list_id: string;
   category: string;
+  is_default: string;
 };
 
 export default function QuestionsForm({
   size,
   quiz_list_id,
   category,
+  is_default,
 }: QuestionFormProps) {
   const router = useRouter();
   const isReady = router.isReady;
@@ -61,7 +63,11 @@ export default function QuestionsForm({
         category: category || '',
         question: '',
         image_url: '',
-        answers: [],
+        answers: [
+          {
+            is_correct: -1,
+          },
+        ],
       });
     }
     return questions;
@@ -91,7 +97,11 @@ export default function QuestionsForm({
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)} className='mt-6'>
           {isReady && (
-            <QuestionArrayFields category={category} setValue={setValue} />
+            <QuestionArrayFields
+              category={category}
+              setValue={setValue}
+              is_default={is_default}
+            />
           )}
           <div className='mt-8 flex items-center justify-center'>
             <Button

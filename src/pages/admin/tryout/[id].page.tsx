@@ -165,7 +165,7 @@ function DetailTryoutAdmin() {
                 {dataDetailQuizList?.data.is_active ? 'Nonaktif' : 'Aktif'}
               </Button>
               <ButtonLink
-                href={`/admin/tryout/question/buat?quiz_list_id=${id}&name=${dataDetailQuizList?.data.name}&category=${dataDetailQuizList?.data.category}`}
+                href={`/admin/tryout/question/buat?quiz_list_id=${id}&name=${dataDetailQuizList?.data.name}&category=${dataDetailQuizList?.data.category}&is_default=${dataDetailQuizList?.data.is_default}`}
                 className='border border-[#37B965] bg-[#37B965] shadow-lg hover:bg-[#2a8d4d]'
                 variant='primary'
                 size='lg'
@@ -183,7 +183,7 @@ function DetailTryoutAdmin() {
                 Peserta Tryout
               </ButtonLink>
               <ButtonLink
-                href={`/admin/tryout/question/${id}?name=${dataDetailQuizList?.data.name}&status=${dataDetailQuizList?.data.is_active}`}
+                href={`/admin/tryout/question/${id}?name=${dataDetailQuizList?.data.name}&status=${dataDetailQuizList?.data.is_active}&is_default=${dataDetailQuizList?.data.is_default}`}
                 className='shadow-lg'
                 variant='danger'
                 size='lg'

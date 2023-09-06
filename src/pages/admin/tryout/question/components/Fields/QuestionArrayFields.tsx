@@ -28,11 +28,13 @@ import QuestionForm, { QUESTION_TYPE_NAME } from '@/types/entities/question';
 type QuestionArrayFieldsProps = {
   category: string;
   setValue: UseFormSetValue<QuestionForm>;
+  is_default: string;
 };
 
 export default function QuestionArrayFields({
   category,
   setValue,
+  is_default,
 }: QuestionArrayFieldsProps) {
   const { append, fields, move, remove } = useFieldArray({
     name: 'questions[]',
@@ -105,7 +107,11 @@ export default function QuestionArrayFields({
                               <BiMenu size='26' />
                             </div>
                             <div className='ml-12'>
-                              <Question number={index} setValue={setValue} />
+                              <Question
+                                number={index}
+                                setValue={setValue}
+                                is_default={is_default}
+                              />
                             </div>
                             <div className='mx-6 flex items-center justify-end gap-x-2'>
                               <Button
@@ -157,9 +163,10 @@ export default function QuestionArrayFields({
 type QuestionProps = {
   number: number;
   setValue: UseFormSetValue<QuestionForm>;
+  is_default: string;
 };
 
-function Question({ number, setValue }: QuestionProps) {
+function Question({ number, setValue, is_default }: QuestionProps) {
   const question_type = React.useContext(QuestionTypeContext);
 
   const methods = useForm<{ variant: string }>({
@@ -231,7 +238,7 @@ function Question({ number, setValue }: QuestionProps) {
         </div>
       </div>
       <div className=''>
-        <Answer number={number} answerType={variant} />
+        <Answer number={number} answerType={variant} is_default={is_default} />
       </div>
     </>
   );
@@ -240,9 +247,10 @@ function Question({ number, setValue }: QuestionProps) {
 type AnswerProps = {
   number: number;
   answerType: string;
+  is_default: string;
 };
 
-function Answer({ number, answerType }: AnswerProps) {
+function Answer({ number, answerType, is_default }: AnswerProps) {
   return (
     <>
       <div>
@@ -251,7 +259,11 @@ function Answer({ number, answerType }: AnswerProps) {
           <Typography variant='h4'>Correct Answer</Typography>
         </div>
         <div className='mt-2'>
-          <AnswerOptionsForm number={number} answerType={answerType} />
+          <AnswerOptionsForm
+            number={number}
+            answerType={answerType}
+            is_default={is_default}
+          />
         </div>
       </div>
     </>

@@ -31,6 +31,7 @@ export interface GeolympicTryout {
   category: string;
   summary: string;
   is_active: boolean;
+  is_default: boolean;
   total_question: number;
   total_participant: number;
 }

@@ -77,7 +77,7 @@ export default function EditQuestion({
   questionTypes,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
-  const { id, name, status, quiz_id } = router.query;
+  const { id, name, status, quiz_id, is_default } = router.query;
 
   const {
     data: detailSoal,
@@ -126,7 +126,7 @@ export default function EditQuestion({
       onSuccess: () => {
         refetch();
         router.push(
-          `/admin/tryout/question/${quiz_id}?name=${name}&status=${status}`
+          `/admin/tryout/question/${quiz_id}?name=${name}&status=${status}&is_default=${is_default}`
         );
       },
     });
@@ -232,6 +232,7 @@ export default function EditQuestion({
                 ]
               }
               answer={jawaban ?? []}
+              is_default={is_default as string}
             />
           </div>
           <Button type='submit' className='ml-4 mt-4'>
@@ -247,9 +248,10 @@ type AnswerProps = {
   number: number;
   answerType: string;
   answer: DetailAnswer[];
+  is_default: string;
 };
 
-function Answer({ answerType, answer }: AnswerProps) {
+function Answer({ answerType, answer, is_default }: AnswerProps) {
   return (
     <>
       <div>
@@ -259,7 +261,11 @@ function Answer({ answerType, answer }: AnswerProps) {
         </div>
         <div className='mt-2'>
           {answerType !== '' && (
-            <AnswerOptionsForm answerType={answerType} answer={answer} />
+            <AnswerOptionsForm
+              answerType={answerType}
+              answer={answer}
+              is_default={is_default}
+            />
           )}
         </div>
       </div>
@@ -270,9 +276,11 @@ function Answer({ answerType, answer }: AnswerProps) {
 function AnswerOptionsForm({
   answerType,
   answer,
+  is_default,
 }: {
   answerType: string;
   answer: DetailAnswer[];
+  is_default: string;
 }) {
   const { fields, append, remove } = useFieldArray({
     name: `answers[]`,
@@ -299,7 +307,7 @@ function AnswerOptionsForm({
       append(
         answer.map((item) => ({
           answer: item.answer,
-          is_correct: item.is_correct ? '1' : '0',
+          is_correct: item.is_correct,
         }))
       );
     }
@@ -340,7 +348,11 @@ function AnswerOptionsForm({
               ref={radio}
             >
               {answerType !== undefined && (
-                <AnswerTypeOptions questionType={answerType} index={index} />
+                <AnswerTypeOptions
+                  questionType={answerType}
+                  index={index}
+                  is_default={is_default}
+                />
               )}
             </div>
           ))}
@@ -394,9 +406,14 @@ function AnswerOptionsForm({
 type AnswerTypeProps = {
   index: number;
   questionType: string;
+  is_default: string;
 };
 
-function AnswerTypeOptions({ index, questionType }: AnswerTypeProps) {
+function AnswerTypeOptions({
+  index,
+  questionType,
+  is_default,
+}: AnswerTypeProps) {
   return (
     <>
       {questionType === 'multiple_choice_multiple_answer' ||
@@ -428,17 +445,26 @@ function AnswerTypeOptions({ index, questionType }: AnswerTypeProps) {
             'hidden'
         )}
       >
-        <SearchableSelectInput
-          id={`answers.${index}.is_correct`}
-          label={null}
-          options={[
-            { label: 'Benar', value: '1' },
-            { label: 'Salah', value: '0' },
-          ]}
-          validation={{
-            required: 'Jawaban tidak boleh kosong!',
-          }}
-        />
+        {is_default === 'true' && (
+          <SearchableSelectInput
+            id={`answers.${index}.is_correct`}
+            label={null}
+            options={[
+              { label: 'Benar', value: '1' },
+              { label: 'Salah', value: '0' },
+            ]}
+            validation={{
+              required: 'Jawaban tidak boleh kosong!',
+            }}
+          />
+        )}
+        {is_default === 'false' && (
+          <Input
+            id={`answers.${index}.is_correct`}
+            label={null}
+            placeholder='Poin'
+          />
+        )}
       </div>
     </>
   );
