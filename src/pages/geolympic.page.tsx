@@ -366,7 +366,7 @@ export default function Geolympic() {
                           ]
                         )}
                       >
-                        15 Oktober
+                        22 Oktober
                       </div>
                       <Typography
                         color='white'
