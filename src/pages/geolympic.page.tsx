@@ -493,7 +493,7 @@ export default function Geolympic() {
                       ['w-full']
                     )}
                   >
-                    15 Oktober
+                    22 Oktober
                   </div>
                   <Typography color='white' className='mt-2 font-semibold'>
                     Babak Final (Offline)
