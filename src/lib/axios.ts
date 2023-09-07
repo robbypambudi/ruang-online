@@ -31,12 +31,13 @@ api.interceptors.request.use(function (config) {
       const cookies = new Cookies(context.req?.headers.cookie);
 
       const detectedIp = requestIp.getClientIp(context.req);
-
       if (
         detectedIp &&
         process.env.NEXT_PUBLIC_STATUS_PRODUCTION === 'vercel'
       ) {
+        // console.log('detectedIp', detectedIp);
         config.headers['X-Forwarded-For'] = detectedIp;
+        config.headers['X-Real-IP'] = detectedIp;
       }
 
       /** Get cookies from context if server side */

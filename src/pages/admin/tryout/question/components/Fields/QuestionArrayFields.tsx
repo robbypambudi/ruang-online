@@ -209,16 +209,18 @@ function Question({ number, setValue, is_default }: QuestionProps) {
               validation={{
                 required: 'Nama tidak boleh kosong!',
               }}
+              helperText='*Contoh: (MTK-1, FIS-1, dll)'
               containerClassName='md:w-1/2 w-full'
             />
             <Input
               id={`questions.${number}.category`}
-              label='Category'
+              label='Category Name'
               placeholder='Masukkan Kategori Disini'
-              containerClassName='md:w-1/4 w-full'
+              containerClassName='md:w-1/3 w-full'
               validation={{
                 required: 'Kategori tidak boleh kosong!',
               }}
+              helperText='*Contoh: (Matematika, Fisika, dll)'
             />
           </div>
 

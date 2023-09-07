@@ -1,13 +1,16 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { ColumnDef } from '@tanstack/react-table';
-import { FiArrowRight, FiFileText, FiUsers } from 'react-icons/fi';
+import { FiEye, FiFileText, FiTrash, FiUsers } from 'react-icons/fi';
 import { LuFileCheck } from 'react-icons/lu';
 import { MdAdd } from 'react-icons/md';
 
+import api from '@/lib/axios';
 import { buildPaginatedTableURL } from '@/lib/table';
+import useMutationToast from '@/hooks/toast/useMutationToast';
 import useServerTable from '@/hooks/useServerTable';
 
 import Breadcrumb from '@/components/Breadcrumb';
+import IconButton from '@/components/buttons/IconButton';
 import withAuth from '@/components/hoc/withAuth';
 import DashboardLayout from '@/components/layout/dashboard/DashboardLayout';
 import ButtonLink from '@/components/links/ButtonLink';
@@ -29,10 +32,11 @@ function TryoutAdmin() {
     tableState,
   });
 
-  const { data: queryData, isLoading } = useQuery<
-    PaginatedApiResponse<GeolympicTryout[]>,
-    Error
-  >([url], {
+  const {
+    data: queryData,
+    isLoading,
+    refetch,
+  } = useQuery<PaginatedApiResponse<GeolympicTryout[]>, Error>([url], {
     keepPreviousData: true,
   });
 
@@ -49,6 +53,16 @@ function TryoutAdmin() {
     }
   }
 
+  const { mutate: handleDelete } = useMutationToast<
+    void,
+    { quiz_list_id: string }
+  >(
+    useMutation((data) => {
+      return api.delete(
+        `/admin/quiz_list/soft_delete?quiz_list_id=${data.quiz_list_id}`
+      );
+    })
+  );
   const columns: ColumnDef<GeolympicTryout>[] = [
     {
       header: 'No',
@@ -61,17 +75,14 @@ function TryoutAdmin() {
     {
       accessorKey: 'name',
       header: 'Nama Ujian',
-      size: 25,
     },
     {
       accessorKey: 'code',
       header: 'Kode Ujian',
-      size: 10,
     },
     {
       accessorKey: 'category',
       header: 'Kategori',
-      size: 5,
     },
     {
       accessorKey: 'start_time',
@@ -87,7 +98,6 @@ function TryoutAdmin() {
           WIB
         </Typography>
       ),
-      size: 10,
     },
     {
       accessorKey: 'end_time',
@@ -103,7 +113,6 @@ function TryoutAdmin() {
           WIB
         </Typography>
       ),
-      size: 10,
     },
     {
       accessorKey: 'status',
@@ -123,7 +132,6 @@ function TryoutAdmin() {
           )}
         </div>
       ),
-      size: 25,
     },
     {
       id: 'actions',
@@ -138,12 +146,25 @@ function TryoutAdmin() {
           />
           <IconLink
             href={`/admin/tryout/${row.original.id}`}
-            icon={FiArrowRight}
+            icon={FiEye}
             iconClassName='text-gray-500'
+          />
+          <IconButton
+            icon={FiTrash}
+            variant='danger'
+            onClick={() =>
+              handleDelete(
+                { quiz_list_id: row.original.id },
+                {
+                  onSuccess: () => {
+                    refetch();
+                  },
+                }
+              )
+            }
           />
         </div>
       ),
-      size: 10,
     },
   ];
 

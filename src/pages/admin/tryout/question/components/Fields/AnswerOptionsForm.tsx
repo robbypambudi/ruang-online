@@ -188,8 +188,16 @@ function AnswerTypeOptions({
           <Input
             id={`questions.${number}.answers.${index}.is_correct`}
             label={null}
+            type='number'
             containerClassName='mx-3'
             placeholder='Poin'
+            validation={{
+              required: 'Jawaban tidak boleh kosong!',
+              pattern: {
+                value: /^[0-9]*$/,
+                message: 'Hanya boleh angka',
+              },
+            }}
           />
         )}
       </div>

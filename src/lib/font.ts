@@ -1,4 +1,4 @@
-import { Montserrat, Poppins } from '@next/font/google';
+import { Montserrat, Poppins } from 'next/font/google';
 
 export const poppins = Poppins({
   subsets: ['latin'],

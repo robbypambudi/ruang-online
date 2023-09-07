@@ -1,10 +1,7 @@
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next';
+import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
-
-import api, { setApiContext } from '@/lib/axios';
-import { generateToastQuery } from '@/lib/toast';
 
 import Breadcrumb from '@/components/Breadcrumb';
 import withAuth from '@/components/hoc/withAuth';
@@ -22,10 +19,12 @@ import { QuestionType } from '@/types/entities/question';
 export const QuestionTypeContext = React.createContext<QuestionType[]>([]);
 
 export default withAuth(BuatTryoutAdmin, ['admin_tryout.index']);
-function BuatTryoutAdmin({
-  questionTypes,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+function BuatTryoutAdmin() {
   const router = useRouter();
+
+  const { data } = useQuery<ApiResponse<QuestionType[]>>(['/question_type'], {
+    keepPreviousData: true,
+  });
 
   const { quiz_list_id, name, questions, category, is_default } = router.query;
 
@@ -35,7 +34,8 @@ function BuatTryoutAdmin({
     !name &&
     !questions &&
     !category &&
-    !is_default
+    !is_default &&
+    !data?.data
   ) {
     return (
       <div className='flex h-screen items-center justify-center'>
@@ -66,7 +66,7 @@ function BuatTryoutAdmin({
       </header>
 
       <main>
-        <section className='flex flex-col-reverse items-center justify-between rounded-xl bg-white p-2.5 shadow-lg lg:flex-row'>
+        <section className='flex flex-wrap items-center justify-between rounded-xl bg-white p-2.5 shadow-lg lg:flex-row'>
           <div className='flex flex-col justify-between gap-4 px-5 py-3'>
             <Typography
               className='w-fit rounded-xl bg-primary-200 px-8 py-3 text-primary-500'
@@ -87,7 +87,7 @@ function BuatTryoutAdmin({
         </section>
 
         <section>
-          <QuestionTypeContext.Provider value={questionTypes}>
+          <QuestionTypeContext.Provider value={data?.data ?? []}>
             {!questions ? (
               <div className='mt-8 flex items-center justify-center'>
                 <QuestionGenerate />
@@ -106,34 +106,3 @@ function BuatTryoutAdmin({
     </DashboardLayout>
   );
 }
-
-export const getServerSideProps = async (
-  context: GetServerSidePropsContext
-) => {
-  setApiContext(context);
-
-  try {
-    const response = await api.get<ApiResponse<QuestionType[]>>(
-      '/question_type'
-    );
-    return {
-      props: {
-        questionTypes: response.data.data,
-      },
-    };
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error);
-
-    return {
-      redirect: {
-        destination: generateToastQuery({
-          type: 'error',
-          message: 'Gagal mengambil data question type',
-          url: '/admin/tryout',
-        }),
-        permanent: false,
-      },
-    };
-  }
-};
