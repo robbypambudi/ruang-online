@@ -194,7 +194,7 @@ function AnswerTypeOptions({
             validation={{
               required: 'Jawaban tidak boleh kosong!',
               pattern: {
-                value: /^[0-9]*$/,
+                value: /^-?[0-9]\d*(\.\d+)?$/,
                 message: 'Hanya boleh angka',
               },
             }}
