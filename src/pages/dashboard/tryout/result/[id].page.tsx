@@ -2,11 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
 import * as React from 'react';
 import { FiArrowLeft } from 'react-icons/fi';
-import { RiFilePaper2Line } from 'react-icons/ri';
 
 import Breadcrumb from '@/components/Breadcrumb';
 import DashboardLayout from '@/components/layout/dashboard/DashboardLayout';
-import ButtonLink from '@/components/links/ButtonLink';
 import IconLink from '@/components/links/IconLink';
 import NextImage from '@/components/NextImage';
 import Seo from '@/components/Seo';
@@ -131,14 +129,14 @@ export default function ResultPage() {
                       : 'Belum Tersedia'}
                   </Typography>
                 </div>
-                <ButtonLink
+                {/* <ButtonLink
                   href={`/dashboard/tryout/result/pembahasan/${id}`}
                   className='shadow-lg'
                   variant='danger'
                   rightIcon={RiFilePaper2Line}
                 >
                   Lihat Pembahasan
-                </ButtonLink>
+                </ButtonLink> */}
               </div>
             </div>
           </div>
