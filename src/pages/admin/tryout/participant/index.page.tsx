@@ -116,7 +116,7 @@ function TryoutParticipantIndexPage() {
         <IconLink
           variant='outline'
           icon={FiEye}
-          href={'/admin/geolympic/' + row.original.grade_id}
+          href={`/admin/tryout/participant/pembahasan?quiz_list_id=${row.original.quiz_list_id}&user_id=${row.original.user_id}&username=${row.original.username}`}
         />
       ),
     },

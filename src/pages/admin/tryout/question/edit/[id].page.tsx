@@ -134,7 +134,13 @@ export default function EditQuestion({
 
   const [text, setText] = React.useState(pertanyaan);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (router.isReady && !name && !is_default && isLoading) {
+    return (
+      <div className='flex h-screen items-center justify-center'>
+        <Typography variant='h1'>Loading</Typography>
+      </div>
+    );
+  }
 
   return (
     <DashboardLayout>
