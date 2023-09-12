@@ -195,8 +195,11 @@ function DetailPembahasanSoalAdmin() {
                             <li
                               key={index}
                               className={clsxm(
-                                is_correct && 'font-semibold !text-green-500',
-                                is_user_answered && 'font-semibold text-red-500'
+                                is_correct > 0 &&
+                                  'font-semibold !text-green-500',
+                                is_correct <= 0 &&
+                                  is_user_answered &&
+                                  'font-semibold text-red-500'
                               )}
                             >
                               <Latex macros={INITIAL_MACROS}>{answer}</Latex>
