@@ -144,14 +144,13 @@ function TryoutAdmin() {
             iconClassName='text-gray-500'
             href={`/admin/tryout/participant?quiz_list_id=${row.original.id}`}
           />
-          {statusQuiz(row.original.start_time, row.original.end_time) ===
-            'Selesai' && (
-            <IconLink
-              href={`/admin/tryout/${row.original.id}`}
-              icon={FiEye}
-              iconClassName='text-gray-500'
-            />
-          )}
+
+          <IconLink
+            href={`/admin/tryout/${row.original.id}`}
+            icon={FiEye}
+            iconClassName='text-gray-500'
+          />
+
           <IconButton
             icon={FiTrash}
             variant='danger'

@@ -145,7 +145,7 @@ function GeosentricPage() {
                         1. Pay the registration fee to the account number below
                         : <br />
                         <span className='text-primary-500'>
-                          BNI: RISKYANIRMALA NOVATIANA 1299862385
+                          BNI: Robby Ulung Pambudi 123456789
                         </span>
                       </Typography>
                       <Typography className='font-semibold'>

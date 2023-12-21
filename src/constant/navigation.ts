@@ -14,7 +14,7 @@ export const navigations: Navigation[] = [
     name: 'Geolympic',
     href: '/dashboard/geolympic',
     activeClassName: 'bg-typo text-white',
-    permissions: ['geosentric.index'],
+    permissions: ['ruang-online.index'],
     icon: FiBook,
   },
   {

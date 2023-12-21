@@ -48,7 +48,7 @@ function DashboardPage() {
               className='w-16'
             />
             <Typography variant='h2' className='font-bold'>
-              Geolympic 2023
+              Geolympic 2024
             </Typography>
             <Typography className='mt-2'>
               GEOLYMPIC (Geomatics Science and Exploration Olympiad) is an
@@ -60,9 +60,9 @@ function DashboardPage() {
                 user?.event?.is_geolympic.registration_status
                   ? '/dashboard/tryout'
                   : generateToastQuery({
-                      message: 'Pendaftaran Sudah Ditutup',
+                      message: 'Silahkan lengkapi data diri terlebih dahulu',
                       type: 'error',
-                      url: '/dashboard',
+                      url: '/dashboard/geolympic/buat',
                     })
               }
               className='mt-4 border border-purple-500 text-purple-500 transition-all duration-300 ease-in-out hover:bg-purple-500 hover:text-white'
@@ -81,20 +81,24 @@ function DashboardPage() {
               height={121}
               className='w-16'
             />
-            <Typography variant='h6' className='font-bold'>
-              Geopost 2023
+            <Typography variant='h2' className='font-bold'>
+              Schematics 2024
             </Typography>
             <Typography className='mt-2'>
-              The Geocentric poster competition, namely the Geocentric Digital
-              Poster Competition, is a digital poster competition for the
-              general public in Indonesia. This competition aims to channel
-              skills and creativity for the community and students as outlined
-              in the form of digital posters
+              Schematics adalah salah satu event terbesar ITS yang
+              diselenggarakan oleh mahasiswa Teknik Informatika ITS. Schematics
+              merupakan event yang berfokus pada kompetisi pemrograman dan
+              logika, serta memperkenalkan perkembangan teknologi kepada
+              masyarakat luas melalui subevent-subevent Schematics
             </Typography>
             <ButtonLink
-              href='/geopost'
               className='mt-4 border border-purple-500 text-purple-500 transition-all duration-300 ease-in-out hover:bg-purple-500 hover:text-white'
               variant='outline'
+              href={generateToastQuery({
+                message: 'Pendaftaran belum dibuka',
+                type: 'error',
+                url: '/dashboard',
+              })}
             >
               Register Now
             </ButtonLink>
