@@ -52,50 +52,6 @@ export default function Home() {
               'relative z-10 flex items-center justify-center',
             ])}
           >
-            <div className='absolute'>
-              <NextImage
-                src='/images/home/hero-purple.png'
-                width={400}
-                height={400}
-                alt='hero'
-                className={clsxm(
-                  [
-                    'absolute h-[200px] w-[200px] lg:-left-20 lg:-top-40 lg:h-[400px] lg:w-[400px]',
-                  ],
-                  ['-left-10 -top-20']
-                )}
-                data-aos='fade-left'
-                data-aos-delay='900'
-              />
-              <NextImage
-                src='/images/home/hero-blue.png'
-                width={400}
-                height={400}
-                alt='hero'
-                className={clsxm(
-                  [
-                    'absolute h-[200px] w-[200px] lg:-left-60 lg:-top-20 lg:h-[400px] lg:w-[400px]',
-                  ],
-                  ['-left-32 -top-10']
-                )}
-                data-aos='fade-down'
-                data-aos-delay='1000'
-              />
-              <NextImage
-                src='/images/home/hero-orange.png'
-                width={400}
-                height={400}
-                alt='hero'
-                className={clsxm(
-                  [
-                    'absolute h-[200px] w-[200px] lg:-left-72 lg:-top-60 lg:h-[400px] lg:w-[400px]',
-                  ],
-                  ['-left-40 -top-32']
-                )}
-                data-aos='fade-up'
-                data-aos-delay='800'
-              />
-            </div>
             <NextImage
               src='/images/logo.png'
               width={340}
@@ -106,15 +62,6 @@ export default function Home() {
               data-aos-delay='600'
             />
           </div>
-          <NextImage
-            src='/images/home/hero-satelite.png'
-            width={134}
-            height={117}
-            alt='satelite'
-            className='absolute top-40 z-0 hidden lg:block'
-            data-aos='zoom-in'
-            data-aos-delay='700'
-          />
           <div
             className={clsxm(
               ['flex flex-col justify-center'],
@@ -168,38 +115,10 @@ export default function Home() {
           data-aos-delay='600'
           data-aos-offset='-50'
         />
-        <NextImage
-          src={worldLogo}
-          width={150}
-          height={119}
-          alt='logo'
-          className='absolute bottom-0 right-10 z-0 h-[55px] w-[70px]  lg:h-[119px] lg:w-[150px]'
-          data-aos='fade-up'
-          data-aos-delay='600'
-          data-aos-offset='-50'
-        />
         <section
           ref={about}
           className={clsxm(['lg:-translate-y-10'], ['px-10'], ['lg:px-40'])}
         >
-          <NextImage
-            src='/images/home/subevent-circle.png'
-            width={117}
-            height={113}
-            alt='circle'
-            className='absolute left-96 z-0 hidden -translate-y-10 translate-x-96 lg:block'
-            data-aos='fade-up'
-            data-aos-delay='600'
-          />
-          <NextImage
-            src='/images/home/triangle-two.png'
-            width={97}
-            height={97}
-            alt='triangle'
-            className='absolute left-0 z-0 hidden translate-y-40 lg:block'
-            data-aos='fade-right'
-            data-aos-delay='600'
-          />
           <Typography
             variant='j2'
             as='h2'
@@ -428,7 +347,7 @@ export default function Home() {
                       color='white'
                       className='rounded-lg bg-[#F8650E] px-3 py-2 text-center font-semibold lg:mt-5'
                     >
-                      12 Juli - 8 Oktober 2023
+                      12 Juli - 8 Oktober 2024
                     </Typography>
                     <Typography
                       color='white'
@@ -458,13 +377,13 @@ export default function Home() {
                       color='white'
                       className='rounded-lg bg-[#696CA1] px-3 py-2 text-center font-semibold lg:mt-5'
                     >
-                      2 September - 8 Oktober 2023
+                      2 September - 8 Oktober 2024
                     </Typography>
                     <Typography
                       color='white'
                       className='pt-5 text-start font-semibold lg:text-center lg:text-xl'
                     >
-                      Digital Poster Competition
+                      Schematics 2024
                     </Typography>
                   </div>
                 </div>

@@ -13,7 +13,7 @@ const isServer = () => {
 let context = <GetServerSidePropsContext>{};
 
 const api = axios.create({
-  baseURL: 'https://api.geosentric-its.com/api',
+  baseURL: 'https://api.ruang-online.robbypambudi.com/api',
   headers: {
     'Content-Type': 'application/json',
   },

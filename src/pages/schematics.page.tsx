@@ -19,7 +19,7 @@ function Geopost() {
   }, []);
   return (
     <Layout>
-      <Seo templateTitle='Geopost' />
+      <Seo templateTitle='Schematics' />
       <div className='min-h-screen bg-[#24202D]'>
         <section className='relative flex items-center justify-center pb-16 pt-32 md:min-h-screen md:pb-0 lg:pt-0'>
           <NextImage
@@ -71,7 +71,7 @@ function Geopost() {
           <div className='layout grid -translate-y-8 grid-cols-2 gap-8 lg:grid-cols-12 xl:gap-16'>
             <div className='order-last col-span-2 flex flex-col justify-center gap-4 lg:order-first lg:col-span-7 lg:gap-6'>
               <Typography variant='j1' color='white' data-aos='fade-right'>
-                Geopost 2023
+                Schematics 2024
               </Typography>
               <Typography
                 color='white'
@@ -79,14 +79,16 @@ function Geopost() {
                 as='h3'
                 data-aos='fade-right'
               >
-                Geopost (
+                Schematics (
                 <span className='text-[#CCCFE0]'>
                   Ruang Online Digital Poster Competition
                 </span>
-                ) is an activities to channel skills and creativity to the
-                community and students in Indonesia as outlined in the form of
-                digital posters. Geopost 2023 carries the theme 'Spatial Science
-                with the Use of LoT'.
+                ) Schematics adalah salah satu event terbesar ITS yang
+                diselenggarakan oleh mahasiswa Teknik Informatika ITS.
+                Schematics merupakan event yang berfokus pada kompetisi
+                pemrograman dan logika, serta memperkenalkan perkembangan
+                teknologi kepada masyarakat luas melalui subevent-subevent
+                Schematics
               </Typography>
               <div
                 className='mt-8 flex flex-col gap-2'
@@ -95,7 +97,7 @@ function Geopost() {
                 data-aos-anchor-placement='top-bottom'
               >
                 <ButtonLink
-                  href='https://intip.in/RegistrationGEOPOST2023'
+                  href='#'
                   className='w-full border-[#323458] bg-[#545793] hover:bg-[#4c4e84] md:w-fit'
                 >
                   <Typography variant='s2' color='white'>
@@ -104,7 +106,7 @@ function Geopost() {
                 </ButtonLink>
                 <ButtonLink
                   variant='outline'
-                  href='https://drive.google.com/file/d/1xPmLEd6fvYeEdyllGdOli53JFuYJVQXU/view?usp=sharing'
+                  href='#'
                   className='group w-full border-[#323458] md:w-fit'
                 >
                   <Typography
@@ -117,18 +119,7 @@ function Geopost() {
                 </ButtonLink>
               </div>
             </div>
-            <div className='col-span-2 lg:col-span-5'>
-              <div>
-                <NextImage
-                  src='/images/geopost/logo-geopost.png'
-                  alt='logo'
-                  width={450}
-                  height={450}
-                  className='relative z-[10] mx-auto w-52 md:w-80'
-                  data-aos='zoom-in'
-                />
-              </div>
-            </div>
+            <div className='col-span-2 lg:col-span-5'></div>
           </div>
         </section>
       </div>

@@ -9,7 +9,6 @@ import {
   BsLine,
   BsWhatsapp,
 } from 'react-icons/bs';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -129,7 +128,7 @@ export default function Geolympic() {
                 color='white'
                 className='text-center font-bold md:text-left'
               >
-                Roadmap Geolympic 2023
+                Roadmap Geolympic 2024
               </Typography>
               <ButtonLink
                 href='/dashboard/geolympic'
@@ -531,7 +530,7 @@ export default function Geolympic() {
               color='white'
               className='text-center font-bold'
             >
-              Reward Geolympic 2023
+              Reward Geolympic 2024
             </Typography>
             <div className='mt-16 flex flex-col items-center gap-12 md:flex-row md:items-end md:gap-0'>
               <div className='relative z-50 w-full'>
@@ -1029,140 +1028,6 @@ export default function Geolympic() {
                 </Disclosure>
               </div>
             </div>
-          </div>
-        </section>
-        <section className='bg-[#0B0614] pt-44'>
-          <Typography
-            variant='h5'
-            color='white'
-            className='text-center font-bold'
-          >
-            Gallery Geolympic
-          </Typography>
-          <div className='px-4 pb-44 pt-16 md:px-24'>
-            <Swiper
-              // modules={[Autoplay, Pagination, Navigation]}
-              breakpoints={{
-                300: {
-                  slidesPerView: 1,
-                  spaceBetween: 20,
-                },
-                640: {
-                  slidesPerView: 1,
-                  spaceBetween: 20,
-                },
-                768: {
-                  slidesPerView: 2,
-                  spaceBetween: 20,
-                },
-                1024: {
-                  slidesPerView: 3,
-                  spaceBetween: 10,
-                },
-              }}
-              className='mySwiper'
-            >
-              <SwiperSlide>
-                <NextImage
-                  width={1125}
-                  height={567}
-                  src='/images/geolympic/IMG_1.jpg'
-                  className='mx-auto h-56 w-full xl:h-64'
-                  alt=''
-                  quality={100}
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <NextImage
-                  width={1125}
-                  height={603}
-                  src='/images/geolympic/IMG_2.jpg'
-                  className='mx-auto h-56 w-full xl:h-64'
-                  alt=''
-                  quality={100}
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <NextImage
-                  width={1125}
-                  height={634}
-                  src='/images/geolympic/IMG_3.jpg'
-                  className='mx-auto h-56 w-full xl:h-64'
-                  alt=''
-                  quality={100}
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <NextImage
-                  width={1125}
-                  height={621}
-                  src='/images/geolympic/IMG_4.jpg'
-                  className='mx-auto h-56 w-full xl:h-64'
-                  alt=''
-                  quality={100}
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <NextImage
-                  width={1125}
-                  height={636}
-                  src='/images/geolympic/IMG_5.jpg'
-                  className='mx-auto h-56 w-full xl:h-64'
-                  alt=''
-                  quality={100}
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <NextImage
-                  width={1125}
-                  height={634}
-                  src='/images/geolympic/IMG_6.jpg'
-                  className='mx-auto h-56 w-full xl:h-64'
-                  alt=''
-                  quality={100}
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <NextImage
-                  width={1125}
-                  height={624}
-                  src='/images/geolympic/IMG_7.jpg'
-                  className='mx-auto h-56 w-full xl:h-64'
-                  alt=''
-                  quality={100}
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <NextImage
-                  width={1125}
-                  height={744}
-                  src='/images/geolympic/IMG_8.jpg'
-                  className='mx-auto h-56 w-full xl:h-64'
-                  alt=''
-                  quality={100}
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <NextImage
-                  width={1125}
-                  height={743}
-                  src='/images/geolympic/IMG_9.jpg'
-                  className='mx-auto h-56 w-full xl:h-64'
-                  alt=''
-                  quality={100}
-                />
-              </SwiperSlide>
-              <SwiperSlide>
-                <NextImage
-                  width={1125}
-                  height={737}
-                  src='/images/geolympic/IMG_10.jpg'
-                  className='mx-auto h-56 w-full xl:h-64'
-                  alt=''
-                  quality={100}
-                />
-              </SwiperSlide>
-            </Swiper>
           </div>
         </section>
       </div>
