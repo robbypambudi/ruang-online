@@ -54,10 +54,10 @@ export default function Home() {
           >
             <NextImage
               src='/images/logo.png'
-              width={340}
-              height={340}
+              width={435}
+              height={175}
               alt='logo'
-              className='h-[180px] w-[180px] md:h-[340px] md:w-[340px]'
+              className='w-[180px] md:w-[340px]'
               data-aos='zoom-in'
               data-aos-delay='600'
             />
@@ -171,9 +171,9 @@ export default function Home() {
                 data-aos='fade-down'
                 data-aos-delay='500'
               >
-                GEOLYMPIC (Geomatics Science and Exploration Olympiad) is an
-                academic olympiad in the field of basic application of geomatics
-                science held by HIMAGE-ITS.
+                GEOLYMPIC (Geomatics Science and Exploration Olympiad) merupakan
+                olimpiade akademik di bidang aplikasi dasar ilmu geomatika yang
+                diselenggarakan oleh HIMAGE-ITS.
               </Typography>
               <div
                 className={clsxm(
@@ -225,11 +225,12 @@ export default function Home() {
                 className='pt-8 font-normal'
                 data-aos='fade-down'
               >
-                The Geocentric poster competition, namely the Geocentric Digital
-                Poster Competition, is a digital poster competition for the
-                general public in Indonesia. This competition aims to channel
-                skills and creativity for the community and students as outlined
-                in the form of digital posters
+                Schematics adalah salah satu event terbesar ITS yang
+                diselenggarakan oleh mahasiswa Teknik Informatika ITS.
+                Schematics merupakan event yang berfokus pada kompetisi
+                pemrograman dan logika, serta memperkenalkan perkembangan
+                teknologi kepada masyarakat luas melalui subevent-subevent
+                Schematics
               </Typography>
               <div
                 className={clsxm(
@@ -238,8 +239,8 @@ export default function Home() {
                 )}
               >
                 <ButtonLink
-                  href='/geopost'
-                  className=''
+                  href='/'
+                  className='hover:cursor-not-allowed'
                   data-aos='fade-down'
                   data-aos-delay='500'
                 >

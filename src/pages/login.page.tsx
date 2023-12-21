@@ -72,11 +72,11 @@ export default function LoginPage() {
     <div className='relative flex min-h-screen items-center justify-center bg-[#24202D]'>
       <Seo templateTitle='Login' />
       <div className='grid grid-cols-1 gap-24 rounded-2xl border border-white px-12 py-12 md:grid-cols-2'>
-        <div className='hidden md:block'>
+        <div className='hidden flex-col items-center justify-center md:flex'>
           <NextImage
             src='/images/logo.png'
-            width='340'
-            height='340'
+            width='435'
+            height='175'
             alt='Logo Ruang Online'
           />
           <Typography
@@ -128,7 +128,7 @@ export default function LoginPage() {
                   Login
                 </Button>
                 <PrimaryLink href='/forgot-password' variant='primary'>
-                  Forogot Password
+                  Forgot Password
                 </PrimaryLink>
               </div>
               <div>

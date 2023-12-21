@@ -51,9 +51,9 @@ function DashboardPage() {
               Geolympic 2024
             </Typography>
             <Typography className='mt-2'>
-              GEOLYMPIC (Geomatics Science and Exploration Olympiad) is an
-              academic olympiad in the field of basic application of geomatics
-              science held by HIMAGE-ITS.
+              GEOLYMPIC (Geomatics Science and Exploration Olympiad) merupakan
+              olimpiade akademik di bidang aplikasi dasar ilmu geomatika yang
+              diselenggarakan oleh HIMAGE-ITS.
             </Typography>
             <ButtonLink
               href={

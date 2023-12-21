@@ -77,9 +77,9 @@ export default function LoginPage() {
         <div className='grid grid-cols-1 gap-24 rounded-2xl border border-white px-12 py-8 md:grid-cols-2'>
           <div className='my-auto hidden md:block'>
             <NextImage
-              src='/images/logo-geosentric.png'
-              width='320'
-              height='320'
+              src='/images/logo.png'
+              width='435'
+              height='175'
               layout='responsive'
               alt='Logo Ruang Online'
             />

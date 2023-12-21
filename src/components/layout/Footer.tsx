@@ -5,7 +5,7 @@ import UnstyledLink from '@/components/links/UnstyledLink';
 import NextImage from '@/components/NextImage';
 import Typography from '@/components/typography/Typography';
 
-import { events, quickLinks, socials } from '@/constant/event';
+import { events, quickLinks } from '@/constant/event';
 
 export default function Footer() {
   return (
@@ -74,16 +74,9 @@ export default function Footer() {
           <Typography color='white' className='text-base'>
             &copy; Ruang Online
           </Typography>
-          <div className='flex flex-row items-center gap-4 text-typo'>
-            {socials.map((social) => (
-              <UnstyledLink
-                key={social.name}
-                href={social.href}
-                className='flex h-10 w-10 items-center justify-center rounded-full bg-white hover:brightness-90'
-              >
-                <social.icon size='20' />
-              </UnstyledLink>
-            ))}
+          <div className='flex flex-row items-center gap-4 text-white'>
+            Kuliah Pemrograman Web Jurusan Teknik Informatika ITS (2023). Dosen:
+            Imam Kuswardayan, S.Kom, M.T.
           </div>
         </div>
       </div>
