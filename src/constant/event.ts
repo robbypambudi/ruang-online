@@ -39,27 +39,27 @@ export const quickLinks: QuickLink[] = [
 export const socials: Social[] = [
   {
     name: 'Twitter',
-    href: 'https://twitter.com/geosentric.its',
+    href: 'https://twitter.com/robbypambudi',
     icon: FaTwitter,
   },
   {
     name: 'Instagram',
-    href: 'https://www.instagram.com/geosentric.its',
+    href: 'https://www.instagram.com/robbypambudi',
     icon: AiFillInstagram,
   },
   {
     name: 'Youtube',
-    href: 'https://www.youtube.com/@geosentricits',
+    href: 'https://www.youtube.com/@robbypambudi',
     icon: FaYoutube,
   },
   {
     name: 'Linkedin',
-    href: 'https://www.linkedin.com/company/geosentricits',
+    href: 'https://www.linkedin.com/in/robbypambudi',
     icon: FaLinkedinIn,
   },
   {
     name: 'Tiktok',
-    href: 'https://www.tiktok.com/@geosentric.its',
+    href: 'https://www.tiktok.com/@robbypambudi',
     icon: FaTiktok,
   },
   {
@@ -77,7 +77,7 @@ export const events: Event[] = [
     hover: 'hover:brightness-90',
   },
   {
-    name: 'Geopost',
+    name: 'Schematics',
     href: '/geopost',
     color: 'text-white',
     hover: 'hover:brightness-90',

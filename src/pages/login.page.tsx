@@ -74,10 +74,10 @@ export default function LoginPage() {
       <div className='grid grid-cols-1 gap-24 rounded-2xl border border-white px-12 py-12 md:grid-cols-2'>
         <div className='hidden md:block'>
           <NextImage
-            src='/images/logo-geosentric.png'
+            src='/images/logo.png'
             width='340'
             height='340'
-            alt='Logo Geosentric'
+            alt='Logo Ruang Online'
           />
           <Typography
             variant='j2'
@@ -85,7 +85,7 @@ export default function LoginPage() {
             className='mt-4 text-center font-bold'
             color='white'
           >
-            Geosentric 2023
+            Ruang Online
           </Typography>
         </div>
         <div className=''>

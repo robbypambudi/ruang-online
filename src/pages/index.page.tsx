@@ -1,7 +1,6 @@
 'use client';
 import AOS from 'aos';
 import * as React from 'react';
-import { BsLine, BsWhatsapp } from 'react-icons/bs';
 
 import 'aos/dist/aos.css';
 
@@ -10,7 +9,6 @@ import clsxm from '@/lib/clsxm';
 import Button from '@/components/buttons/Button';
 import Layout from '@/components/layout/Layout';
 import ButtonLink from '@/components/links/ButtonLink';
-import UnstyledLink from '@/components/links/UnstyledLink';
 import NextImage from '@/components/NextImage';
 import Seo from '@/components/Seo';
 import Typography from '@/components/typography/Typography';
@@ -132,7 +130,7 @@ export default function Home() {
               data-aos='fade-right'
               data-aos-delay='600'
             >
-              Geosentric 2023
+              Ruang Online
             </Typography>
             <Typography
               color='white'
@@ -142,10 +140,8 @@ export default function Home() {
               data-aos='fade-right'
               data-aos-delay='700'
             >
-              Geomatics Science and Arts is the{' '}
-              <span className='text-purple-300'>largest series</span> of events
-              Department of Geomatics Engineering organized by the Association
-              of <span className='text-purple-300'>Geomatics ITS</span>.
+              Tempat berkumpulnya para pelajar dan mahasiswa untuk berkompetisi
+              secara online dalam bidang Ilmu Pengetahuan dan Teknologi{' '}
             </Typography>
             <Button
               onClick={() =>
@@ -210,7 +206,7 @@ export default function Home() {
             color='white'
             className='-translate-y-9 pt-20 font-bold lg:-translate-y-20'
           >
-            Sub Event Geosentric
+            Event Saat Ini
           </Typography>
 
           <div
@@ -303,7 +299,7 @@ export default function Home() {
                 className='pt-10 text-center font-bold'
                 data-aos='fade-down'
               >
-                Geopost 2023
+                Schematics 2024
               </Typography>
               <Typography
                 color='white'
@@ -366,7 +362,7 @@ export default function Home() {
             data-aos='flip-right'
             data-aos-delay='600'
           >
-            Timeline Geosentric 2023
+            Timeline Event Saat Ini
           </Typography>
           <NextImage
             src='/images/home/ring.png'
@@ -469,127 +465,6 @@ export default function Home() {
                       className='pt-5 text-start font-semibold lg:text-center lg:text-xl'
                     >
                       Digital Poster Competition
-                    </Typography>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className='m-5 lg:m-32' id='contact'>
-          <div
-            className={clsxm([
-              'w-full rounded-md border-2 border-[#9c96a7] border-transparent bg-[#3E3155] bg-opacity-40 p-10 duration-300 ease-in-out hover:border-white',
-            ])}
-          >
-            <NextImage
-              src='/images/home/triangle-four.png'
-              width={105}
-              height={105}
-              alt='triangle'
-              className='absolute right-0 z-0 hidden -translate-y-40 lg:block'
-            />
-            <div className='flex flex-col justify-between lg:flex-row'>
-              <div>
-                <Typography
-                  color='white'
-                  variant='h5'
-                  className='text-center font-bold lg:text-left'
-                  data-aos='fade-right'
-                >
-                  Any Question?
-                </Typography>
-                <Typography
-                  color='white'
-                  className='mt-8 text-center font-semibold lg:text-left'
-                  data-aos='fade-right'
-                >
-                  You can contact this contact whenever you want
-                </Typography>
-              </div>
-              <NextImage
-                src='/images/home/phone.png'
-                width={227}
-                height={239}
-                alt='phone'
-                className='absolute right-80 hidden -translate-y-1/2 lg:block'
-                data-aos='fade-down'
-              />
-            </div>
-            <div className='mt-14 flex flex-col justify-evenly gap-y-5 lg:flex-row lg:gap-y-0'>
-              <div>
-                <Typography
-                  color='white'
-                  className='text-center font-semibold'
-                  data-aos='fade-down'
-                >
-                  CP 1: Zidan
-                </Typography>
-                <div
-                  className='mt-5 flex flex-col gap-y-2'
-                  data-aos='fade-down'
-                >
-                  <UnstyledLink
-                    href='https://wa.me/6285745444962'
-                    target='_blank'
-                    className='flex cursor-pointer items-center gap-x-4 hover:animate-pulse'
-                  >
-                    <BsWhatsapp className='h-[25px] w-[25px] rounded-md bg-white p-[5px] text-black' />
-                    <Typography
-                      color='white'
-                      className='text-center font-semibold'
-                    >
-                      085745444962
-                    </Typography>
-                  </UnstyledLink>
-                  <div className='flex items-center gap-x-4'>
-                    <BsLine className='h-[25px] w-[25px] rounded-md bg-white p-[5px] text-black' />
-                    <Typography
-                      color='white'
-                      className='text-center font-semibold'
-                    >
-                      zidan2804
-                    </Typography>
-                  </div>
-                </div>
-              </div>
-              <div
-                className='w-0.5 rounded-full bg-white'
-                data-aos='fade-down'
-              ></div>
-              <div>
-                <Typography
-                  color='white'
-                  className='text-center font-semibold'
-                  data-aos='fade-down'
-                >
-                  CP 2: Raka
-                </Typography>
-                <div
-                  className='mt-5 flex flex-col gap-y-2'
-                  data-aos='fade-down'
-                >
-                  <UnstyledLink
-                    href='https://wa.me/6281292331829'
-                    target='_blank'
-                    className='flex cursor-pointer items-center gap-x-4 hover:animate-pulse'
-                  >
-                    <BsWhatsapp className='h-[25px] w-[25px] rounded-md bg-white p-[5px] text-black' />
-                    <Typography
-                      color='white'
-                      className='text-center font-semibold'
-                    >
-                      081292331829
-                    </Typography>
-                  </UnstyledLink>
-                  <div className='flex items-center gap-x-4'>
-                    <BsLine className='h-[25px] w-[25px] rounded-md bg-white p-[5px] text-black' />
-                    <Typography
-                      color='white'
-                      className='text-center font-semibold'
-                    >
-                      rakark11
                     </Typography>
                   </div>
                 </div>

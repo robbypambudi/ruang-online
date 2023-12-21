@@ -47,7 +47,7 @@ export default function DesktopNavigation() {
                 className='ml-2.5 font-bold text-black'
                 font='poppins'
               >
-                Geosentric 2023
+                Ruang Online 2023
               </Typography>
             )}
           </UnstyledLink>

@@ -681,7 +681,7 @@ export default function Geolympic() {
                 <li className='mb-4 list-decimal'>
                   <Typography variant='h6' color='white'>
                     Registration will be carried out online through the official
-                    website of Geosentric at www.geosentric-its.com
+                    website of Ruang Online at www.ruang-online.robbypambudi.com
                   </Typography>
                 </li>
                 <li className='mb-4 list-decimal'>
@@ -713,7 +713,7 @@ export default function Geolympic() {
                     Each team will receive an e-mail reply as a confirmation
                     that the registration has been successfully carried out,
                     along with the registration number as a username to enter
-                    the GEOSENTRIC 2023 website
+                    the Ruang Online website
                   </Typography>
                 </li>
               </ul>
@@ -838,11 +838,11 @@ export default function Geolympic() {
                         />
                       </Disclosure.Button>
                       <Disclosure.Panel className='bg-faq-geolympic px-4 pb-4 pt-4 text-sm text-white'>
-                        Geolympic is one of the events from Geosentric, which is
-                        one of the big events of the ITS Geomatics Engineering
-                        Department. The Geolympic is an academic olympiad that
-                        is participated by senior high school (SMA/K) students
-                        and the equivalent.
+                        Schematics is one of the events from Ruang Online, which
+                        is one of the big events of the ITS Geomatics
+                        Engineering Department. The Geolympic is an academic
+                        olympiad that is participated by senior high school
+                        (SMA/K) students and the equivalent.
                       </Disclosure.Panel>
                     </>
                   )}
@@ -940,7 +940,7 @@ export default function Geolympic() {
                       </Disclosure.Button>
                       <Disclosure.Panel className='bg-faq-geolympic px-4 pb-4 pt-4 text-sm text-white'>
                         The Elimination and Semifinal Rounds will be held online
-                        through the official Geosentric website, the Zoom
+                        through the official Ruang Online website, the Zoom
                         Meeting platform, and Google Meet. While the Final round
                         will be held offline at the ITS Geomatics Engineering
                         Department.

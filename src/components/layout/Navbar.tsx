@@ -200,14 +200,6 @@ export default function Navbar() {
             height='42'
             className='w-7 md:w-10'
           />
-          {/* <Typography
-            font='montserrat'
-            variant='p'
-            color='white'
-            className='text-xs'
-          >
-            GEOSENTRIC 2023
-          </Typography> */}
         </UnstyledLink>
 
         <nav className='w-full flex-1'>

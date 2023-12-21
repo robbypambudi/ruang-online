@@ -4,12 +4,12 @@ import { useRouter } from 'next/router';
 import { openGraph } from '@/lib/helper';
 
 const defaultMeta = {
-  title: 'Geosentric 2023',
-  siteName: 'Geosentric 2023',
+  title: 'Ruang Online',
+  siteName: 'Ruang Online',
   description:
-    'Geomatics Science and Arts is the largest series of events Department of Geomatics Engineering organized by the Association of Geomatics ITS.',
+    'Tempat berkumpulnya para pelajar dan mahasiswa untuk berkompetisi secara online dalam bidang Ilmu Pengetahuan dan Teknologi.',
   /** Without additional '/' on the end, e.g. https://theodorusclarence.com */
-  url: 'https://geosentric-its.com',
+  url: 'https://ruang-online.robbypambudi.com',
   type: 'website',
   robots: 'follow, index',
   /**

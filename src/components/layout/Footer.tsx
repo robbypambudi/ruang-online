@@ -20,7 +20,7 @@ export default function Footer() {
               height='37'
             ></NextImage>
             <Typography color='white' className='text-lg'>
-              GEOSENTRIC 2023
+              Ruang Online
             </Typography>
           </div>
           <div className='flex flex-col gap-6 md:flex-row md:gap-24'>
@@ -72,7 +72,7 @@ export default function Footer() {
 
         <div className='flex flex-col-reverse items-center justify-between gap-6 pt-6 md:flex-row'>
           <Typography color='white' className='text-base'>
-            &copy; Geosentric 2023
+            &copy; Ruang Online
           </Typography>
           <div className='flex flex-row items-center gap-4 text-typo'>
             {socials.map((social) => (

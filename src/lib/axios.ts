@@ -41,8 +41,8 @@ api.interceptors.request.use(function (config) {
       }
 
       /** Get cookies from context if server side */
-      // get cookie from context by name @geosentric/token
-      token = cookies.get('@geosentric/token');
+      // get cookie from context by name @ruang_online/token
+      token = cookies.get('@ruang_online/token');
     } else {
       /** Get cookies from context if server side */
       token = getToken();

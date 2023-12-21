@@ -80,7 +80,7 @@ function DetailTryoutAdmin() {
                 variant='h1'
                 font='montserrat'
               >
-                Geosentric ITS 2023 -{' '}
+                Ruang Online
                 {dataDetailQuizList?.data.is_active ? 'Aktif' : 'Belum Aktif'}
               </Typography>
               <div className='my-auto'>

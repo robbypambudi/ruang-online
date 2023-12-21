@@ -81,14 +81,14 @@ export default function LoginPage() {
               width='320'
               height='320'
               layout='responsive'
-              alt='Logo Geosentric'
+              alt='Logo Ruang Online'
             />
             <Typography
               variant='j2'
               className='mt-4 text-center font-bold'
               color='white'
             >
-              Geosentric 2023
+              Ruang Online 2023
             </Typography>
           </div>
           <div className=''>

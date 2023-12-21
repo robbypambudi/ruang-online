@@ -81,7 +81,7 @@ function Geopost() {
               >
                 Geopost (
                 <span className='text-[#CCCFE0]'>
-                  Geosentric Digital Poster Competition
+                  Ruang Online Digital Poster Competition
                 </span>
                 ) is an activities to channel skills and creativity to the
                 community and students in Indonesia as outlined in the form of
