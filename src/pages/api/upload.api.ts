@@ -34,7 +34,11 @@ export default async function handler(
       const location = fields.location[0] ? fields.location[0] + '/' : '';
       try {
         const key =
-          'geosentric/assets/' + email + location + name + new Date().getTime();
+          'ruang_online/assets/' +
+          email +
+          location +
+          name +
+          new Date().getTime();
         await S3Client.putObject({
           Bucket: 'sch',
           Key: key,
